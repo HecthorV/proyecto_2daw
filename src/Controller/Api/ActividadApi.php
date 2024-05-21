@@ -66,6 +66,9 @@ class ActividadApi extends AbstractController
         $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
         $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
         $actividad->setCompuesta($isCompuesta);
+        // TODO ponenetes
+        // TODO aforo => espacios
+        // TODO recibir grupos
         
         $evento = new Evento
         // Buscar esta entidad $evento en el repositorio
