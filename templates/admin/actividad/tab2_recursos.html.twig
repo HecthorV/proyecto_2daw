@@ -1,0 +1,26 @@
+{% block tab2 %}
+
+    <div class="container">
+        <h2>Formulario de Actividad</h2>
+        <form id="actividadForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="fechaHoraInicio">Fecha y Hora de Inicio:</label>
+                <input type="datetime-local" class="form-control" id="fechaHoraInicio" name="fechaHoraInicio">
+            </div>
+            <div class="form-group">
+                <label for="fechaHoraFin">Fecha y Hora de Fin:</label>
+                <input type="datetime-local" class="form-control" id="fechaHoraFin" name="fechaHoraFin">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="compuesta" name="compuesta">
+                <label class="form-check-label" for="compuesta">Compuesta</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+{% endblock %}

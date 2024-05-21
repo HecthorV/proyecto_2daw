@@ -1,0 +1,74 @@
+{% include 'structure/structure.html.twig' %}
+
+{# Inyectar bloques necesarios #}
+{% block myjs %}
+    {# SCRIPT #}
+    <script>
+        $( function() {
+            $( "#formulario" ).dialog({
+                autoOpen: false,
+                height: 700,
+                width: 1600,
+                modal: true,
+                buttons: {
+                    //"Crear actividad": createActividad,
+                    Cancel: function() {
+                        $( "#formulario" ).dialog( "close" );
+                    }
+                },
+                //close: function() {
+                //        form[ 0 ].reset();
+                //        allFields.removeClass( "ui-state-error" );
+                //    }
+            });
+             
+            /*form = dialog.find( "form" ).on( "submit", function( event ) {
+                event.preventDefault();
+                createActividad();
+            });
+            */
+            $( "#crear_actividad" ).button().on( "click", function() {
+                $( "#formulario" ).dialog( "open" );
+            });
+        });
+
+            {# function createActividad() {
+                alert("creado");
+            } #}
+    </script>
+
+    {% include 'plugins/date-range.html.twig' %}
+    <script src="{{ asset('js/actividad/formulario.js') }}"></script>
+{% endblock %}
+
+{% block mycss %}
+    {# CSS #}
+    <style>
+        /* funcionamiento básico del sistema de pestañas */
+        .tab-content {
+            display: none;
+        }
+
+        .tab:target .tab-content, .tab:last-of-type .tab-content {
+            display: block;
+        }
+
+        .tab:target ~ .tab:last-of-type .tab-content {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div id="formulario">
+        {% include 'admin/actividad/crear-actividad.html.twig' %}
+    </div>
+
+    <button id="crear_actividad">Añadir</button>
+
+    <div id="list">
+
+    </div>
+
+{% endblock %}

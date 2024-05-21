@@ -1,0 +1,21 @@
+{% extends 'structure/structure.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block myjs %}
+    <script src="{{ asset('js/homeScript.js') }}"></script>
+{% endblock %}
+
+{% block mycss %}
+    <script src="{{ asset('css/homeStyle.css') }}"></script>
+{% endblock %}
+
+{% block main %}
+    <p>PÁGINA DE INICIO</p>
+    {# <div class="container">
+        <h1>Teacher Profiles</h1>
+        <div id="teacherProfiles" class="row">
+            <!-- Teacher profiles will be appended here -->
+        </div>
+    </div> #}
+{% endblock %}

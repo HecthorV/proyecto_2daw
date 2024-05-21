@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony main{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+{% block javascripts %}{% endblock %}
+
+{% block mycss %}{% endblock %}
+{% block myjs %}{% endblock %}
+
+
+{% block body %}
+
+    {% block header %}
+        {% include 'structure/header.html.twig' %}
+    {% endblock %}
+
+    {% block main %}{% endblock %}
+
+{% endblock %}

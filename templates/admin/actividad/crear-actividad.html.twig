@@ -1,0 +1,47 @@
+{# {% include '@EasyAdmin/page/content.html.twig' %} #}
+{# {% include 'structure/structure.html.twig' %} #}
+
+{# {% block content_title %}Admin - Crear actividad{% endblock %} #}
+
+{% block mycss %}{% endblock %}
+{% block myjs %}
+    <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script>
+{% endblock %}
+
+{% block miformulario %}
+    {# SCRIPT #}
+    <script>
+        $( function() {
+            $( "#tabs" ).tabs({
+                collapsible: true
+            });
+        } );
+    </script>
+
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Introducción</a></li>
+            <li><a href="#tabs-2">Recursos</a></li>
+            <li><a href="#tabs-3">Ponentes</a></li>
+            <li><a href="#tabs-4">Grupos</a></li>
+        </ul>
+
+            <div id="tabs-1">
+                {% include 'admin/actividad/tab1_introduccion.html.twig' %}
+            </div>
+
+            <div id="tabs-2">
+                {% include 'admin/actividad/tab2_recursos.html.twig' %}
+            </div>
+
+            <div id="tabs-3">
+                {% include 'admin/actividad/tab3_ponentes.html.twig' %}
+            </div>
+            
+            <div id="tabs-4">
+                {% include 'admin/actividad/tab4_grupos.html.twig' %}
+            </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% block tab4 %}
+
+    <div class="container">
+
+        {# Filtro #}
+        <label for="filtro">Filtro:</label>
+        <select name="filtrar_por_curso">
+            <option>1ros</option>
+            <option>2dos</option>
+        </select>
+        
+        {# Seleccionar los grupos #}
+        <div name="select_groups" id="select_groups">
+
+            {# {% for grupo in grupos %}
+                <div class="grupo" value="{{ grupo.id }}">{{ grupo }}</option>
+            {% endfor %} #}
+
+        </div>
+
+        <div name="selected_groups" id="selected_groups"></div>
+
+    </div>
+
+{% endblock %}

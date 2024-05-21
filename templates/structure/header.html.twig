@@ -1,0 +1,28 @@
+{% block header %}
+    <header>
+        <nav>
+            <ul>
+                <li> <a href="{{ path('app_register') }}">Crear cuenta</a> </li>
+                <li> <a href="{{ path('app_login') }}">Iniciar sesión</a> </li>
+                <li> <a href="{{ path('app_home') }}">Inicio</a> </li>
+
+                {% if app.user %}
+
+                    {# Profesor #}
+                    {% if is_granted('ROLE_TEACHER') %}
+                        <li> <a href="{{ path('app_home') }}">Ruta con rol de profesor</a> </li>
+                    {% endif %}
+
+                    {# Administrador #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li> <a href="{{ path('admin') }}">Panel de administrador</a> </li>
+                        <li> <a href="{{ path('app_actividad-crear') }}">Crear actividad</a> </li>
+                    {% endif %}
+
+                    
+                    <li> <a href="{{ path('app_logout') }}">Cerrar sesión</a> </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+{% endblock %}

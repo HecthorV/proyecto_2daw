@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/libreriaComun.js"></script>
+    <script src="js/select.js"></script>
+    <script src="js/tablas.js"></script>
+    <script src="js/ficheros.js"></script>
+</head>
+<body>
+    <label>Seleccione el fichero deseado</label><input type="file" id="fichero">
+    <table>
+        <tr>
+            <td><select class="recursos" id="fuente" size="20" multiple="multiple"></select></td>
+            <td>
+                <span id="pasarIzq">&lt;</span><br>
+                <span id="pasarIzqTodos">&lt;&lt;</span><br>
+                <span id="pasarDer">&gt;</span><br>
+                <span id="pasarDerTodos">&gt;&gt;</span>
+            </td>
+            <td><select class="recursos" id="seleccionados" size="20" multiple="multiple"></select></td>
+        </tr>
+    </table>
+    <table id="ponentes" data-noeditable="[]">
+        <thead>
+            <tr><th>Nombre</th><th>Cargo</th><th>Enlace</th></tr>
+        </tbody>
+        <tbody>
+            <tr><td>Dato11</td><td>Dato12</td><td>Dato13</td></tr>
+            <tr><td>Dato21</td><td>Dato22</td><td>Dato23</td></tr>
+        </tbody>
+        <tbody>
+            <tr><td>Dato31</td><td>Dato32</td><td>Dato33</td></tr>
+            <tr><td>Dato41</td><td>Dato42</td><td>Dato43</td></tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>
