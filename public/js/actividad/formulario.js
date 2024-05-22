@@ -53,5 +53,22 @@ $( function() {
     });
     
 
+    $("#b_compuesta")   .addClass("deshabilitado");
+    $("#b_simple")      .addClass("deshabilitado");
 
+    $('#elegir_simple_compusesta').on('change', function(e) {
+        
+        if ( $(this).val() == "0" ) {
+            // ES SIMPLE
+            console.log("ES SIMPLE");
+            $("#b_simple")      .removeClass("deshabilitado");
+            $("#b_compuesta")   .addClass("deshabilitado");
+        } else {
+            // ES COMPUESTA
+            console.log("ES COMPUESTA");
+            $("#b_compuesta")   .removeClass("deshabilitado");
+            $("#b_simple")      .addClass("deshabilitado");
+        }
+
+    });
 });

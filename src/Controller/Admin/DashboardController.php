@@ -34,14 +34,14 @@ class DashboardController extends AbstractDashboardController
     }
 
     // TODO introducirlo a EASY ADMIN
-    // #[Route('/create-activity', name: 'app_create-activity')]
-    // public function create_activity(): Response
-    // {
-    //     // return parent::index();
-    //     // $this->configureDashboard();
-    //     // $this->configureMenuItems();
-    //     return $this->render('admin/create-actividad.html.twig');
-    // }
+    #[Route('/create-activity', name: 'app_create-activity')]
+    public function create_activity(): Response
+    {
+        // return parent::index();
+        // $this->configureDashboard();
+        // $this->configureMenuItems();
+        return $this->render('admin/crear-actividad.html.twig');
+    }
 
     public function configureMenuItems(): iterable
     {
@@ -52,7 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-users', User::class);
         
         yield MenuItem::section('Funciones');
-        // yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', $this->generateUrl('create-activity'));
+        yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
         // yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class);

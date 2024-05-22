@@ -1,0 +1,17 @@
+.deshabilitado { display: none; }
+
+
+main {
+    display: flex;
+    justify-content: space-around;
+
+    padding: 4em 0 4em 0;
+}
+
+main>div {
+    width: 40%; height: 500px;
+    border: 6px solid;
+    border-radius: 14px;
+
+    padding: 2em;
+}

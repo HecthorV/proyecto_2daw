@@ -1,0 +1,1 @@
+C:\Daw24\proyecto\vendor\easycorp\easyadmin-bundle\src\Resources\views\layout.html.twig

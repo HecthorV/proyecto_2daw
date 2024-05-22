@@ -1,14 +1,23 @@
 {# {% include '@EasyAdmin/page/content.html.twig' %} #}
+{# {% extends '@EasyAdmin/page/content.html.twig' %} #}
 {# {% include 'structure/structure.html.twig' %} #}
 
 {# {% block content_title %}Admin - Crear actividad{% endblock %} #}
 
-{% block mycss %}{% endblock %}
+{% extends "structure/structure.html.twig" %}
+
+{% block mycss %}
+    <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
+{% endblock %}
+
 {% block myjs %}
+    <script src="{{ asset('js/actividad/_funciones.js') }}"></script>
+    <script src="{{ asset('js/actividad/formulario.js') }}"></script>
+
     <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script>
 {% endblock %}
 
-{% block miformulario %}
+{% block main %}
     {# SCRIPT #}
     <script>
         $( function() {
@@ -19,29 +28,65 @@
     </script>
 
 
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Introducción</a></li>
-            <li><a href="#tabs-2">Recursos</a></li>
-            <li><a href="#tabs-3">Ponentes</a></li>
-            <li><a href="#tabs-4">Grupos</a></li>
-        </ul>
 
-            <div id="tabs-1">
-                {% include 'admin/actividad/tab1_introduccion.html.twig' %}
-            </div>
+<main>
+    <div name="todo_actividades">
 
-            <div id="tabs-2">
-                {% include 'admin/actividad/tab2_recursos.html.twig' %}
-            </div>
-
-            <div id="tabs-3">
-                {% include 'admin/actividad/tab3_ponentes.html.twig' %}
-            </div>
-            
-            <div id="tabs-4">
-                {% include 'admin/actividad/tab4_grupos.html.twig' %}
-            </div>
     </div>
+
+
+    <div name="selector_actividad">
+        <div>
+            <div name="header">
+                <select name="eventos">
+                    <option selected disabled>EVENTOS</option>
+                    <option value="1">Evento 1</option>
+                    <option value="2">Evento 2</option>
+                    <option value="3">Evento 3</option>
+                </select>
+
+                <select name="simple_compuesta" id="elegir_simple_compusesta">
+                    <option selected disabled>Elegir simple o compuesta</option>
+                    <option value="0">Simple</option>
+                    <option value="1">Compuesta</option>
+                </select>
+                
+                <input type="text" disabled value="45">
+            </header>
+
+            <div name="body_compuesta" id="b_compuesta">
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-1">Introducción</a></li>
+                        <li><a href="#tabs-2">Recursos</a></li>
+                        <li><a href="#tabs-3">Ponentes</a></li>
+                        <li><a href="#tabs-4">Grupos</a></li>
+                    </ul>
+
+                        <div id="tabs-1">
+                            {% include 'admin/actividad/tab1_introduccion.html.twig' %}
+                        </div>
+
+                        <div id="tabs-2">
+                            {% include 'admin/actividad/tab2_recursos.html.twig' %}
+                        </div>
+
+                        <div id="tabs-3">
+                            {% include 'admin/actividad/tab3_ponentes.html.twig' %}
+                        </div>
+                        
+                        <div id="tabs-4">
+                            {% include 'admin/actividad/tab4_grupos.html.twig' %}
+                        </div>
+                </div>
+            </div>
+
+            <div name="body_simple" id="b_simple">
+                {% include 'admin/actividad/simple.html.twig' %}
+        </div>
+    </div>
+
+</main>
+
 
 {% endblock %}
