@@ -32,25 +32,25 @@ $( function() {
     );
 
 
-    $('#actividadForm').submit(function(event) {
-        // Evitar el comportamiento predeterminado del formulario
-        event.preventDefault();
+    // $('#actividadForm').submit(function(event) {
+    //     // Evitar el comportamiento predeterminado del formulario
+    //     event.preventDefault();
         
-        // Crear un nuevo objeto FormData
-        var formData = new FormData($(this)[0]); // Pasar el formulario directamente al constructor de FormData
+    //     // Crear un nuevo objeto FormData
+    //     var formData = new FormData($(this)[0]); // Pasar el formulario directamente al constructor de FormData
         
-        // Agregar los datos adicionales
-        var datetime_start = "2024-05-07 08:00:00";
-        var datetime_end = "2024-05-07 10:00:00";
-        formData.append("fechaInicio", datetime_start);
-        formData.append("fechaFin", datetime_end);
+    //     // Agregar los datos adicionales
+    //     var datetime_start = "2024-05-07 08:00:00";
+    //     var datetime_end = "2024-05-07 10:00:00";
+    //     formData.append("fechaInicio", datetime_start);
+    //     formData.append("fechaFin", datetime_end);
         
-        // Mostrar los datos por consola
-        console.log("Datos del formulario:");
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
-    });
+    //     // Mostrar los datos por consola
+    //     console.log("Datos del formulario:");
+    //     for (var pair of formData.entries()) {
+    //         console.log(pair[0] + ': ' + pair[1]);
+    //     }
+    // });
     
 
     $("#b_compuesta")   .addClass("deshabilitado");
@@ -71,4 +71,6 @@ $( function() {
         }
 
     });
+
+    cargarEventos();
 });

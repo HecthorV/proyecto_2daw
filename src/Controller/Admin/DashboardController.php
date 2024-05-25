@@ -10,6 +10,9 @@ use App\Entity\Espacio;
 use App\Entity\Evento;
 use App\Entity\Grupo;
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -24,6 +27,7 @@ class DashboardController extends AbstractDashboardController
         // return parent::index();
         $this->configureDashboard();
         $this->configureMenuItems();
+        $this->configureActions();
         return $this->render('admin/admin.html.twig');
     }
 
@@ -34,13 +38,13 @@ class DashboardController extends AbstractDashboardController
     }
 
     // TODO introducirlo a EASY ADMIN
-    #[Route('/create-activity', name: 'app_create-activity')]
-    public function create_activity(): Response
+    #[Route('/crear-actividad', name: 'app-crear-actividad')]
+    public function crear_actividad(): Response
     {
         // return parent::index();
         // $this->configureDashboard();
         // $this->configureMenuItems();
-        return $this->render('admin/crear-actividad.html.twig');
+        return $this->render('admin/actividad/crear-actividad.html.twig');
     }
 
     public function configureMenuItems(): iterable
@@ -65,6 +69,12 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Zonas de mi web');
         yield MenuItem::linkToRoute('Inicio', 'fa fa-home', 'app_home'); // TODO mejorar la URL
+    }
+
+    public function configureActions(): Actions
+    {
+        return parent::configureActions()
+        ->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
     
 }
