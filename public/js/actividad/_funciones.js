@@ -38,3 +38,9 @@ function cargarEventos() {
 
     });
 }
+
+function habilitarPanelDerecho() {
+    $("span.icon").on("click", function () {
+        $("div[name='para_anadir_actividad']").removeClass("deshabilitado");
+    })
+}

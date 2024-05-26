@@ -28,11 +28,25 @@ class EventoApi extends AbstractController
     public function findAll(): Response
     {
         $events = $this->eventoRepository->findAll();
-        // $data = json_encode($events, 'json');
-        $data = $this->serializer->serialize($events, 'json');
+        $data = [];
+    
+        foreach ($events as $event) {
+            // Accedemos a las propiedades del objeto Evento utilizando getters
+            $data[] = [
+                "id" => $event->getId(),
+                "nombre" => $event->getNombre(),
+                "fechaInicio" => $event->getFechaInicio()->format('Y-m-d'),
+                "fechaFin" => $event->getFechaFin() ?? null,
+            ];
+        }
+    
+        // Convertimos el array de datos a formato JSON
+        $jsonData = json_encode($data);
+    
+        // Creamos una nueva respuesta HTTP con el JSON y el tipo de contenido adecuado
         return new Response(
-            $data, 
-            Response::HTTP_OK, 
+            $jsonData,
+            Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );
     }

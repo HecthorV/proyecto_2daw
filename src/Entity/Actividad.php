@@ -29,6 +29,7 @@ class Actividad
     private ?bool $compuesta = null;
 
     #[ORM\ManyToOne(inversedBy: 'actividad')]
+    #[ORM\Column(nullable: true)]
     private ?Evento $evento = null;
 
     /**

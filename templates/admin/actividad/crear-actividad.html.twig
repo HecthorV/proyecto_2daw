@@ -20,8 +20,11 @@
 
     {# CSS #}
     <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
+                {# PLANTILLA DEL LOGIN #}
+                <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
 
     {# JS #}
+    <script src="{{ asset('js/actividad/_crear.js') }}"></script>
     <script src="{{ asset('js/actividad/_funciones.js') }}"></script>
     <script src="{{ asset('js/actividad/formulario.js') }}"></script>
 
@@ -44,15 +47,27 @@
 
 <main>
     <div name="todo_actividades">
-
+        <div name="header">
+        
+            <button class="noselect" id="anadir_actividad">
+                <span class="text">Añadir</span>
+                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span>
+            </button>
+            <button>+</button>
+        </div>
+        <div name="body">
+            <div>Actividad simple</div>
+            <button>+</button>
+        </div>
     </div>
 
 
     <div name="selector_actividad">
-        <div>
+        <div name="para_anadir_actividad">
             <div name="header">
                 <select name="eventos" id="eventos">
                     <option selected disabled>EVENTOS</option>
+                    <option value="sin evento">SIN EVENTO</option>
                 </select>
 
                 <select name="simple_compuesta" id="elegir_simple_compusesta">
@@ -64,7 +79,7 @@
                 <input type="text" id="evento_seleccionado" disabled value="45">
             </header>
 
-            <div name="body_compuesta" id="b_compuesta">
+            <div name="body_simple" id="b_simple">
                 <div id="tabs">
                     <ul>
                         <li><a href="#tabs-1">Introducción</a></li>
@@ -91,8 +106,8 @@
                 </div>
             </div>
 
-            <div name="body_simple" id="b_simple">
-                {% include 'admin/actividad/simple.html.twig' %}
+            <div name="body_compuesta" id="b_compuesta">
+                {% include 'admin/actividad/compuesta.html.twig' %}
             </div>
     </div>
 

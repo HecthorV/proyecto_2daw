@@ -6,8 +6,10 @@ namespace App\Controller\Api;
 use App\Entity\Actividad;
 use App\Entity\Route;
 use App\Repository\ActividadRepository;
+use App\Repository\EventoRepository;
 use App\Service\RouteService;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +22,8 @@ class ActividadApi extends AbstractController
 {
     public function __construct(
         private ActividadRepository $actividadRepository,
-        // private EntityManager $entityManager,
+        private EventoRepository $eventoRepository,
+        private EntityManagerInterface $entityManagerInteface,
     ){}
 
     // ################################################################################
@@ -49,6 +52,39 @@ class ActividadApi extends AbstractController
     // // ################################################################################
     // // #################################### INSERTS ###################################
     // // ################################################################################
+    #[RouteAnnotation("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
+    public function insert(Request $request): Response
+    {
+        // $requestData = $request->request->all();
+        $requestData = json_decode($request->getContent(), true);
+
+        $nombre = $requestData['descripcion'] ?? null;
+        $fechaHoraInicio = $requestData['fechaHoraInicio'] ?? null;
+        $fechaHoraFin = $requestData['fechaHoraFin'] ?? null;
+        $isCompuesta = $requestData['isCompuesta'] ?? null;
+        $idEvento = $requestData["idEvento"] ?? null;
+        $idEvento = intval($idEvento);
+
+        $actividad = new Actividad();
+        $actividad->setNombre($nombre);
+        $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+        $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+        $actividad->setCompuesta($isCompuesta);
+        
+        // Buscar el evento correspondiente
+        $evento = $this->eventoRepository->find($idEvento);
+        if (!$evento) {
+            return new JsonResponse("Evento no encontrado", Response::HTTP_NOT_FOUND);
+        }
+        $actividad->setEvento($evento);
+        // $evento->addActividad($actividad);
+
+        $this->entityManagerInteface->persist($actividad);
+        $this->entityManagerInteface->flush($actividad);
+        
+        return new JsonResponse(['id' => $actividad->getId()], JsonResponse::HTTP_CREATED);
+    }
+
     // #[RouteAnnotation("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
     // public function insert(Request $request): Response
     // {

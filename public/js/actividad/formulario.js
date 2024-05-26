@@ -1,4 +1,6 @@
 $( function() {
+    $("div[name='para_anadir_actividad']").addClass("deshabilitado");
+    
     let today = new Date();
     let datetime_start,datetime_end = "";
 
@@ -73,4 +75,10 @@ $( function() {
     });
 
     cargarEventos();
+    habilitarPanelDerecho();
+
+    $("#guardar_compuesta").on("click", function (e) {
+        e.preventDefault();
+        crearActividad();
+    })
 });

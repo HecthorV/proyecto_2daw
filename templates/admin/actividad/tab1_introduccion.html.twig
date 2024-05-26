@@ -5,8 +5,8 @@
         <form id="actividadForm">
         {# NOMBRE #}
             <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion">
             </div>
         {# FECHA HORA INICIO #}
             <div class="form-group">
@@ -14,12 +14,11 @@
                 {# <input type="datetime-local" class="form-control daterange" id="fechaHoraInicio" name="fechaHoraInicio"> #}
                 <input class="daterange" id="fechaHoraInicio" name="fechaHoraInicio">
             </div>
-        {# DESCRIPCIÓN #}
+        {# AFORO #}
             <div class="form-group form-check">
-                <label class="form-check-label" for="descripcion">Descripción</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion">
+                <label class="form-check-label" for="aforo">Aforo</label>
+                <input type="number" class="form-control input-3-digits" id="aforo_simple" name="aforo_simple">
             </div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
     </div>
 
