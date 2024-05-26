@@ -36,4 +36,11 @@ class ActividadController extends AbstractController
             // , [ 'grupos' => $data ]
         );
     }
+
+    // TODO inyectarlo al panel de administrador
+    #[Route('/descargardatos', name: 'descargardatos')]
+    public function descargardatos(): Response
+    {
+        return $this->render('actividad/descargardatos.html.twig');
+    }
 }
