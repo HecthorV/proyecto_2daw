@@ -38,32 +38,33 @@ main>div {
 
 /* EJEMPLO WEB BOTÓN */
 button {
-    width: 150px;
+    width: 110px;
     height: 50px;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    background: red;
     border: none;
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-    background: #e62222;
+    background: #5368D5;
+    margin-left: auto;
    }
    
    button, button span {
     transition: 200ms;
+
    }
    
    button .text {
-    transform: translateX(35px);
+    transform: translateX(18px);
     color: white;
     font-weight: bold;
    }
    
    button .icon {
     position: absolute;
-    border-left: 1px solid #c41b1b;
-    transform: translateX(110px);
+    margin-left: 5px;
+    border-left: 1px solid #e0e3e9;
+    transform: translateX(60px);
     height: 40px;
     width: 40px;
     display: flex;
@@ -72,12 +73,12 @@ button {
    }
    
    button svg {
-    width: 15px;
+    width: 30px;
     fill: #eee;
    }
    
    button:hover {
-    background: #ff3636;
+    background: #09114e;
    }
    
    button:hover .text {
@@ -85,7 +86,7 @@ button {
    }
    
    button:hover .icon {
-    width: 150px;
+    width: 100px;
     border-left: none;
     transform: translateX(0);
    }
