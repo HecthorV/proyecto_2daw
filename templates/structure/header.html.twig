@@ -1,9 +1,16 @@
 {% block header %}
+
+    <style>
+        nav>div.container>a>img {
+            width: 70px;
+        }
+    </style>
+
     <header>
 
     <nav class="navbar navbar-expand-lg bg-white navbar-light container-fluid py-3 position-fixed ">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><img src="images/main-logo.png" alt="logo"></a>
+            <a class="navbar-brand" href="{{ path('app_home') }}"><img src="{{ asset('images/icon/icon.jpeg') }}" alt="logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -19,59 +26,45 @@
                     <ul class="navbar-nav align-items-center justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link text-uppercase  active px-3" aria-current="page"
-                                href="index.html">home</a>
+                               href="{{ path('app_home') }}">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase  px-3" href="#services">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase  px-3" href="#about">about</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase  px-3" href="#projects">projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase  px-3" href="#blog">blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase  px-3" href="#cta">Contact</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-uppercase  dropdown-toggle text-center" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-expanded="false">Pages</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="about.html" class="dropdown-item text-uppercase ">About <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="blog.html" class="dropdown-item text-uppercase ">Blog <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="blog-single.html" class="dropdown-item text-uppercase ">Blog-Single <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="booking.html" class="dropdown-item text-uppercase ">Booking <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="services.html" class="dropdown-item text-uppercase ">Services <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="services-single.html" class="dropdown-item text-uppercase ">Service-Single
-                                        <span class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="project.html" class="dropdown-item text-uppercase ">Project <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="project-single.html" class="dropdown-item text-uppercase ">Project-Single
-                                        <span class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="pricing.html" class="dropdown-item text-uppercase ">Pricing <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="contact.html" class="dropdown-item text-uppercase ">Contact <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="team.html" class="dropdown-item text-uppercase ">Our Team <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="review.html" class="dropdown-item text-uppercase ">Reviews <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                                <li><a href="faq.html" class="dropdown-item text-uppercase ">FAQs <span
-                                            class="badge bg-secondary">Pro</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item ms-2"><a href="https://templatesjungle.gumroad.com/l/roofers-roofing-bootstrap-html-website-template" class="dropdown-item text-uppercase btn btn-primary text-white py-2 px-3 ">Get Pro </a></li>
+                        {% if app.user %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-uppercase  px-3" href="{{ path('admin') }}">Panel de administrador</a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_TEACHER') %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-uppercase  px-3" href="{{ path('app_home') }}">Rol de profesor</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-uppercase  dropdown-toggle text-center" data-bs-toggle="dropdown" href="#"
+                                    role="button" aria-expanded="false">Bienvenido, {{ app.user.role }}</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="about.html" class="dropdown-item text-uppercase ">{{ app.user.email }}</a></li>
+                                    <li><a href="{{ path('app_logout') }}" class="dropdown-item text-uppercase "> <span
+                                                class="badge bg-secondary">Cerrar sesión</span></a></li>
+                                </ul>
+                            </li>
 
+                            <li class="nav-item ms-2">
+                                <a href="https://templatesjungle.gumroad.com/l/roofers-roofing-bootstrap-html-website-template"
+                                   class="dropdown-item text-uppercase btn btn-primary text-white py-2 px-3 ">Cerrar sesión</a>
+                            </li>
+
+                        {% else %}
+
+                            <li class="nav-item ms-2">
+                                <a href="{{ path('app_login') }}"
+                                   class="dropdown-item text-uppercase btn btn-primary text-white py-2 px-3 ">Acceder</a>
+                            </li>
+
+                        {% endif %}
                     </ul>
 
+{#
                     <div class="d-flex mt-5 mt-lg-0 ps-lg-3 align-items-center justify-content-center ">
                         <ul class="navbar-nav justify-content-end align-items-center">
                             <li class="nav-item">
@@ -88,6 +81,8 @@
                         </ul>
                         <button type="button" class="btn btn-primary ms-md-3"> Get in touch </button>
                     </div>
+#}
+
                 </div>
             </div>
         </div>

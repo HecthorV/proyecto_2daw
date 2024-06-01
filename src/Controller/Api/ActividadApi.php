@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route as RouteAnnotation;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[RouteAnnotation("/api/actividad", name: "route-")]
+#[RouteAnnotation("/api/actividad", name: "actividades-")]
 class ActividadApi extends AbstractController
 {
     public function __construct(

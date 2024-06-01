@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route as RouteAnnotation;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[RouteAnnotation("/api/eventos", name: "route-")]
+#[RouteAnnotation("/api/eventos", name: "eventos-")]
 class EventoApi extends AbstractController
 {
     public function __construct(

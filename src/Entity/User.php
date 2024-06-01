@@ -107,4 +107,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getRole(): string {
+
+        switch ($this->getRoles()[0]) {
+            case 'ROLE_TEACHER':
+                return 'profesor';
+            case 'ROLE_ADMIN':
+                return 'administrador';
+            default:
+                return 'usuario';
+        }
+    }
 }

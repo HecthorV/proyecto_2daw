@@ -81,4 +81,8 @@ $( function() {
         e.preventDefault();
         crearActividad();
     })
+
+
+    // Ponentes
+    cargarPonentes();
 });

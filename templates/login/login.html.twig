@@ -1,35 +1,251 @@
 {% extends 'structure/structure.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
+{% block title %}Iniciar sesión{% endblock %}
 
 {% block mycss %}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
+
+    <style>
+        body {
+            background: white;
+        }
+
+        .login-wrapper {
+            width: 500px !important;
+
+            border: 6px solid darkred;
+            border-radius: 12px;
+            padding: 4em;
+
+            background-color: white;
+        }
+    </style>
+
+    <style>
+        body {
+            background-color: #fff;
+            font-family: 'Karla', sans-serif; }
+
+        h1 > a {
+            text-decoration:none;
+            color:#fff !important;
+        }
+
+        .intro-section {
+            background-image: url(https://i.ibb.co/t2tbbh6/pexels-luis-quintero-2471234.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 75px 95px;
+            min-height: 100vh;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            color: #ffffff; }
+        @media (max-width: 991px) {
+            .intro-section {
+                padding-left: 50px;
+                padding-rigth: 50px; } }
+        @media (max-width: 767px) {
+            .intro-section {
+                padding: 28px; } }
+        @media (max-width: 575px) {
+            .intro-section {
+                min-height: auto; } }
+
+        .brand-wrapper .logo {
+            height: 35px; }
+
+        @media (max-width: 767px) {
+            .brand-wrapper {
+                margin-bottom: 35px; } }
+
+        .intro-content-wrapper {
+            width: 410px;
+            max-width: 100%;
+            margin-top: auto;
+            margin-bottom: auto; }
+        .intro-content-wrapper .intro-title {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 17px; }
+        .intro-content-wrapper .intro-text {
+            font-size: 19px;
+            line-height: 1.37; }
+        .intro-content-wrapper .btn-read-more {
+            background-color: #fff;
+            padding: 13px 30px;
+            border-radius: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000; }
+        .intro-content-wrapper .btn-read-more:hover {
+            background-color: transparent;
+            border: 1px solid #fff;
+            color: #fff; }
+
+        @media (max-width: 767px) {
+            .intro-section-footer {
+                margin-top: 35px; } }
+
+        .intro-section-footer .footer-nav a {
+            font-size: 20px;
+            font-weight: bold;
+            color: inherit; }
+        @media (max-width: 767px) {
+            .intro-section-footer .footer-nav a {
+                font-size: 14px; } }
+        .intro-section-footer .footer-nav a + a {
+            margin-left: 30px; }
+
+        .form-section {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center; }
+        @media (max-width: 767px) {
+            .form-section {
+                padding: 35px; } }
+
+        .login-wrapper {
+            width: 300px;
+            max-width: 100%; }
+        @media (max-width: 575px) {
+            .login-wrapper {
+                width: 100%; } }
+        .login-wrapper .form-control {
+            border: 0;
+            border-bottom: 1px solid #e7e7e7;
+            border-radius: 0;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 15px 10px;
+            margin-bottom: 7px; }
+        .login-wrapper .form-control::-webkit-input-placeholder {
+            color: #b0adad; }
+        .login-wrapper .form-control::-moz-placeholder {
+            color: #b0adad; }
+        .login-wrapper .form-control:-ms-input-placeholder {
+            color: #b0adad; }
+        .login-wrapper .form-control::-ms-input-placeholder {
+            color: #b0adad; }
+        .login-wrapper .form-control::placeholder {
+            color: #b0adad; }
+
+        .login-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 30px; }
+
+        .login-btn {
+            padding: 13px 30px;
+            background-color: #000;
+            border-radius: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff; }
+        .login-btn:hover {
+            border: 1px solid #000;
+            background-color: transparent;
+            color: #000; }
+
+        .forgot-password-link {
+            font-size: 14px;
+            color: #080808;
+            text-decoration: underline; }
+
+        .social-login-title {
+            font-size: 15px;
+            color: #919aa3;
+            display: -webkit-box;
+            display: flex;
+            margin-bottom: 23px; }
+        .social-login-title::before, .social-login-title::after {
+            content: "";
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#f4f4f4));
+            background-image: linear-gradient(#f4f4f4, #f4f4f4);
+            -webkit-box-flex: 1;
+            flex-grow: 1;
+            background-size: calc(100% - 20px) 1px;
+            background-repeat: no-repeat; }
+        .social-login-title::before {
+            background-position: center left; }
+        .social-login-title::after {
+            background-position: center right; }
+
+        .social-login-links {
+            text-align: center;
+            margin-bottom: 32px; }
+
+        .social-login-link img {
+            width: 40px;
+            height: 40px;
+            -o-object-fit: contain;
+            object-fit: contain; }
+
+        .social-login-link + .socia-login-link {
+            margin-left: 16px; }
+
+        .login-wrapper-footer-text {
+            font-size: 14px;
+            text-align: center; }
+    </style>
 {% endblock %}
 
 {% block main %}
-    <form class="hero-form p-5">
-        <div class="login-box">
-            <h2>Login</h2>
-            <form>
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 col-md-7 intro-section">
+                <div class="brand-wrapper">
+                    <h1><a href="https://stackfindover.com/">Logo</a></h1>
+                </div>
+                <div class="intro-content-wrapper">
+                    <h1 class="intro-title">Welcome to website !</h1>
+                    <p class="intro-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna</p>
+                    <a href="#!" class="btn btn-read-more">Read more</a>
+                </div>
+                <div class="intro-section-footer">
+                    <na class="footer-nav">
+                        <a href="#!">Facebook</a>
+                        <a href="#!">Twitter</a>
+                        <a href="#!">Gmail</a>
+                    </na>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-5 form-section">
+                <div class="login-wrapper">
+                    <h2 class="login-title">Acceder</h2>
+                    <form method="post">
+                        {% if error %}
+                            <div style="text-align: center; color: red; font-weight: bold;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
 
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
-                <div class="user-box">
-                    <input type="text" name="" required="">
-                    <label>Username</label>
+                        <div class="form-group">
+                            <label for="username" class="sr-only">Correo electrónico</label>
+{#                            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>#}
+                                                        <input type="email" name="_username" id="username" class="form-control" placeholder="Correo electrónico" autofocus>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password" class="sr-only">Contraseña</label>
+{#                            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>#}
+                                                        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" placeholder="Contraseña">
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="d-flex justify-content-center align-items-center mb-4">
+                            <input name="login" id="login" class="btn login-btn" type="submit" value="Iniciar sesión">
+                            {# <a href="#!" class="forgot-password-link">Password?</a> #}
+                        </div>
+                    </form>
+                    <p class="login-wrapper-footer-text">¿No tienes cuenta? <a href="{{ path('app_register') }}" class="text-reset">Registro</a></p>
                 </div>
-                <div class="user-box">
-                    <input type="password" name="" required="">
-                    <label>Password</label>
-                </div>
-            </form>
+            </div>
         </div>
-    </form>
+    </div>
 {% endblock %}
