@@ -68,3 +68,6 @@ INSERT INTO espacio_recurso (espacio_id, recurso_id) VALUES
 ;
 
 
+INSERT INTO nivel_educativo (id, descripcion) VALUES
+("DAW", "Desarrollo de Aplicaciones Web");
+

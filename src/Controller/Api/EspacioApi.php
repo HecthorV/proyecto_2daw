@@ -29,7 +29,7 @@ class EspacioApi extends AbstractController
         $recursosIdsArray = explode(',', $recursosIds);
 
         $espacios = [];
-        foreach ($recursosIdsArray as $idEvento) {
+        foreach ($recursosIdsArray as $idEvento) { // arrayDeIds as id
             $espacio = $this->espacioRepository->find($idEvento);
             if ($espacio !== null) {
                 $espacios[] = $this->serializeEspacio($espacio);

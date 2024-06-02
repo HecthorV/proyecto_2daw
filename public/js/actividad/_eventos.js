@@ -18,16 +18,22 @@ function cargarEventos() {
             console.log(response);
 
             for (const item of response) {
-                $("#eventos").append(
-                    $('<option>', {
-                        value: item.id,
-                        text: item.nombre
-                    })
-                );
+                // $("#eventos").append(
+                //     $('<option>', {
+                //         value: item.id,
+                //         text: item.nombre
+                //     })
+                // );
+
+                const option = $('<option>');
+                option.val(item.id)
+                option.text(item.nombre)
+
+                $("#eventos").append(option);
             }
         },
         error: function(textStatus, error) {
-            console.log('Error en la petición:');
+            console.error('Error en la petición:');
             console.log(textStatus); // Aquí puedes mostrar el tipo de error
         }
     });

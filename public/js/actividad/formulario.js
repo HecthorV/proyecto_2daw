@@ -26,8 +26,8 @@ $( function() {
         timePicker24Hour: true,
         timePickerIncrement: 5,
     }, 
-        function(start, end, label) {
-            console.log("New date range selected: " + start.format('DD/MM/YYYY') + " to " + end.format('DD/MM/YYYY') + " (predefined range: " + label + ")");
+        function(start, end) {
+            console.log("New date range selected: " + start.format('DD/MM/YYYY') + " to " + end.format('DD/MM/YYYY'));
             datetime_start = start.format('DD/MM/YYYY HH:mm');
             datetime_end = end.format('DD/MM/YYYY HH:mm');
         }
@@ -55,7 +55,9 @@ $( function() {
     // });
     
 
+    // Formulario de compuesta
     $("#b_compuesta")   .addClass("deshabilitado");
+    // Formulario de simple
     $("#b_simple")      .addClass("deshabilitado");
 
     $('#elegir_simple_compusesta').on('change', function(e) {
@@ -77,19 +79,21 @@ $( function() {
     cargarEventos();
     habilitarPanelDerecho();
 
-    $("#guardar_compuesta").on("click", function (e) {
-        e.preventDefault();
-        crearActividad();
+    // Recursos
+    cargarRecursos();
+    $('#btnBuscarEspacios').on('click', function () {
+        console.log('BOTÓN PULSADO')
+        cargarEspacios();
     })
 
 
     // Ponentes
     cargarPonentes();
 
-    // Recursos
-    cargarRecursos();
-    $('#btnBuscarEspacios').on('click', function () {
-        console.log('BOTÓN PULSADO')
-        cargarEspacios();
+
+    // RECOGIDA DE DATOS
+    $("#guardar_compuesta").on("click", function (e) {
+        e.preventDefault();
+        crearActividad();
     })
 });

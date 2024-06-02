@@ -10,14 +10,14 @@ function cargarRecursos() {
             console.log(response);
 
             for (const item of response) {
-                const recursoDiv = $('<div>');
-                const contentDiv = $('<div>');
+                const recursoDiv = $('<div>'); // div padre con clase recurso
+                const contentDiv = $('<div>'); // div para css
 
                 recursoDiv.attr('data-id', item.id);
+                // recursoDiv.data('id', item.id); // ha dado error
 
                 const nombreSpan = $('<span>', {
-                    text: item.nombre,
-                    'data-id': item.id
+                    text: item.nombre
                 });
 
                 contentDiv.append(nombreSpan);
@@ -29,8 +29,8 @@ function cargarRecursos() {
                 eligeRecursos.append(recursoDiv);
             }
 
-            // Attach click event to dynamically added elements
             $('#eligeRecursos, #elegidosRecursos').on('click', 'div.recurso', function() {
+                // $(this) es div.recurso
                 if ($(this).parent().attr('id') === 'eligeRecursos') {
                     elegidosRecursos.append($(this));
                 } else {
@@ -48,7 +48,7 @@ function cargarRecursos() {
 
 
 function obtenerIdsDiv() {
-    const divsRecursosElegidos = $('#elegidosRecursos [data-id]');
+    const divsRecursosElegidos = $('#elegidosRecursos > [data-id]'); // hijo directo
     const idsRecursos = [];
 
     for (const divRecurso of divsRecursosElegidos) {
@@ -68,7 +68,7 @@ function cargarEspacios() {
         url: '/api/espacios/findByIdsRecursos',
         method: 'GET',
         headers: {
-            'X-Recurso-Ids': obtenerIdsDiv()
+            'X-Recurso-Ids': recursosIds // tiene nombre raro por consenso
         },
         success: function(response) {
             console.log(response);
@@ -84,6 +84,7 @@ function cargarEspacios() {
                     text: espacio.nombre,
                     'data-id': espacio.id
                 })
+                // divEspacio.data('id', espacio.id);
 
                 divEspacios.append(divEspacio)
             }
