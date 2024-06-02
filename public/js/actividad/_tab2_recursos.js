@@ -65,4 +65,21 @@ function cargarEspacios() {
     });
 
 
+    $.ajax({
+        url: '/api/espacios/findByIdsRecursos',
+        method: 'GET',
+        headers: {
+            'X-Recurso-Ids': '1,5'
+        },
+        success: function(response) {
+            console.log(response);
+            // Aquí maneja la respuesta, por ejemplo, actualizando la UI con los datos obtenidos
+        },
+        error: function(xhr, status, error) {
+            console.error('Error en la petición:');
+            console.error(xhr.responseText); // Aquí puedes mostrar el mensaje de error devuelto por el servidor
+        }
+    });
+
+
 }
