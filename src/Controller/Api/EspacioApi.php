@@ -30,8 +30,12 @@ class EspacioApi extends AbstractController
         $recursosIdsArray = explode(',', $recursosIds);
 
         dump($recursosIdsArray);
-        $arrIdsEspacios = $this->espacioRepository->findByIdsRecursos($recursosIdsArray);
-        dd($arrIdsEspacios);
+        $eventos = [];
+        foreach ($recursosIdsArray as $idEvento) {
+            $eventos[] = $this->espacioRepository->find($idEvento);
+        }
+//        $arrIdsEspacios = $this->espacioRepository->findByIdsRecursos($recursosIdsArray);
+        dd($eventos);
 
         // Buscar los espacios que contienen todos los recursos especificados
         $espacios = $this->espacioRepository->findByRecursos($recursosIdsArray);
