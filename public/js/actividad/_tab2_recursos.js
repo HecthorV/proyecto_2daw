@@ -13,8 +13,11 @@ function cargarRecursos() {
                 const recursoDiv = $('<div>');
                 const contentDiv = $('<div>');
 
+                recursoDiv.attr('data-id', item.id);
+
                 const nombreSpan = $('<span>', {
-                    text: item.nombre
+                    text: item.nombre,
+                    'data-id': item.id
                 });
 
                 contentDiv.append(nombreSpan);
@@ -44,40 +47,50 @@ function cargarRecursos() {
 
 
 
+function obtenerIdsDiv() {
+    const divsRecursosElegidos = $('#elegidosRecursos [data-id]');
+    const idsRecursos = [];
+
+    for (const divRecurso of divsRecursosElegidos) {
+        var id = $(divRecurso).data('id');
+        idsRecursos.push(id);
+    }
+
+    return idsRecursos;
+}
+
+
 function cargarEspacios() {
 
-    const selectedIds = [2, 6, 7];
-
-    $.ajax({
-        url: 'api/recursos/findByIdsRecursos',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            'X-Selected-Ids': selectedIds.join(',')
-        },
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(textStatus, error) {
-            console.log('Error en la petición:');
-            console.log(textStatus);
-        }
-    });
-
+    let recursosIds = obtenerIdsDiv();
 
     $.ajax({
         url: '/api/espacios/findByIdsRecursos',
         method: 'GET',
         headers: {
-            'X-Recurso-Ids': '1,5'
+            'X-Recurso-Ids': obtenerIdsDiv()
         },
         success: function(response) {
             console.log(response);
-            // Aquí maneja la respuesta, por ejemplo, actualizando la UI con los datos obtenidos
+
+            const divEspacios = $('#espacios')
+            divEspacios.empty();
+
+            let espacios = response
+            for (const espacio of espacios) {
+
+                let divEspacio = $('<div>', {
+                    class: 'espacio',
+                    text: espacio.nombre,
+                    'data-id': espacio.id
+                })
+
+                divEspacios.append(divEspacio)
+            }
         },
-        error: function(xhr, status, error) {
+        error: function(status, error) {
             console.error('Error en la petición:');
-            console.error(xhr.responseText); // Aquí puedes mostrar el mensaje de error devuelto por el servidor
+            console.log(error)
         }
     });
 

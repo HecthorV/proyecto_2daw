@@ -87,5 +87,9 @@ $( function() {
     cargarPonentes();
 
     // Recursos
-    // cargarRecursos();
+    cargarRecursos();
+    $('#btnBuscarEspacios').on('click', function () {
+        console.log('BOTÓN PULSADO')
+        cargarEspacios();
+    })
 });

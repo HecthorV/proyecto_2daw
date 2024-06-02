@@ -1,26 +1,21 @@
 {% block tab4 %}
 
     <div class="container">
-
-        {# Filtro #}
-        <label for="filtro">Filtro:</label>
-        <select name="filtrar_por_curso">
-            <option>1ros</option>
-            <option>2dos</option>
-        </select>
-        
-        {# Seleccionar los grupos #}
-        <div name="select_groups" id="select_groups">
-
-            {# {% for grupo in grupos %}
-                <div class="grupo" value="{{ grupo.id }}">{{ grupo }}</option>
-            {% endfor %} #}
-
-        </div>
-
-        <div name="selected_groups" id="selected_groups"></div>
-
+        {# <h2>Elige a los ponentes</h2> #}
+        <section>
+            <h4>Selcciona</h4>
+            {# Filtro #}
+            <label for="filtro">Filtro:</label>
+            <select name="filtrar_por_curso">
+                <option>1ros</option>
+                <option>2dos</option>
+            </select>
+            <div name="selecciona_ponentes" id="select"></div>
+        </section>
+        <section>
+            <h4>Selccionados</h4>
+                <div name="seleccionados_ponentes" id="selected"></div>
+        </section>
     </div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
 
 {% endblock %}

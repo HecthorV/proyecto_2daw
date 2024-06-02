@@ -3,6 +3,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Espacio;
 use App\Repository\EspacioRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,27 +22,31 @@ class EspacioApi extends AbstractController
     ){}
 
     #[RouteAnnotation('/findByIdsRecursos', name: 'find_by_recursos', methods: ['GET'])]
-    public function findByRecursos(Request $request, EspacioRepository $espacioRepository): Response
+    public function findByRecursos(Request $request): JsonResponse
     {
-        // Obtener los IDs de Recurso de los parámetros de la cabecera
         $recursosIds = $request->headers->get('X-Recurso-Ids');
 
-        // Convertir los IDs de Recurso en un array
         $recursosIdsArray = explode(',', $recursosIds);
 
-        dump($recursosIdsArray);
-        $eventos = [];
+        $espacios = [];
         foreach ($recursosIdsArray as $idEvento) {
-            $eventos[] = $this->espacioRepository->find($idEvento);
+            $espacio = $this->espacioRepository->find($idEvento);
+            if ($espacio !== null) {
+                $espacios[] = $this->serializeEspacio($espacio);
+            }
         }
-//        $arrIdsEspacios = $this->espacioRepository->findByIdsRecursos($recursosIdsArray);
-        dd($eventos);
 
-        // Buscar los espacios que contienen todos los recursos especificados
-        $espacios = $this->espacioRepository->findByRecursos($recursosIdsArray);
+        return new JsonResponse($espacios, Response::HTTP_OK);
+    }
 
-        // Convertir los resultados en un formato JSON y devolverlos
-        return $this->json($espacios);
+    public function serializeEspacio(Espacio $espacio): array
+    {
+        return [
+            'id' => $espacio->getId(),
+            'nombre' => $espacio->getNombre(),
+            'aforo' => $espacio->getAforo(),
+            'edificio' => $espacio->getEdificio(),
+        ];
     }
 
 }
