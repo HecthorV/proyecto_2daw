@@ -8,16 +8,18 @@
                 <label for="descripcion">Descripción:</label>
                 <input type="text" class="form-control" id="descripcion" name="descripcion">
             </div>
-        {# FECHA HORA INICIO #}
-            <div class="form-group">
-                <label for="fechaHoraInicio">Fecha y Hora de Inicio:</label>
-                {# <input type="datetime-local" class="form-control daterange" id="fechaHoraInicio" name="fechaHoraInicio"> #}
-                <input class="daterange" id="fechaHoraInicio" name="fechaHoraInicio">
-            </div>
-        {# AFORO #}
-            <div class="form-group form-check">
-                <label class="form-check-label" for="aforo">Aforo</label>
-                <input type="number" class="form-control input-3-digits" id="aforo_simple" name="aforo_simple">
+            <div class="row">
+                {# FECHA HORA INICIO #}
+                <div class="col-xl-6 col-lg-12">
+                    <label for="fechaHoraInicio">Fecha y Hora de Inicio:</label>
+                    {# <input type="datetime-local" class="form-control daterange" id="fechaHoraInicio" name="fechaHoraInicio"> #}
+                    <input class="daterange" id="fechaHoraInicio" name="fechaHoraInicio">
+                </div>
+                {# AFORO #}
+                <div class="col-xl-6 col-lg-12">
+                    <label class="form-check-label" for="aforo">Aforo</label>
+                    <input type="number" class="form-control input-3-digits" id="aforo_simple" name="aforo_simple">
+                </div>
             </div>
         </form>
     </div>

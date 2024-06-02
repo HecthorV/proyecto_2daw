@@ -30,9 +30,16 @@ class Espacio
     #[ORM\ManyToOne(inversedBy: 'espacios')]
     private ?Edificio $edificio = null;
 
+    /**
+     * @var Collection<int, DetalleActividad>
+     */
+    #[ORM\OneToMany(targetEntity: DetalleActividad::class, mappedBy: 'espacio')]
+    private Collection $detalleActividad;
+
     public function __construct()
     {
         $this->recursos = new ArrayCollection();
+        $this->detalleActividad = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,6 +103,36 @@ class Espacio
     public function setEdificio(?Edificio $edificio): static
     {
         $this->edificio = $edificio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetalleActividad>
+     */
+    public function getDetalleActividad(): Collection
+    {
+        return $this->detalleActividad;
+    }
+
+    public function addDetalleActividad(DetalleActividad $detalleActividad): static
+    {
+        if (!$this->detalleActividad->contains($detalleActividad)) {
+            $this->detalleActividad->add($detalleActividad);
+            $detalleActividad->setEspacio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleActividad(DetalleActividad $detalleActividad): static
+    {
+        if ($this->detalleActividad->removeElement($detalleActividad)) {
+            // set the owning side to null (unless already changed)
+            if ($detalleActividad->getEspacio() === $this) {
+                $detalleActividad->setEspacio(null);
+            }
+        }
 
         return $this;
     }

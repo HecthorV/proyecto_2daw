@@ -85,4 +85,7 @@ $( function() {
 
     // Ponentes
     cargarPonentes();
+
+    // Recursos
+    cargarRecursos();
 });
