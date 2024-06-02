@@ -45,4 +45,26 @@ class EspacioRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+//    public function findByRecursos(array $recursoIds)
+//    {
+//        $qb = $this->createQueryBuilder('e');
+//        $qb->join('e.recursos', 'r')
+//            ->where($qb->expr()->in('r.id', $recursoIds))
+//            ->groupBy('e.id')
+//            ->having($qb->expr()->eq($qb->expr()->countDistinct('r'), count($recursoIds)));
+//
+//        return $qb->getQuery()->getResult();
+//    }
+
+    public function findByIdsRecursos(array $recursoIds)
+    {
+        $qb = $this->createQueryBuilder('er');
+        $qb->select('DISTINCT er.espacio')
+            ->andWhere($qb->expr()->in('er.recurso', ':recursoIds'))
+            ->setParameter('recursoIds', $recursoIds);
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

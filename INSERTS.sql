@@ -46,3 +46,25 @@ INSERT INTO espacio (nombre, aforo, edificio_id) VALUES
                                                      ('Sala de Computación', 40, 6),
                                                      ('Biblioteca Principal', 60, 7),
                                                      ('Aula de Música', 20, 8);
+
+-- ESPACIO_RECURSO
+INSERT INTO espacio_recurso (espacio_id, recurso_id) VALUES
+                                                         (1,1),
+                                                         (1,2),
+                                                         (1,5),
+
+                                                         (2,1),
+                                                         (2,5),
+
+                                                         (5,3),
+                                                         (5,8),
+                                                         (5,9),
+
+                                                         (6,2),
+                                                         (6,6),
+                                                         (6,7),
+                                                         (6,9),
+                                                         (6,10)
+;
+
+

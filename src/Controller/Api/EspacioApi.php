@@ -20,39 +20,24 @@ class EspacioApi extends AbstractController
         private SerializerInterface $serializer,
     ){}
 
-    #[RouteAnnotation("/findByEspacios", name: "findByEspacios", methods: ["GET"])]
-    public function findByEspacios(Request $request): Response
+    #[RouteAnnotation('/findByIdsRecursos', name: 'find_by_recursos', methods: ['GET'])]
+    public function findByRecursos(Request $request, EspacioRepository $espacioRepository): Response
     {
-        // Obtenemos los IDs de los espacios desde los headers
-        $selectedIds = $request->headers->get('X-Selected-Ids');
+        // Obtener los IDs de Recurso de los parámetros de la cabecera
+        $recursosIds = $request->headers->get('X-Recurso-Ids');
 
-        if (!$selectedIds) {
-            return new JsonResponse(['error' => 'No IDs provided'], Response::HTTP_BAD_REQUEST);
-        }
+        // Convertir los IDs de Recurso en un array
+        $recursosIdsArray = explode(',', $recursosIds);
 
-        $idsArray = explode(',', $selectedIds);
+        dump($recursosIdsArray);
+        $arrIdsEspacios = $this->espacioRepository->findByIdsRecursos($recursosIdsArray);
+        dd($arrIdsEspacios);
 
-        // Buscamos los espacios por los IDs
-        $espacios = $this->espacioRepository->findBy(['id' => $idsArray]);
+        // Buscar los espacios que contienen todos los recursos especificados
+        $espacios = $this->espacioRepository->findByRecursos($recursosIdsArray);
 
-        $data = [];
-
-        foreach ($espacios as $espacio) {
-            $data[] = [
-                "id" => $espacio->getId(),
-                "nombre" => $espacio->getNombre() ?? null,
-            ];
-        }
-
-        // Convertimos el array de datos a formato JSON
-        $jsonData = json_encode($data);
-
-        // Creamos una nueva respuesta HTTP con el JSON y el tipo de contenido adecuado
-        return new Response(
-            $jsonData,
-            Response::HTTP_OK,
-            ['Content-Type' => 'application/json']
-        );
+        // Convertir los resultados en un formato JSON y devolverlos
+        return $this->json($espacios);
     }
 
 }

@@ -46,10 +46,10 @@ function cargarRecursos() {
 
 function cargarEspacios() {
 
-    const selectedIds = [1, 2, 3];
+    const selectedIds = [2, 6, 7];
 
     $.ajax({
-        url: 'api/recursos/findByRecursos',
+        url: 'api/recursos/findByIdsRecursos',
         method: 'GET',
         dataType: 'json',
         headers: {
