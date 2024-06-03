@@ -20,18 +20,20 @@
 
     {# CSS #}
     <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
-        {# Recursos #}
-        <link rel="stylesheet" href="{{ asset('css/actividad/recursos.css') }}">
-        {# Ponente #}
-        <link rel="stylesheet" href="{{ asset('css/actividad/ponente.css') }}">
-                {# PLANTILLA DEL LOGIN #}
-                <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
+    {# Recursos #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/recursos.css') }}">
+    {# Ponente #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/ponente.css') }}">
+    {# Grupos #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/grupos.css') }}">
+    {# PLANTILLA DEL LOGIN #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
 
     {# JS #}
-        {# Ponentes #}
-        <script src="{{ asset('js/actividad/tab3_ponentes.js') }}"></script>
-        {# Recursos #}
-        <script src="{{ asset('js/actividad/_tab2_recursos.js') }}"></script>
+    {# Ponentes #}
+    <script src="{{ asset('js/actividad/tab3_ponentes.js') }}"></script>
+    {# Recursos #}
+    <script src="{{ asset('js/actividad/_tab2_recursos.js') }}"></script>
     <script src="{{ asset('js/actividad/_crear.js') }}"></script>
     <script src="{{ asset('js/actividad/_eventos.js') }}"></script>
     <script src="{{ asset('js/actividad/_ponentes.js') }}"></script>
@@ -45,57 +47,64 @@
 {% block main %}
     {# SCRIPT #}
     <script>
-        $( function() {
-            $( "#tabs" ).tabs({
+        $(function () {
+            $("#tabs").tabs({
                 collapsible: true
             });
-        } );
+        });
     </script>
 
 
 
-<main>
-    <div name="todo_actividades">
-        <div name="header">
-        
-            <button class="noselect" id="anadir_actividad">
-                <span class="text">Añadir</span>
-                <span class="icon"><svg id="Layer_3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-name="Layer 3"><path d="m25 14h-7v-7a2 2 0 0 0 -4 0v7h-7a2 2 0 0 0 0 4h7v7a2 2 0 0 0 4 0v-7h7a2 2 0 0 0 0-4z" fill="#000000" style="fill: rgb(255, 255, 255);"></path></svg>
-            </button>
-            {# <button>+</button> #}
-        </div>
-        <div name="body">
-            {# <div>Actividad simple</div>
-            <button>+</button> #}
-        </div>
-    </div>
-
-
-    <div name="selector_actividad">
-        <div name="para_anadir_actividad">
+    <main>
+        <div name="todo_actividades">
             <div name="header">
-                <select name="eventos" id="eventos">
-                    <option selected disabled>EVENTOS</option>
-                    <option value="sin evento">SIN EVENTO</option>
-                </select>
 
-                <select name="simple_compuesta" id="elegir_simple_compusesta">
-                    <option selected disabled>Elegir simple o compuesta</option>
-                    <option value="0">Simple</option>
-                    <option value="1">Compuesta</option>
-                </select>
-                
-                <input type="text" id="evento_seleccionado" disabled value="45">
-            </header>
+                <button class="noselect" id="anadir_actividad">
+                    <span class="text">Añadir</span>
+                    <span class="icon"><svg id="Layer_3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                            data-name="Layer 3"><path
+                                    d="m25 14h-7v-7a2 2 0 0 0 -4 0v7h-7a2 2 0 0 0 0 4h7v7a2 2 0 0 0 4 0v-7h7a2 2 0 0 0 0-4z"
+                                    fill="#000000" style="fill: rgb(255, 255, 255);"></path></svg>
+                    </span>
+                </button>
+                {# <button>+</button> #}
+            </div>
+            <div name="body">
+                {# <div>Actividad simple</div>
+            <button>+</button> #}
+            </div>
+        </div>
 
-            <div name="body_simple" id="b_simple">
-                <div id="tabs">
-                    <ul>
-                        <li><a href="#tabs-1">Introducción</a></li>
-                        <li><a href="#tabs-2">Recursos</a></li>
-                        <li><a href="#tabs-3">Ponentes</a></li>
-                        <li><a href="#tabs-4">Grupos</a></li>
-                    </ul>
+
+        <div name="selector_actividad">
+            <div name="para_anadir_actividad">
+                <div name="header" class="col-12">
+                    <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
+                        <select name="eventos" id="eventos" class="w-85 w-sm-100">
+                            <option selected disabled>EVENTOS</option>
+                            <option value="sin evento">SIN EVENTO</option>
+                        </select>
+
+                        <select name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100">
+                            <option selected disabled>Elegir simple o compuesta</option>
+                            <option value="0">Simple</option>
+                            <option value="1">Compuesta</option>
+                        </select>
+
+                        <input type="text" id="actividad_padre" class="w-85 w-sm-100" disabled
+                               placeholder="ID actividad padre">
+                    </div>
+                </div>
+
+                <div name="body_simple" id="b_simple">
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#tabs-1">Introducción</a></li>
+                            <li><a href="#tabs-2">Recursos</a></li>
+                            <li><a href="#tabs-3">Ponentes</a></li>
+                            <li><a href="#tabs-4">Grupos</a></li>
+                        </ul>
 
                         <div id="tabs-1">
                             {% include 'admin/actividad/tab1_introduccion.html.twig' %}
@@ -108,19 +117,20 @@
                         <div id="tabs-3">
                             {% include 'admin/actividad/tab3_ponentes.html.twig' %}
                         </div>
-                        
+
                         <div id="tabs-4">
                             {% include 'admin/actividad/tab4_grupos.html.twig' %}
                         </div>
+                    </div>
+                </div>
+
+                <div name="body_compuesta" id="b_compuesta">
+                    {% include 'admin/actividad/compuesta.html.twig' %}
                 </div>
             </div>
+        </div>
 
-            <div name="body_compuesta" id="b_compuesta">
-                {% include 'admin/actividad/compuesta.html.twig' %}
-            </div>
-    </div>
-
-</main>
+    </main>
 
 
 {% endblock %}

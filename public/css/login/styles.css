@@ -1,3 +1,7 @@
+.intro-section {
+  visibility: hidden;
+}
+
 html {
     height: 100%;
   }

@@ -37,12 +37,6 @@ function cargarEventos() {
             console.log(textStatus); // Aquí puedes mostrar el tipo de error
         }
     });
-
-    $('#eventos').on('change', function(e) {
-        
-        $('#evento_seleccionado').val( $(this).val() );
-
-    });
 }
 
 function habilitarPanelDerecho() {

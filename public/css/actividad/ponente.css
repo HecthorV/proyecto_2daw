@@ -1,4 +1,13 @@
 table, tr, td {
     border: 2px solid;
     border-collapse: collapse;
+    text-align: center;
 }
+
+table th {
+    font-size: .9em;
+}
+table td {
+    font-size: .8em;
+}
+

@@ -68,6 +68,17 @@ INSERT INTO espacio_recurso (espacio_id, recurso_id) VALUES
 ;
 
 
-INSERT INTO nivel_educativo (id, descripcion) VALUES
-("DAW", "Desarrollo de Aplicaciones Web");
+INSERT INTO nivel_educativo (siglas, descripcion) VALUES
+                                                  ("DAW", "Desarrollo de Aplicaciones Web"),
+                                                  ("DAM", "Desarrollo de Aplicaciones Multiplataforma"),
+                                                  ("ASIR", "Administración de Sistemas Informáticos en Red");
+
+INSERT INTO grupo (nombre, curso, letra, nivel_educativo_id) VALUES
+                                                                 ("DAW", 1, "A", 1),
+                                                                 ("DAW", 1, "B", 1),
+                                                                 ("DAM", 2, "A", 2),
+                                                                 ("DAM", 2, "B", 2),
+                                                                 ("ASIR", 3, "A", 3),
+                                                                 ("ASIR", 3, "B", 3);
+
 

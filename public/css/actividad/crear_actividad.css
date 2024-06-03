@@ -1,5 +1,6 @@
 .deshabilitado { display: none; }
 .negrita { font-weight: bold }
+.w-85 { width: 85% }
 
 main {
     display: flex;
@@ -132,3 +133,8 @@ button {
    button:active .icon svg {
     transform: scale(0.8);
    }
+
+
+
+   /* Responsive */
+
