@@ -61,7 +61,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Entidades');
         // yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class);
         yield MenuItem::linkToCrud('Alumnos', 'fas fa-users', Alumno::class);
-        yield MenuItem::linkToCrud('DetalleActividad', 'fas fa-users', DetalleActividad::class);
         yield MenuItem::linkToCrud('Edificios', 'fas fa-users', Edificio::class);
         yield MenuItem::linkToCrud('Espacios', 'fas fa-users', Espacio::class);
         yield MenuItem::linkToCrud('Eventos', 'fas fa-users', Evento::class);

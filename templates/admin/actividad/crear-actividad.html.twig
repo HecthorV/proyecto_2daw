@@ -68,11 +68,7 @@
                                     fill="#000000" style="fill: rgb(255, 255, 255);"></path></svg>
                     </span>
                 </button>
-                {# <button>+</button> #}
-            </div>
-            <div name="body">
-                {# <div>Actividad simple</div>
-            <button>+</button> #}
+
             </div>
         </div>
 
@@ -97,6 +93,7 @@
                     </div>
                 </div>
 
+                {# 1. OPCIÓN SIMPLE #}
                 <div name="body_simple" id="b_simple">
                     <div id="tabs">
                         <ul>
@@ -124,6 +121,7 @@
                     </div>
                 </div>
 
+                {# 2. OPCIÓN COMPUESTA #}
                 <div name="body_compuesta" id="b_compuesta">
                     {% include 'admin/actividad/compuesta.html.twig' %}
                 </div>
