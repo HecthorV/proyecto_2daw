@@ -9,11 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route as RouteAnnotation;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[RouteAnnotation("/api/grupos", name: "grupos-")]
+#[Route("/api/grupos", name: "grupos-")]
 class GruposApi extends AbstractController
 {
     public function __construct(
@@ -21,7 +21,7 @@ class GruposApi extends AbstractController
         private SerializerInterface $serializer,
     ){}
 
-    #[RouteAnnotation('/findAll', name: 'findAll', methods: ['GET'])]
+    #[Route('/findAll', name: 'findAll', methods: ['GET'])]
     public function findAll(): Response
     {
         $grupos = $this->grupoRepository->findAll();
@@ -32,7 +32,7 @@ class GruposApi extends AbstractController
             $data[] = [
                 "id" => $grupo->getId(),
                 "nombre" => $grupo->getNombre(),
-                "cargo" => $grupo->getCurso(),
+                "curso" => $grupo->getCurso(),
                 "letra" => $grupo->getLetra(),
                 "nivelEducativo" => $grupo->getNivelEducativo(),
             ];

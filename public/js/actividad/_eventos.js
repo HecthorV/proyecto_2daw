@@ -39,8 +39,9 @@ function cargarEventos() {
     });
 }
 
-function habilitarPanelDerecho() {
+function crearTabsActividad() {
     $("span.icon").on("click", function () {
         $("div[name='para_anadir_actividad']").removeClass("deshabilitado");
     })
 }
+

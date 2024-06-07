@@ -47,8 +47,8 @@ function cargarRecursos() {
 
 
 
-function obtenerIdsDiv() {
-    const divsRecursosElegidos = $('#elegidosRecursos > [data-id]'); // hijo directo
+function obtenerRecursosIdsDiv() {
+    const divsRecursosElegidos = $('#elegidosRecursos > [data-id]'); // '>' significa: hijo directo
     const idsRecursos = [];
 
     for (const divRecurso of divsRecursosElegidos) {
@@ -62,7 +62,7 @@ function obtenerIdsDiv() {
 
 function cargarEspacios() {
 
-    let recursosIds = obtenerIdsDiv();
+    let recursosIds = obtenerRecursosIdsDiv();
 
     $.ajax({
         url: '/api/espacios/findByIdsRecursos',
@@ -94,6 +94,17 @@ function cargarEspacios() {
             console.log(error)
         }
     });
-
-
 }
+
+function obtenerEspaciosIdsDiv() {
+    const divsEspaciosElegidos = $('#espacios > [data-id]'); // '>' significa: hijo directo
+    const idsEspacios = [];
+
+    for (const divEspacio of divsEspaciosElegidos) {
+        var id = $(divEspacio).data('id');
+        idsEspacios.push(id);
+    }
+
+    return idsEspacios;
+}
+

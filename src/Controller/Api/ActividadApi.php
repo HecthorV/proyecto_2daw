@@ -4,32 +4,32 @@
 namespace App\Controller\Api;
 
 use App\Entity\Actividad;
-use App\Entity\Route;
 use App\Repository\ActividadRepository;
+use App\Repository\EspacioRepository;
 use App\Repository\EventoRepository;
-use App\Service\RouteService;
-use Doctrine\ORM\EntityManager;
+use App\Service\ActividadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route as RouteAnnotation;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[RouteAnnotation("/api/actividad", name: "actividades-")]
+#[Route("/api/actividad", name: "actividades-")]
 class ActividadApi extends AbstractController
 {
     public function __construct(
         private ActividadRepository $actividadRepository,
+        private EspacioRepository $espacioRepository,
         private EventoRepository $eventoRepository,
         private EntityManagerInterface $entityManagerInteface,
+        private ActividadService $actividadService
     ){}
 
     // ################################################################################
     // #################################### SELECTS ###################################
     // ################################################################################
-    #[RouteAnnotation("/findAll", name: "findAll", methods: ["GET"])]
+    #[Route("/findAll", name: "findAll", methods: ["GET"])]
     public function findAll(): Response
     {
         $routes = $this->actividadRepository->findAll();
@@ -38,7 +38,7 @@ class ActividadApi extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    #[RouteAnnotation("/findById/{id}", name: "findById", methods: ["GET"])]
+    #[Route("/findById/{id}", name: "findById", methods: ["GET"])]
     public function findById($id): Response
     {
         $route = $this->actividadRepository->find($id);
@@ -52,25 +52,36 @@ class ActividadApi extends AbstractController
     // // ################################################################################
     // // #################################### INSERTS ###################################
     // // ################################################################################
-    #[RouteAnnotation("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
-    public function insert(Request $request): Response
+    #[Route("/insert/compuesta", name: "insert-compuesta", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
+    public function insert_compuesta(Request $request): Response
     {
         // $requestData = $request->request->all();
         $requestData = json_decode($request->getContent(), true);
 
-        $nombre = $requestData['descripcion'] ?? null;
+        dd($requestData);
+
+        $description = $requestData['descripcion'] ?? null;
         $fechaHoraInicio = $requestData['fechaHoraInicio'] ?? null;
         $fechaHoraFin = $requestData['fechaHoraFin'] ?? null;
+        $aforo = $requestData['aforo'] ?? null;
         $isCompuesta = $requestData['isCompuesta'] ?? null;
-        $idEvento = $requestData["idEvento"] ?? null;
+        $arrIdsEspacios = $requestData["espacios"] ?? null;
         $idEvento = intval($idEvento);
 
         $actividad = new Actividad();
-        $actividad->setNombre($nombre);
+        $actividad->setNombre($description);
         $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
         $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+        $actividad->setAforo($aforo);
         $actividad->setCompuesta($isCompuesta);
-        
+
+        foreach ($arrIdsEspacios as $idEspacio) {
+            $espacio = $espacioRepository->find($idEspacio);
+            if ($evento) {
+                $actividad->add($espacio);
+            }
+        }
+
         // Buscar el evento correspondiente
         $evento = $this->eventoRepository->find($idEvento);
         if (!$evento) {
@@ -81,11 +92,22 @@ class ActividadApi extends AbstractController
 
         $this->entityManagerInteface->persist($actividad);
         $this->entityManagerInteface->flush($actividad);
-        
+
         return new JsonResponse(['id' => $actividad->getId()], JsonResponse::HTTP_CREATED);
     }
 
-    // #[RouteAnnotation("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
+
+    #[Route("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
+    public function insert_simple(Request $request, ActividadService $actividadService): Response
+    {
+        $requestData = json_decode($request->getContent(), true);
+
+        $newActividadId = $actividadService->insertNewEntity($requestData);
+        
+        return new JsonResponse(['id' => $newActividadId], JsonResponse::HTTP_CREATED);
+    }
+
+    // #[Route("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
     // public function insert(Request $request): Response
     // {
     //     // $requestData = $request->request->all();
@@ -119,7 +141,7 @@ class ActividadApi extends AbstractController
     //     return new JsonResponse(['id' => $actividad->getId()], JsonResponse::HTTP_CREATED);        
     // }
 
-    // #[RouteAnnotation("/insertAndGenerateTours", name: "insertAndGenerateTours", methods: ["POST"]), IsGranted("ROLE_TEACHER")]
+    // #[Route("/insertAndGenerateTours", name: "insertAndGenerateTours", methods: ["POST"]), IsGranted("ROLE_TEACHER")]
     // public function insertAndGenerateTours(Request $request, RouteService $routeService): Response
     // {
     //     // Llamar al servicio 'route_service' que inserta los datos y devuelve el ID de la nueva entidad creada
@@ -136,7 +158,7 @@ class ActividadApi extends AbstractController
     // // ################################################################################
     // // #################################### UPDATE ###################################
     // // ################################################################################
-    // #[RouteAnnotation("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_GUIDE")]
+    // #[Route("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_GUIDE")]
     // public function update(Request $request): Response
     // {
     //     if (!$this->routeService->update($request)) 
@@ -146,7 +168,7 @@ class ActividadApi extends AbstractController
     //     return $this->redirect('http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CRouteCrudController');
     // }
 
-    // #[RouteAnnotation("/update/{id}", name: "updateById", methods: ["PUT"])]
+    // #[Route("/update/{id}", name: "updateById", methods: ["PUT"])]
     // public function updateById(Request $request, $id): Response
     // {
     //     $route = $this->routeRepository->find($id);
@@ -157,7 +179,7 @@ class ActividadApi extends AbstractController
     //     // Aquí puedes actualizar la entidad Route con los datos recibidos en $data
     // }
 
-    // #[RouteAnnotation("/delete/{id}", name: "delete", methods: ["DELETE"])]
+    // #[Route("/delete/{id}", name: "delete", methods: ["DELETE"])]
     // public function delete($id): Response
     // {
     //     $entityManager = $this->routeRepository->getManager();

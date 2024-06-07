@@ -1,4 +1,11 @@
 $( function() {
+
+    $("#tabs").tabs({
+        collapsible: true
+    });
+
+    $("#anadir_actividad").appendTo("div.page-actions")
+
     $("div[name='para_anadir_actividad']").addClass("deshabilitado");
     
     let today = new Date();
@@ -77,23 +84,37 @@ $( function() {
     });
 
     cargarEventos();
-    habilitarPanelDerecho();
+    crearTabsActividad();
 
     // Recursos
     cargarRecursos();
     $('#btnBuscarEspacios').on('click', function () {
-        console.log('BOTÓN PULSADO')
         cargarEspacios();
     })
 
 
     // Ponentes
-    cargarPonentes();
+    // cargarPonentes();
+
+    // Grupos
+    cargarGrupos()
 
 
-    // RECOGIDA DE DATOS
-    $("#guardar_compuesta").on("click", function (e) {
+    // CREAR ACTIVIDAD
+    // $("#guardar_compuesta").on("click", function (e) {
+    //     e.preventDefault();
+    //     crearActividad();
+    // })
+
+    $("#crear_actividad_compuesta").on("click", function (e) {
         e.preventDefault();
-        crearActividad();
+        // console.log(obtenerDatosActividadSimple())
+        crearActividad(0, "compuesta", $("#eventos").val());
     })
+    $("#crear_actividad_simple").on("click", function (e) {
+        e.preventDefault();
+        // console.log(obtenerDatosActividadSimple())
+        crearActividad(0, "simple", $("#eventos").val());
+    })
+
 });

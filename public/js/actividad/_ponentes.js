@@ -7,21 +7,6 @@ function cargarPonentes() {
         success: function(response) {
             console.log(response);
 
-            // for (const item of response) {
-            //     const ponenteDiv = $('<div>', {
-            //         text: item.nombre + '(' + item.cargo + ')'
-            //     });
-            //     if (item.url) {
-            //         const ponenteImg = $('<img>', {
-            //             src: "images/uploads/ponente/"+item.url,
-            //             alt: item.nombre,
-            //             style: 'margin-left: 10px; width: 50px; height: 50px;'
-            //         });
-            //         ponenteDiv.append(ponenteImg);
-            //     }
-            //     $('#select').append(ponenteDiv);
-            // }
-
             for (const item of response) {
                 const ponenteDiv = $('<div>');
                 const headerDiv = $('<div>');
@@ -73,4 +58,24 @@ function cargarPonentes() {
             $('#selected').append($(this));
         }
     });
+}
+
+function obtenerPonentes() {
+    var datos = [];
+    var filas = $("table tbody tr");
+
+    filas.each(function() {
+        var fila = $(this);
+        var celdas = fila.find("td:not(:last-child)");
+
+        var dato = {
+            nombre: celdas.eq(0).text(),
+            cargo: celdas.eq(1).text(),
+            url: celdas.eq(2).text()
+        };
+
+        datos.push(dato);
+    });
+
+    return JSON.stringify(datos);;
 }

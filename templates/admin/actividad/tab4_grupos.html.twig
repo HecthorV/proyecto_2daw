@@ -1,21 +1,41 @@
 {% block tab4 %}
 
-    <div class="container">
+    <div class="container row d-flex justify-content-between">
         {# <h2>Elige a los ponentes</h2> #}
-        <section>
-            <h4>Selcciona</h4>
+        <section class="col-6">
+            <div class="row text-center">
+                <h4>Selcciona</h4>
+            </div>
             {# Filtro #}
-            <label for="filtro">Filtro:</label>
-            <select name="filtrar_por_curso">
-                <option>1ros</option>
-                <option>2dos</option>
-            </select>
-            <div name="selecciona_ponentes" id="select"></div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="filtro">Filtro:</label>
+                    <select name="filtrar_por_curso">
+                        <option>1ros</option>
+                        <option>2dos</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <div name="selecciona_ponentes" id="select"></div>
+                </div>
+            </div>
         </section>
-        <section>
-            <h4>Selccionados</h4>
-                <div name="seleccionados_ponentes" id="selected"></div>
+
+        <section class="col-6">
+            <div class="row text-center">
+                <h4>Selccionados</h4>
+            </div>
+            <div class="row">
+                <div class="col-12" style="visibility: hidden;">
+                    <label for="filtro">Filtro:</label><select name="filtrar_por_curso"><option>1ros</option></select>
+                </div>
+                <div class="col-12">
+                    <div name="seleccionados_ponentes" id="selected"></div>
+                </div>
+            </div>
         </section>
+
+        <button class="btn btn-primary" id="crear_actividad_simple">Crear</button>
     </div>
 
 {% endblock %}
