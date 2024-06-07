@@ -137,4 +137,26 @@ button {
 
 
    /* Responsive */
+@media (max-width: 500px) {
+    main {
+        flex-direction: column;
+        justify-content: center;
+    }
 
+    div[name="todo_actividades"] {
+        width: 100%;
+        height: auto;
+    }
+    div[name="selector_actividad"] {
+        width: 100%;
+    }
+
+    #eligeRecursos {
+        display: flex;
+        justify-content: center;
+    }
+
+    .recurso {
+        width: 80%;
+    }
+}

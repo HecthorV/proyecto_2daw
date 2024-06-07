@@ -24,7 +24,7 @@ function cargarRecursos() {
                 recursoDiv.append(contentDiv);
 
                 nombreSpan.addClass("negrita");
-                recursoDiv.addClass("recurso col-3 row-4em");
+                recursoDiv.addClass("recurso col-lg-3 col-sm-12 row-4em");
 
                 eligeRecursos.append(recursoDiv);
             }

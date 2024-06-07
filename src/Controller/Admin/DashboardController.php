@@ -12,6 +12,7 @@ use App\Entity\Grupo;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -74,6 +75,14 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureActions()
         ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addCssFile('css/easyadmin/estilosprincipales.css')
+            // ->addJsFile('js/admin.js')
+            ;
     }
     
 }
