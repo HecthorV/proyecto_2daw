@@ -44,38 +44,53 @@ class ActividadService
         $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
         $actividad->setCompuesta($requestData['isCompuesta']);
 
-        if (!$requestData['isCompuesta']) {
-            $aforo = $requestData['aforo'] ?? null;
+        if ($requestData['isCompuesta']) {
 
             $detalleActividad = new DetalleActividad();
-//            $detalleActividad->setEspacio();
+            $detalleActividad->setNombre($description);
+            $detalleActividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+            $detalleActividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+            $detalleActividad->setActividad($actividad);
+
+            $this->entityManager->persist($detalleActividad);
+            $this->entityManager->flush();
+
+            $this->entityManager->persist($actividad);
+            $this->entityManager->flush();
+
+            return $actividad->getId();
+        } else {
+
+            $detalleActividad = new DetalleActividad();
+
+//            $aforo = $requestData['aforo'] ?? null;
+
+            $idActividad = $requestData['id_actividad'] ?? null;
+            $actividadPadre = $this->actividadRepository->find($idActividad);
 
             $espaciosIds = $requestData["espacios"] ?? null;
-            $espaciosArr = [];
             foreach ($espaciosIds as $espacioId) {
                 $espacio = $this->espacioRepository->find($espacioId);
-                $espaciosArr[] = $espacio;
+                $detalleActividad->addEspacio($espacio);
             }
 
             $gruposIds = $requestData["grupos"] ?? null;
-            $gruposArr = [];
             foreach ($gruposIds as $grupoId) {
                 $grupo = $this->grupoRepository->find($grupoId);
-                $gruposArr[] = $grupo;
+                $detalleActividad->addGrupo($grupo);
             }
 
-            dd($espaciosArr
-                ,$gruposArr);
 
+            $detalleActividad->setNombre($description);
+            $detalleActividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+            $detalleActividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+            $detalleActividad->setActividad($actividadPadre);
 
-            $actividad->setAforo($aforo);
+            $this->entityManager->persist($detalleActividad);
+            $this->entityManager->flush();
 
+            return $detalleActividad->getId();
         }
-
-        $this->entityManager->persist($actividad);
-        $this->entityManager->flush();
-
-        return $actividad->getId();
     }
 
 

@@ -1,6 +1,7 @@
 .intro-section {
   visibility: hidden;
 }
+.mt-10 { margin-top: 10em; }
 
 html {
     height: 100%;

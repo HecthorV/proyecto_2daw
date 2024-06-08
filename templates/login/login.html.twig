@@ -200,6 +200,7 @@
 {% block main %}
     <div class="container-fluid">
         <div class="row">
+            <!--
             <div class="col-sm-6 col-md-7 intro-section">
                 <div class="brand-wrapper">
                     <h1><a href="https://stackfindover.com/">Logo</a></h1>
@@ -218,9 +219,10 @@
                     </na>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-5 form-section">
+            -->
+            <div class="col-sm-12 col-md-12 mt-10 form-section">
                 <div class="login-wrapper">
-                    <h2 class="login-title">Acceder</h2>
+                    <h2 class="login-title">Iniciar sesión</h2>
                     <form method="post">
                         {% if error %}
                             <div style="text-align: center; color: red; font-weight: bold;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

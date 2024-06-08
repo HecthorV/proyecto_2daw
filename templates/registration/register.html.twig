@@ -201,9 +201,10 @@
 {% block main %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 col-md-5 form-section">
+
+            <div class="col-12 mt-10 form-section">
                 <div class="login-wrapper">
-                    <h2 class="login-title">Acceder</h2>
+                    <h2 class="login-title">Crear cuenta</h2>
                     <form action="#!">
                         <div class="form-group">
                             <label for="email" class="sr-only">Correo electrónico</label>
@@ -221,7 +222,8 @@
                     <p class="login-wrapper-footer-text">¿Ya tienes cuenta? <a href="{{ path('app_login') }}" class="text-reset">Iniciar sesión</a></p>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-7 intro-section">
+            <!--
+            <div class="col-sm-12 col-md-12 mt-10 intro-section">
                 <div class="brand-wrapper">
                     <h1><a href="https://stackfindover.com/">Logo</a></h1>
                 </div>
@@ -239,6 +241,7 @@
                     </na>
                 </div>
             </div>
+            -->
         </div>
     </div>
 {% endblock %}

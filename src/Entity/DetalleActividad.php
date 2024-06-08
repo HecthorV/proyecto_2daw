@@ -40,13 +40,24 @@ class DetalleActividad
     #[ORM\OneToMany(targetEntity: Ponente::class, mappedBy: 'detalleActividad')]
     private Collection $ponentes;
 
-    #[ORM\ManyToOne(inversedBy: 'detalleActividad')]
-    private ?Espacio $espacio = null;
+    /**
+     * @var Collection<int, Espacio>
+     */
+    #[ORM\ManyToMany(targetEntity: Espacio::class, inversedBy: 'detalleActividades')]
+    private Collection $espacios;
+
+    /**
+     * @var Collection<int, Grupo>
+     */
+    #[ORM\ManyToMany(targetEntity: Grupo::class, inversedBy: 'detalleActividades')]
+    private Collection $grupos;
 
     public function __construct()
     {
         $this->alumnoDetalleActividads = new ArrayCollection();
         $this->ponentes = new ArrayCollection();
+        $this->espacios = new ArrayCollection();
+        $this->grupos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,14 +173,50 @@ class DetalleActividad
         return $this;
     }
 
-    public function getEspacio(): ?Espacio
+    /**
+     * @return Collection<int, Espacio>
+     */
+    public function getEspacios(): Collection
     {
-        return $this->espacio;
+        return $this->espacios;
     }
 
-    public function setEspacio(?Espacio $espacio): static
+    public function addEspacio(Espacio $espacio): static
     {
-        $this->espacio = $espacio;
+        if (!$this->espacios->contains($espacio)) {
+            $this->espacios->add($espacio);
+        }
+
+        return $this;
+    }
+
+    public function removeEspacio(Espacio $espacio): static
+    {
+        $this->espacios->removeElement($espacio);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Grupo>
+     */
+    public function getGrupos(): Collection
+    {
+        return $this->grupos;
+    }
+
+    public function addGrupo(Grupo $grupo): static
+    {
+        if (!$this->grupos->contains($grupo)) {
+            $this->grupos->add($grupo);
+        }
+
+        return $this;
+    }
+
+    public function removeGrupo(Grupo $grupo): static
+    {
+        $this->grupos->removeElement($grupo);
 
         return $this;
     }

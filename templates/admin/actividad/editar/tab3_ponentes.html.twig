@@ -1,0 +1,44 @@
+{% block tab3 %}
+
+    <div class="container">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Url</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Jose Ángel</td>
+                <td>Director de instituto</td>
+                <td>www.joseangel.es</td>
+                <td>
+                    <button class="editar">Editar</button>
+                    <button class="borrar">Borrar</button>
+                </td>
+            </tr>
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td><input type="text" id="nombre"></td>
+                <td><input type="text" id="cargo"></td>
+                <td><input type="text" id="url"></td>
+                <td><button id="anadir">Añadir</button></td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <!-- Modal de error -->
+        <div id="errorModal" title="Error" style="display:none;">
+            <p>Por favor, completa todos los campos antes de añadir una nueva fila.</p>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{# {% block content_title %}Admin - Crear actividad{% endblock %} #}
+
+{% block my_own_head_content %}
+    {# JQUERY #}
+    <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
+
+    {# JQUERY UI #}
+    <script src="{{ asset('jquery/jquery-ui-1.13.3/jquery-ui.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('jquery/jquery-ui-1.13.3/jquery-ui.structure.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jquery/jquery-ui-1.13.3/jquery-ui.theme.min.css') }}">
+
+    {# PLUGINS #}
+    {% include 'plugins/date-range.html.twig' %}
+
+    {# CSS #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
+    {# Recursos #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/recursos.css') }}">
+    {# Ponente #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/ponente.css') }}">
+    {# Grupos #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/grupos.css') }}">
+    {# PLANTILLA DEL LOGIN #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
+
+    {# JS #}
+    {# tabs #}
+        {# Grupos #}
+        <script src="{{ asset('js/actividad/editar/tab4_grupos.js') }}"></script>
+        {# Ponentes #}
+        <script src="{{ asset('js/actividad/editar/tab3_ponentes.js') }}"></script>
+        {# Recursos #}
+        <script src="{{ asset('js/actividad/editar/_tab2_recursos.js') }}"></script>
+        {# Introducción #}
+        <script src="{{ asset('js/actividad/editar/_tab1_introduccion.js') }}"></script>
+
+    <script src="{{ asset('js/actividad/editar/_crear.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/_eventos.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/_ponentes.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/editar.js') }}"></script>
+
+    {# <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script> #}
+{% endblock %}
+
+{% block content_title %} Editar Actividad {% endblock %}
+
+
+
+
+{% block main %}
+{#    <input type="hidden" name="id" id="id" value="{{ id }}">#}
+
+    <button class="noselect" id="anadir_actividad">
+        <span class="text">Añadir</span>
+        <span class="icon">
+            <svg id="Layer_3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-name="Layer 3">
+                <path d="m25 14h-7v-7a2 2 0 0 0 -4 0v7h-7a2 2 0 0 0 0 4h7v7a2 2 0 0 0 4 0v-7h7a2 2 0 0 0 0-4z" fill="#000000" style="fill: rgb(255, 255, 255);"></path>
+            </svg>
+        </span>
+    </button>
+    <main>
+        <div style="display: none;" name="todo_actividades">
+            <div name="header">
+
+                <button class="noselect" id="anadir_actividad">
+                    <span class="text">Añadir</span>
+                    <span class="icon"><svg id="Layer_3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                                            data-name="Layer 3"><path
+                                    d="m25 14h-7v-7a2 2 0 0 0 -4 0v7h-7a2 2 0 0 0 0 4h7v7a2 2 0 0 0 4 0v-7h7a2 2 0 0 0 0-4z"
+                                    fill="#000000" style="fill: rgb(255, 255, 255);"></path></svg>
+                    </span>
+                </button>
+
+            </div>
+        </div>
+
+
+        <div name="selector_actividad">
+            <div name="para_anadir_actividad">
+                <div name="header" class="col-12">
+                    <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
+                        <select name="eventos" id="eventos" class="w-85 w-sm-100 form-control">
+                            <option selected disabled>EVENTOS</option>
+                            <option value="sin evento">SIN EVENTO</option>
+                        </select>
+
+                        <select name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
+                            <option selected disabled>Elegir simple o compuesta</option>
+                            <option value="0">Simple</option>
+                            <option value="1">Compuesta</option>
+                        </select>
+
+                        <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
+                               placeholder="ID actividad padre">
+                    </div>
+                </div>
+
+                {# 1. OPCIÓN SIMPLE #}
+                <div name="body_simple" id="b_simple">
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#tabs-1">Introducción</a></li>
+                            <li><a href="#tabs-2">Recursos</a></li>
+                            <li><a href="#tabs-3">Ponentes</a></li>
+                            <li><a href="#tabs-4">Grupos</a></li>
+                        </ul>
+
+                        <div id="tabs-1">
+                            {% include 'admin/actividad/editar/tab1_introduccion.html.twig' %}
+                        </div>
+
+                        <div id="tabs-2">
+                            {% include 'admin/actividad/editar/tab2_recursos.html.twig' %}
+                        </div>
+
+                        <div id="tabs-3">
+                            {% include 'admin/actividad/editar/tab3_ponentes.html.twig' %}
+                        </div>
+
+                        <div id="tabs-4">
+                            {% include 'admin/actividad/editar/tab4_grupos.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+
+                {# 2. OPCIÓN COMPUESTA #}
+                <div name="body_compuesta" id="b_compuesta">
+                    {% include 'admin/actividad/editar/compuesta.html.twig' %}
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+{% endblock %}

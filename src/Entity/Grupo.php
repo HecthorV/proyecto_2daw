@@ -34,9 +34,16 @@ class Grupo
     #[ORM\OneToMany(targetEntity: UserGrupo::class, mappedBy: 'grupo')]
     private Collection $userGrupos;
 
+    /**
+     * @var Collection<int, DetalleActividad>
+     */
+    #[ORM\ManyToMany(targetEntity: DetalleActividad::class, mappedBy: 'grupos')]
+    private Collection $detalleActividades;
+
     public function __construct()
     {
         $this->userGrupos = new ArrayCollection();
+        $this->detalleActividades = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,5 +132,32 @@ class Grupo
     public function __toString(): string
     {
         return $this->nombre ?? 'Grupo sin nombre';
+    }
+
+    /**
+     * @return Collection<int, DetalleActividad>
+     */
+    public function getDetalleActividades(): Collection
+    {
+        return $this->detalleActividades;
+    }
+
+    public function addDetalleActividade(DetalleActividad $detalleActividade): static
+    {
+        if (!$this->detalleActividades->contains($detalleActividade)) {
+            $this->detalleActividades->add($detalleActividade);
+            $detalleActividade->addGrupo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleActividade(DetalleActividad $detalleActividade): static
+    {
+        if ($this->detalleActividades->removeElement($detalleActividade)) {
+            $detalleActividade->removeGrupo($this);
+        }
+
+        return $this;
     }
 }

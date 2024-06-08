@@ -10,6 +10,7 @@ use App\Entity\Espacio;
 use App\Entity\Evento;
 use App\Entity\Grupo;
 use App\Entity\User;
+use App\Repository\ActividadRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -17,6 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -38,21 +40,29 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Proyecto');
     }
 
-    // TODO introducirlo a EASY ADMIN
     #[Route('/crear-actividad', name: 'app-crear-actividad')]
     public function crear_actividad(): Response
     {
-        // return parent::index();
-        // $this->configureDashboard();
-        // $this->configureMenuItems();
         return $this->render('admin/actividad/crear-actividad.html.twig');
+    }
+
+    #[Route('/editar-actividad', name: 'app-editar-actividad')]
+    public function editar_actividad(Request $request, ActividadRepository $actividadRepository): Response
+    {
+        $id = $request->query->get('id');
+        $actividad = $actividadRepository->find($id);
+//        $actividad = $request->query->get('actividad');
+//        dd($request);
+
+        return $this->render('admin/actividad/editar/editar-actividad.html.twig',[
+            'id' => $id,
+            'actividad' => $actividad,
+//            'actividad' => $actividad,
+        ]);
     }
 
     public function configureMenuItems(): iterable
     {
-        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
-
         yield MenuItem::section('Usuarios');
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-users', User::class);
         
@@ -60,15 +70,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
-        // yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class);
         yield MenuItem::linkToCrud('Alumnos', 'fas fa-users', Alumno::class);
         yield MenuItem::linkToCrud('Edificios', 'fas fa-users', Edificio::class);
         yield MenuItem::linkToCrud('Espacios', 'fas fa-users', Espacio::class);
         yield MenuItem::linkToCrud('Eventos', 'fas fa-users', Evento::class);
         yield MenuItem::linkToCrud('Grupos', 'fas fa-users', Grupo::class);
-
-        yield MenuItem::section('Zonas de mi web');
-        yield MenuItem::linkToRoute('Inicio', 'fa fa-home', 'app_home'); // TODO mejorar la URL
     }
 
     public function configureActions(): Actions

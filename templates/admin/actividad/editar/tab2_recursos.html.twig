@@ -1,0 +1,55 @@
+{% block tab2 %}
+
+    <div class="container">
+        <div class="col-12">
+            <h2>Formulario de Actividad</h2>
+        </div>
+
+        <div class="col-12">
+            <div class="row justify-content-center align-items-start">
+
+                <div class="col-lg-5 col-12">
+                    <div class="row">
+                        <h4>Elige recursos</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-grid border-black-2 p-2">
+                            <div class="row gap-2" id="eligeRecursos">
+                                <!-- Los recursos se cargarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-12">
+                    <div class="row">
+                        <h4>Recursos elegidos</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-grid border-black-2 p-2">
+                            <div class="row" id="elegidosRecursos">
+                                <!-- Los recursos seleccionados se moverán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" id="btnBuscarEspacios">Buscar espacios</button>
+        </div>
+
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 d-grid border-black-2 p-2">
+                    <div class="row gap-2" id="espacios">
+                        <!-- Los espacios se cargarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -36,10 +36,17 @@ class Espacio
     #[ORM\OneToMany(targetEntity: DetalleActividad::class, mappedBy: 'espacio')]
     private Collection $detalleActividad;
 
+    /**
+     * @var Collection<int, DetalleActividad>
+     */
+    #[ORM\ManyToMany(targetEntity: DetalleActividad::class, mappedBy: 'espacios')]
+    private Collection $detalleActividades;
+
     public function __construct()
     {
         $this->recursos = new ArrayCollection();
         $this->detalleActividad = new ArrayCollection();
+        $this->detalleActividades = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,6 +139,33 @@ class Espacio
             if ($detalleActividad->getEspacio() === $this) {
                 $detalleActividad->setEspacio(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetalleActividad>
+     */
+    public function getDetalleActividades(): Collection
+    {
+        return $this->detalleActividades;
+    }
+
+    public function addDetalleActividade(DetalleActividad $detalleActividade): static
+    {
+        if (!$this->detalleActividades->contains($detalleActividade)) {
+            $this->detalleActividades->add($detalleActividade);
+            $detalleActividade->addEspacio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetalleActividade(DetalleActividad $detalleActividade): static
+    {
+        if ($this->detalleActividades->removeElement($detalleActividade)) {
+            $detalleActividade->removeEspacio($this);
         }
 
         return $this;
