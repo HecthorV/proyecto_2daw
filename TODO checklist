@@ -8,3 +8,37 @@ formulario dar de alta masiva actividad
 
 codigo de actividad compuesta
 plantear pestaña Recursos
+
+
+
+08/06/2024
+ - botón buscar padre de una simple cambiar a texto "Buscar compuesta"
+  - cuando creas activida que se redirija a listado
+  - guardar borrador
+  - filtro de espacios
+  - todos los cruds poner botones y labels bien
+  - alta masiva
+
+EASY ADMIN
+ - poner colores corporativos contraste fondo letras
+
+LANDINGPAGE
+  - borrar botón grande en home "Cerrar sesión"
+  - carrousell en landing page
+  - letras más grandes en móvil landing page
+
+EMAIL SERVIDOR MAILHOG y PHPMAILER
+
+dompdf
+
+en listado actividades mostrar que una grande contiene muchas hijas
+
+PRIORIDAD
+ 1. Alta masiva y editar actividad
+ 1. fecha de que cuando creo una actividad su fecha debe estar entra la padre
+ 2. parte antonio colores, guardar borrardor y botón a buscar compuesta
+ 3. corregir crud botones iconos y labels
+ 4. Filtro de espacios
+ 5. Carrousell en landingpage
+ 6. Email y PDF
+
