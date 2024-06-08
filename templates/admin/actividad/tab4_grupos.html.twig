@@ -11,12 +11,13 @@
                 <div class="col-12">
                     <label for="filtro">Filtro:</label>
                     <select name="filtrar_por_curso">
-                        <option>1ros</option>
-                        <option>2dos</option>
+                        <option value="0">todos</option>
+                        <option value="1">1ros</option>
+                        <option value="2">2dos</option>
                     </select>
                 </div>
-                <div class="col-12">
-                    <div name="selecciona_ponentes" id="select"></div>
+                <div class="col-12" id="gruposSeleccionar">
+                    <div name="selecciona_grupos" id="select"></div>
                 </div>
             </div>
         </section>
@@ -29,7 +30,7 @@
                 <div class="col-12" style="visibility: hidden;">
                     <label for="filtro">Filtro:</label><select name="filtrar_por_curso"><option>1ros</option></select>
                 </div>
-                <div class="col-12">
+                <div class="col-12" id="gruposSeleccionados">
                     <div name="seleccionados_ponentes" id="selected"></div>
                 </div>
             </div>

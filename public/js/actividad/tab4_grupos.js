@@ -11,6 +11,7 @@ function cargarGrupos() {
 
                 const grupoDiv = $('<div>', {
                     'data-id': grupo.id,
+                    'data-curso': grupo.curso,
                     class: 'grupo'
                 });
 
@@ -37,6 +38,23 @@ function cargarGrupos() {
             $('#select').append($(this));
         } else {
             $('#selected').append($(this));
+        }
+    });
+
+    // Filtro por curso
+    $('select[name="filtrar_por_curso"]').on('change', function() {
+        // Obtén la opción seleccionada
+        var selectedOption = $(this).val();
+
+        // Si la opción seleccionada es 'todos', muestra todos los grupos
+        if (selectedOption == '0') {
+            $('#select .grupo').show();
+        } else {
+            // Oculta todos los grupos
+            $('#select .grupo').hide();
+
+            // Muestra solo los grupos que correspondan a la opción seleccionada
+            $('#select .grupo[data-curso="' + selectedOption + '"]').show();
         }
     });
 }

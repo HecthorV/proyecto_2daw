@@ -4,6 +4,22 @@ $( function() {
         collapsible: true
     });
 
+    $('.ui-tabs-nav a').on('click', function(e) {
+        // Obtén la pestaña actual
+        var currentTab = $('.ui-tabs-active');
+
+        // Verifica si hay campos obligatorios no llenos en la pestaña actual
+        var emptyFields = currentTab.find('.required').filter(function() {
+            return !this.value;
+        });
+
+        // Si hay campos obligatorios no llenos, evita que el usuario avance a la siguiente pestaña
+        if (emptyFields.length > 0) {
+            e.preventDefault();
+            alert('Por favor, llena todos los campos obligatorios antes de avanzar.');
+        }
+    });
+
     $("#anadir_actividad").appendTo("div.page-actions")
 
     $("div[name='para_anadir_actividad']").addClass("deshabilitado");
@@ -40,6 +56,24 @@ $( function() {
         }
     );
 
+    cargarActividadesPadre();
+    $("#elegirActividadPadre").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            Ok: function() {
+                let idActividad = $("#listaActividades div.actividad.selected").data("id");
+                $("#actividad_padre").val(idActividad);
+                $(this).dialog("close");
+            },
+            Cancelar: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#buscarActividadPadre").click(function() {
+        $("#elegirActividadPadre").dialog("open");
+    });
 
     // $('#actividadForm').submit(function(event) {
     //     // Evitar el comportamiento predeterminado del formulario
@@ -74,11 +108,15 @@ $( function() {
             console.log("ES SIMPLE");
             $("#b_simple")      .removeClass("deshabilitado");
             $("#b_compuesta")   .addClass("deshabilitado");
+            $("#buscarActividadPadre").addClass("visible");
+            $("#actividad_padre").val("")
         } else {
             // ES COMPUESTA
             console.log("ES COMPUESTA");
             $("#b_compuesta")   .removeClass("deshabilitado");
             $("#b_simple")      .addClass("deshabilitado");
+            $("#buscarActividadPadre").removeClass("visible");
+            $("#actividad_padre").val("")
         }
 
     });
@@ -108,13 +146,22 @@ $( function() {
 
     $("#crear_actividad_compuesta").on("click", function (e) {
         e.preventDefault();
-        // console.log(obtenerDatosActividadSimple())
-        crearActividad(0, "compuesta", $("#eventos").val());
+        if (validarActividadCompuesta()) {
+            crearActividad(0, "compuesta", $("#eventos").val());
+        } else {
+            alert("Por favor, llena todos los campos obligatorios.")
+        }
     })
     $("#crear_actividad_simple").on("click", function (e) {
         e.preventDefault();
-        // console.log(obtenerDatosActividadSimple())
-        crearActividad(0, "simple", $("#eventos").val());
+        if (validarActividadSimple()) {
+            crearActividad(0, "simple", $("#eventos").val());
+        }
+        else if ($("#actividad_padre").val() == "") {
+                alert("Por favor, debes seleccionar una actividad padre.")
+        } else {
+            alert("Por favor, llena todos los campos obligatorios.")
+        }
     })
 
 });

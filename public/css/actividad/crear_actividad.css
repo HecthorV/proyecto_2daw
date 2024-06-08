@@ -1,6 +1,49 @@
 .deshabilitado { display: none; }
 .negrita { font-weight: bold }
 .w-85 { width: 85% }
+.ui-widget-overlay.ui-front { opacity: 0.6 !important; }
+#buscarActividadPadre {
+    width: auto;
+    height: 100%;
+    justify-content: center;
+    visibility: hidden;
+}
+
+#elegirActividadPadre {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actividad:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+.actividad.selected {
+    background-color: lightblue;
+}
+
+.ui-dialog-buttonset {
+    display: flex;
+
+    button {
+        width: auto;
+        height: auto;
+    }
+    button:nth-of-type(2) {
+        background-color: red;
+    }
+    button:nth-of-type(2):hover {
+        background-color: darkred;
+    }
+}
+
+#listaActividades {
+    max-height: 300px;
+    overflow-y: auto;
+}
 
 main {
     display: flex;

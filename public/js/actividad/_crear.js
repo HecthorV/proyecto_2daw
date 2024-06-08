@@ -28,6 +28,7 @@ function obtenerDatosActividadSimple() {
 
     // Create a regular object with the form data
     var datos_actividad = {
+        idActividadPadre: $("#actividad_padre").val(),
         descripcion: $("#descripcion").val(),
         fechaHoraInicio: datetime_start,
         fechaHoraFin: datetime_end,

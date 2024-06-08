@@ -4,6 +4,16 @@
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1em;
 }
+#gruposSeleccionar, #gruposSeleccionados {
+    margin: .8em;
+    border: 2px solid;
+    border-radius: 10px;
+
+    min-height: 20em;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 .grupo {
     display: flex;
     justify-content: center;

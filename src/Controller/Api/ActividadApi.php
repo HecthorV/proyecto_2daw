@@ -8,6 +8,7 @@ use App\Repository\ActividadRepository;
 use App\Repository\EspacioRepository;
 use App\Repository\EventoRepository;
 use App\Service\ActividadService;
+use App\Service\SerializeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +24,8 @@ class ActividadApi extends AbstractController
         private EspacioRepository $espacioRepository,
         private EventoRepository $eventoRepository,
         private EntityManagerInterface $entityManagerInteface,
-        private ActividadService $actividadService
+        private ActividadService $actividadService,
+        private SerializeService $serializeService,
     ){}
 
     // ################################################################################
@@ -32,9 +34,13 @@ class ActividadApi extends AbstractController
     #[Route("/findAll", name: "findAll", methods: ["GET"])]
     public function findAll(): Response
     {
-        $routes = $this->actividadRepository->findAll();
-        $data = json_encode($routes, 'json');
-        // new Response(cuerpo, código de status, cabeceras);
+        $actividades = $this->actividadRepository->findAll();
+        $actividadesSerialized = [];
+        foreach ($actividades as $actividad) {
+            $actividad = $this->serializeService->serializeActividad($actividad);
+            $actividadesSerialized[] = $actividad;
+        }
+        $data = json_encode($actividadesSerialized);
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
