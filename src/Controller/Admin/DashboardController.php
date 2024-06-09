@@ -11,6 +11,7 @@ use App\Entity\Evento;
 use App\Entity\Grupo;
 use App\Entity\User;
 use App\Repository\ActividadRepository;
+use App\Repository\DetalleActividadRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -61,13 +62,26 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
 
+    #[Route('/editar-actividad-compuesta', name: 'app-editar-actividad-compuesta')]
+    public function editar_actividad_compuesta(Request $request, DetalleActividadRepository $detalleActividadRepository): Response
+    {
+        $id = $request->query->get('id');
+        $detalleActividad = $detalleActividadRepository->find($id);
+
+        return $this->render('admin/actividad/editar/editar-actividad-compuesta.html.twig',[
+            'id' => $id,
+            'detalleActividad' => $detalleActividad,
+        ]);
+    }
+
     public function configureMenuItems(): iterable
     {
         yield MenuItem::section('Usuarios');
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-users', User::class);
         
         yield MenuItem::section('Funciones');
-        yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
+        yield MenuItem::linkToCrud('Actividades Compuestas', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
+        yield MenuItem::linkToCrud('Actividades Simples', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
         yield MenuItem::linkToCrud('Alumnos', 'fas fa-users', Alumno::class);

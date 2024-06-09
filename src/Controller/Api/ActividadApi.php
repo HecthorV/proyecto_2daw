@@ -113,66 +113,15 @@ class ActividadApi extends AbstractController
         return new JsonResponse(['id' => $newActividadId], JsonResponse::HTTP_CREATED);
     }
 
-    // #[Route("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
-    // public function insert(Request $request): Response
-    // {
-    //     // $requestData = $request->request->all();
-    //     $requestData = json_decode($request->getContent(), true);
-
-    //     $nombre = $request->request->get("nombre");
-    //     $fechaHoraInicio = $request->request->get("fechaHoraInicio");
-    //     $fechaHoraFin = $request->request->get("fechaHoraFin");
-    //     $isCompuesta = $request->request->get("isCompuesta");
-    //     $evento = 1;
-
-    //     $actividad = new Actividad();
-    //     $actividad->setNombre($nombre);
-    //     $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
-    //     $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
-    //     $actividad->setCompuesta($isCompuesta);
-    //     // TODO ponenetes
-    //     // TODO aforo => espacios
-    //     // TODO recibir grupos
-        
-    //     $evento = new Evento
-    //     // Buscar esta entidad $evento en el repositorio
-    //     $entityManager->find
-    //     $actividad->setEvento($evento);
-
-    //     $this->actividadRepository->persist($actividad);
-    //     $actividad_id = $this->actividadRepository->flush($actividad);
-        
-    //     dump($actividad_id);
-    //     dd($actividad);
-    //     return new JsonResponse(['id' => $actividad->getId()], JsonResponse::HTTP_CREATED);        
-    // }
-
-    // #[Route("/insertAndGenerateTours", name: "insertAndGenerateTours", methods: ["POST"]), IsGranted("ROLE_TEACHER")]
-    // public function insertAndGenerateTours(Request $request, RouteService $routeService): Response
-    // {
-    //     // Llamar al servicio 'route_service' que inserta los datos y devuelve el ID de la nueva entidad creada
-    //     $newEntityId = $routeService->insertNewEntityAndGenerateTours($request);
-
-    //     // Devolver una respuesta adecuada
-    //     return new JsonResponse(['id' => $newEntityId], JsonResponse::HTTP_CREATED);
-
-    //     // TODO por si no funciona crear ruta
-    //     // return $this->redirectToRoute('admin');
-    //     return $this->redirect('http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CRouteCrudController');
-    // }
-
     // // ################################################################################
     // // #################################### UPDATE ###################################
     // // ################################################################################
-    // #[Route("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_GUIDE")]
-    // public function update(Request $request): Response
-    // {
-    //     if (!$this->routeService->update($request)) 
-    //     {
-    //         return new Response(null, Response::HTTP_NOT_FOUND);
-    //     }
-    //     return $this->redirect('http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CRouteCrudController');
-    // }
+     #[Route("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_GUIDE")]
+     public function update(Request $request): Response
+     {
+         $this->actividadService->update($request);
+         return $this->redirect('http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDetalleActividadCrudControllerr');
+     }
 
     // #[Route("/update/{id}", name: "updateById", methods: ["PUT"])]
     // public function updateById(Request $request, $id): Response

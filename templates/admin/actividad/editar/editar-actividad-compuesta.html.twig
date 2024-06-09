@@ -1,0 +1,67 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{# {% block content_title %}Admin - Crear actividad{% endblock %} #}
+
+{% block my_own_head_content %}
+    {# JQUERY #}
+    <script src="{{ asset('jquery/jquery-3.7.1.min.js') }}"></script>
+
+    {# JQUERY UI #}
+    <script src="{{ asset('jquery/jquery-ui-1.13.3/jquery-ui.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('jquery/jquery-ui-1.13.3/jquery-ui.structure.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('jquery/jquery-ui-1.13.3/jquery-ui.theme.min.css') }}">
+
+    {# PLUGINS #}
+    {% include 'plugins/date-range.html.twig' %}
+
+    {# CSS #}
+    <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
+    {# PLANTILLA DEL LOGIN #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
+
+    {# JS #}
+    <script src="{{ asset('js/actividad/_validar.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/_editar.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/compuesta/editar-compuesta.js') }}"></script>
+
+    {# <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script> #}
+{% endblock %}
+
+{% block content_title %} Editar Actividad Compuesta {% endblock %}
+
+
+
+
+{% block main %}
+
+    <main>
+
+        <div name="selector_actividad">
+            <div name="para_anadir_actividad">
+                <div name="header" class="col-12">
+                    <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
+                        <select name="eventos" id="eventos" class="w-85 w-sm-100 form-control">
+                            <option selected disabled>EVENTOS</option>
+                            <option value="sin evento">SIN EVENTO</option>
+                        </select>
+
+                        <select disabled name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
+                            <option value="1" selected>Compuesta</option>
+                        </select>
+
+                        <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
+                               placeholder="ID actividad padre" value="{{ id }}">
+                    </div>
+                </div>
+
+                {# 2. OPCIÓN COMPUESTA #}
+                <div name="body_compuesta" id="b_compuesta">
+                    {% include 'admin/actividad/editar/compuesta.html.twig' %}
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+{% endblock %}

@@ -5,8 +5,6 @@ $( function() {
     });
 
     $("#anadir_actividad").appendTo("div.page-actions")
-
-    $("div[name='para_anadir_actividad']").addClass("deshabilitado");
     
 
 

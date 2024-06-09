@@ -28,17 +28,15 @@
     {# JS #}
     {# tabs #}
         {# Grupos #}
-        <script src="{{ asset('js/actividad/editar/tab4_grupos.js') }}"></script>
+        <script src="{{ asset('js/actividad/editar/simple/tab4_grupos.js') }}"></script>
         {# Ponentes #}
-        <script src="{{ asset('js/actividad/editar/tab3_ponentes.js') }}"></script>
+        <script src="{{ asset('js/actividad/editar/simple/tab3_ponentes.js') }}"></script>
         {# Recursos #}
-        <script src="{{ asset('js/actividad/editar/_tab2_recursos.js') }}"></script>
+        <script src="{{ asset('js/actividad/editar/simple/_tab2_recursos.js') }}"></script>
         {# Introducción #}
-        <script src="{{ asset('js/actividad/editar/_tab1_introduccion.js') }}"></script>
+        <script src="{{ asset('js/actividad/editar/simple/_tab1_introduccion.js') }}"></script>
 
-    <script src="{{ asset('js/actividad/editar/_crear.js') }}"></script>
     <script src="{{ asset('js/actividad/editar/_eventos.js') }}"></script>
-    <script src="{{ asset('js/actividad/editar/_ponentes.js') }}"></script>
     <script src="{{ asset('js/actividad/editar/editar.js') }}"></script>
 
     {# <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script> #}
@@ -50,32 +48,9 @@
 
 
 {% block main %}
-{#    <input type="hidden" name="id" id="id" value="{{ id }}">#}
+    <input type="hidden" name="id" id="id" value="{{ id }}">
 
-    <button class="noselect" id="anadir_actividad">
-        <span class="text">Añadir</span>
-        <span class="icon">
-            <svg id="Layer_3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" data-name="Layer 3">
-                <path d="m25 14h-7v-7a2 2 0 0 0 -4 0v7h-7a2 2 0 0 0 0 4h7v7a2 2 0 0 0 4 0v-7h7a2 2 0 0 0 0-4z" fill="#000000" style="fill: rgb(255, 255, 255);"></path>
-            </svg>
-        </span>
-    </button>
     <main>
-        <div style="display: none;" name="todo_actividades">
-            <div name="header">
-
-                <button class="noselect" id="anadir_actividad">
-                    <span class="text">Añadir</span>
-                    <span class="icon"><svg id="Layer_3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
-                                            data-name="Layer 3"><path
-                                    d="m25 14h-7v-7a2 2 0 0 0 -4 0v7h-7a2 2 0 0 0 0 4h7v7a2 2 0 0 0 4 0v-7h7a2 2 0 0 0 0-4z"
-                                    fill="#000000" style="fill: rgb(255, 255, 255);"></path></svg>
-                    </span>
-                </button>
-
-            </div>
-        </div>
-
 
         <div name="selector_actividad">
             <div name="para_anadir_actividad">
@@ -86,14 +61,22 @@
                             <option value="sin evento">SIN EVENTO</option>
                         </select>
 
-                        <select name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
-                            <option selected disabled>Elegir simple o compuesta</option>
-                            <option value="0">Simple</option>
-                            <option value="1">Compuesta</option>
-                        </select>
+                        {% if actividad.compuesta %}
+                            <select disabled name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
+                                <option value="1" selected>Compuesta</option>
+                            </select>
 
-                        <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
-                               placeholder="ID actividad padre">
+                            <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
+                                   placeholder="ID actividad padre" value="{{ id }}">
+                        {% else %}
+                            <select disabled name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
+                                <option value="0" selected>Simple</option>
+                            </select>
+
+                            <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
+                                   placeholder="ID actividad padre">
+                        {% endif %}
+
                     </div>
                 </div>
 

@@ -1,4 +1,36 @@
 
+function editarActividad(idPadre, simple_compuesta, idEvento) {
+
+    let datos_actividad
+
+    if (simple_compuesta === "simple") {
+        datos_actividad = obtenerDatosActividadSimple();
+    } else {
+        datos_actividad = obtenerDatosActividadCompuesta();
+    }
+
+    datos_actividad.isCompuesta = simple_compuesta === "compuesta";
+
+    console.log(datos_actividad)
+
+    $.ajax({
+        url: 'api/actividad/insert',
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(datos_actividad),
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(textStatus, error) {
+            console.log('Error en la petición:');
+            console.log(textStatus);
+            console.log(error);
+        }
+    });
+}
+
+
 function obtenerDatosActividadCompuesta() {
     var partes = $('#fechaHoraInicio_compuesta').val().split(" / ")
     var fechaHoraInicio = partes[0]
@@ -10,6 +42,7 @@ function obtenerDatosActividadCompuesta() {
         fechaHoraFin: fechaHoraFin
     };
 }
+
 
 function obtenerDatosActividadSimple() {
     // Fecha y hora de inicio
@@ -38,35 +71,4 @@ function obtenerDatosActividadSimple() {
     };
 
     return datos_actividad;
-}
-
-function crearActividad(idPadre, simple_compuesta, idEvento) {
-
-    let datos_actividad
-
-    if (simple_compuesta === "simple") {
-        datos_actividad = obtenerDatosActividadSimple();
-    } else {
-        datos_actividad = obtenerDatosActividadCompuesta();
-    }
-
-    datos_actividad.isCompuesta = simple_compuesta === "compuesta";
-
-    console.log(datos_actividad)
-
-    $.ajax({
-        url: 'api/actividad/insert',
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(datos_actividad),
-        dataType: 'json',
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(textStatus, error) {
-            console.log('Error en la petición:');
-            console.log(textStatus);
-            console.log(error);
-        }
-    });
 }

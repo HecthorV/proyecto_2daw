@@ -114,4 +114,83 @@ class ActividadService
     }
 
 
+    public function update($requestData): int
+    {
+
+        $description = $requestData['descripcion'] ?? null;
+        $fechaHoraInicio = $requestData['fechaHoraInicio'] ?? null;
+        $fechaHoraFin = $requestData['fechaHoraFin'] ?? null;
+
+        if ($requestData['isCompuesta']) {
+
+            $actividad = new Actividad();
+            $actividad->setNombre($description);
+            $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+            $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+            $actividad->setCompuesta($requestData['isCompuesta']);
+
+            $this->entityManager->persist($actividad);
+
+            $detalleActividad = new DetalleActividad();
+            $detalleActividad->setNombre($description);
+            $detalleActividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+            $detalleActividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+            $detalleActividad->setActividad($actividad);
+
+            $this->entityManager->persist($detalleActividad);
+            $this->entityManager->flush();
+
+            $this->entityManager->flush();
+
+            return $actividad->getId();
+        } else {
+            $detalleActividad = new DetalleActividad();
+
+//            $aforo = $requestData['aforo'] ?? null;
+
+            $idActividad = $requestData['idActividadPadre'] ?? null;
+            $actividadPadre = $this->actividadRepository->find($idActividad);
+
+            $espaciosIds = $requestData["espacios"] ?? null;
+            foreach ($espaciosIds as $espacioId) {
+                $espacio = $this->espacioRepository->find($espacioId);
+                $detalleActividad->addEspacio($espacio);
+            }
+
+            $gruposIds = $requestData["grupos"] ?? null;
+            foreach ($gruposIds as $grupoId) {
+                $grupo = $this->grupoRepository->find($grupoId);
+                $detalleActividad->addGrupo($grupo);
+            }
+
+            $ponentesJson = $requestData["ponentes"] ?? null;
+            $ponentesArr = json_decode($ponentesJson, true);
+            foreach ($ponentesArr as $ponente) {
+                $newPonentes = new Ponente();
+                $newPonentes->setNombre($ponente['nombre']);
+                $newPonentes->setCargo($ponente['cargo']);
+                $newPonentes->setUrl($ponente['url']);
+                $newPonentes->setDetalleActividad($detalleActividad);
+//                $detalleActividad->addPonente($ponente);
+            }
+
+            foreach ($gruposIds as $grupoId) {
+                $grupo = $this->grupoRepository->find($grupoId);
+                $detalleActividad->addGrupo($grupo);
+            }
+
+
+            $detalleActividad->setNombre($description);
+            $detalleActividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+            $detalleActividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+            $detalleActividad->setActividad($actividadPadre);
+
+            $this->entityManager->persist($detalleActividad);
+            $this->entityManager->flush();
+
+            return $detalleActividad->getId();
+        }
+    }
+
+
 }
