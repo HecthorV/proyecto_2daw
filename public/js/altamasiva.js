@@ -6,19 +6,25 @@ $( function() {
         csv += 'Juan,juan@example.com,05/08/2006\n';
         csv += 'Maria,maria@example.com,13/02/1992\n';
         csv += 'Antonio,antonio@example.com,20/08/2002\n';
+
         var filename = 'plantilla.csv';
         var csvFile = new Blob([csv], {type: "text/csv"});
         var downloadLink = document.createElement("a");
+
         downloadLink.download = filename;
+        // Descargar en el navegador
         downloadLink.href = window.URL.createObjectURL(csvFile);
         downloadLink.style.display = "none";
+
         document.body.appendChild(downloadLink);
+        // click para iniciar la descarga
         downloadLink.click();
     });
 
     // Función para cargar el archivo CSV y mostrar su contenido en la consola
-    $("#uploadCsv").change(function(evt) {
-        var file = evt.target.files[0];
+    $("#uploadCsv").change(function(ev) {
+        var file = ev.target.files[0];
+        // Lector para csv
         var reader = new FileReader();
         reader.onload = function(e) {
             var contents = e.target.result;
@@ -27,6 +33,10 @@ $( function() {
                 return line.split(',');
             });
             console.log(data);
+
+            
+            // HACER EL AJAX A SERVIDOR de "data"
+            
         };
         reader.readAsText(file);
     });

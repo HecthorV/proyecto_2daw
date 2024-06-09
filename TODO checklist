@@ -44,3 +44,17 @@ PRIORIDAD
  5. Carrousell en landingpage
  6. Email y PDF
 
+
+
+
+09/06/2024
+ - Alta masiva moverlo a EASY ADMIN, un botón dentro del CRUD Alumno
+ - una actividad tiene UN espacio y un espacio puede pertenecer a MUCHAS actividaddes
+ - SIMPLE sin evento y sin padre
+ - SIMPLE con padre el evento decide si tiene padre
+
+ - COMPUESTA sin evento
+ - COMPUESTA con evento
+
+CREAR ACTIVIDAD
+onchange en buscar padre para traernos su evento y mostrarlo. Además bloquear acceso a SELECT evento
