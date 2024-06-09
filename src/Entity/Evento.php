@@ -31,9 +31,16 @@ class Evento
     #[ORM\OneToMany(targetEntity: Actividad::class, mappedBy: 'evento')]
     private Collection $actividad;
 
+    /**
+     * @var Collection<int, Actividad>
+     */
+    #[ORM\OneToMany(targetEntity: Actividad::class, mappedBy: 'evento')]
+    private Collection $actividades;
+
     public function __construct()
     {
         $this->actividad = new ArrayCollection();
+        $this->actividades = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +108,36 @@ class Evento
             // set the owning side to null (unless already changed)
             if ($actividad->getEvento() === $this) {
                 $actividad->setEvento(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Actividad>
+     */
+    public function getActividades(): Collection
+    {
+        return $this->actividades;
+    }
+
+    public function addActividade(Actividad $actividade): static
+    {
+        if (!$this->actividades->contains($actividade)) {
+            $this->actividades->add($actividade);
+            $actividade->setEvento($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActividade(Actividad $actividade): static
+    {
+        if ($this->actividades->removeElement($actividade)) {
+            // set the owning side to null (unless already changed)
+            if ($actividade->getEvento() === $this) {
+                $actividade->setEvento(null);
             }
         }
 

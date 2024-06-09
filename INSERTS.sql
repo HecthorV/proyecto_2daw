@@ -1,3 +1,15 @@
+INSERT INTO evento (nombre, fecha_inicio, fecha_fin) VALUES
+                                                         ('Conferencia de Tecnología', '2024-06-15', '2024-06-17'),
+                                                         ('Feria de Emprendedores', '2024-07-01', NULL),
+                                                         ('Seminario de Marketing', '2024-05-20', '2024-05-21'),
+                                                         ('Taller de Programación', '2024-08-10', '2024-08-12'),
+                                                         ('Exposición de Arte', '2024-09-05', '2024-09-07'),
+                                                         ('Concierto de Verano', '2024-06-22', '2024-06-22'),
+                                                         ('Hackathon', '2024-07-18', '2024-07-20'),
+                                                         ('Congreso de Ciencias', '2024-10-14', '2024-10-16'),
+                                                         ('Jornada de Salud', '2024-11-10', '2024-11-11'),
+                                                         ('Festival de Cine', '2024-12-01', '2024-12-05');
+
 INSERT INTO ponente (nombre, cargo, url)
 VALUES
     ('Ana López', 'Directora', 'analopezdirectora.jpg'),

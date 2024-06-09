@@ -55,73 +55,29 @@ class ActividadApi extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    // // ################################################################################
-    // // #################################### INSERTS ###################################
-    // // ################################################################################
-    #[Route("/insert/compuesta", name: "insert-compuesta", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
-    public function insert_compuesta(Request $request): Response
-    {
-        // $requestData = $request->request->all();
-        $requestData = json_decode($request->getContent(), true);
-
-        dd($requestData);
-
-        $description = $requestData['descripcion'] ?? null;
-        $fechaHoraInicio = $requestData['fechaHoraInicio'] ?? null;
-        $fechaHoraFin = $requestData['fechaHoraFin'] ?? null;
-        $aforo = $requestData['aforo'] ?? null;
-        $isCompuesta = $requestData['isCompuesta'] ?? null;
-        $arrIdsEspacios = $requestData["espacios"] ?? null;
-        $idEvento = intval($idEvento);
-
-        $actividad = new Actividad();
-        $actividad->setNombre($description);
-        $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
-        $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
-        $actividad->setAforo($aforo);
-        $actividad->setCompuesta($isCompuesta);
-
-        foreach ($arrIdsEspacios as $idEspacio) {
-            $espacio = $espacioRepository->find($idEspacio);
-            if ($evento) {
-                $actividad->add($espacio);
-            }
-        }
-
-        // Buscar el evento correspondiente
-        $evento = $this->eventoRepository->find($idEvento);
-        if (!$evento) {
-            return new JsonResponse("Evento no encontrado", Response::HTTP_NOT_FOUND);
-        }
-        $actividad->setEvento($evento);
-        // $evento->addActividad($actividad);
-
-        $this->entityManagerInteface->persist($actividad);
-        $this->entityManagerInteface->flush($actividad);
-
-        return new JsonResponse(['id' => $actividad->getId()], JsonResponse::HTTP_CREATED);
-    }
-
-
-    #[Route("/insert", name: "insert", methods: ["POST"])]//, IsGranted("ROLE_TEACHER")]
+    // ################################################################################
+    // #################################### INSERTS ###################################
+    // ################################################################################
+    #[Route("/insert", name: "insert", methods: ["POST"]), IsGranted("ROLE_ADMIN")]
     public function insert_simple(Request $request, ActividadService $actividadService): Response
     {
         $requestData = json_decode($request->getContent(), true);
 
         $newActividadId = $actividadService->insertNewEntity($requestData);
-        
+
         return new JsonResponse(['id' => $newActividadId], JsonResponse::HTTP_CREATED);
     }
 
-    // // ################################################################################
-    // // #################################### UPDATE ###################################
-    // // ################################################################################
-     #[Route("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_GUIDE")]
-     public function update(Request $request): Response
-     {
-         $this->actividadService->update($request);
-         return $this->redirect('http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDetalleActividadCrudControllerr');
-     }
+    // ################################################################################
+    // #################################### UPDATE ###################################
+    // ################################################################################
+    #[Route("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_ADMIN")]
+    public function update(Request $request): Response
+    {
+        $requestData = json_decode($request->getContent(), true);
+        $this->actividadService->update($requestData);
+        return new JsonResponse(true, JsonResponse::HTTP_CREATED);
+    }
 
     // #[Route("/update/{id}", name: "updateById", methods: ["PUT"])]
     // public function updateById(Request $request, $id): Response

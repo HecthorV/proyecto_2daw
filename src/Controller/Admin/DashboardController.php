@@ -47,30 +47,38 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/actividad/crear-actividad.html.twig');
     }
 
+    // EDITAR SIMPLE
     #[Route('/editar-actividad', name: 'app-editar-actividad')]
-    public function editar_actividad(Request $request, ActividadRepository $actividadRepository): Response
+    public function editar_actividad(Request $request, DetalleActividadRepository $actividadRepository): Response
     {
         $id = $request->query->get('id');
-        $actividad = $actividadRepository->find($id);
+        $detalleActividad = $actividadRepository->find($id);
 //        $actividad = $request->query->get('actividad');
 //        dd($request);
+        $idEvento = $request->query->get('idEvento');
+        $aforo = $request->query->get('aforo');
 
-        return $this->render('admin/actividad/editar/editar-actividad.html.twig',[
+        return $this->render('admin/actividad/editar/editar-actividad-simple.html.twig',[
             'id' => $id,
-            'actividad' => $actividad,
+            'detalleActividad' => $detalleActividad,
 //            'actividad' => $actividad,
+            'idEvento' => $idEvento == "" || $idEvento == null ? 0 : $idEvento,
+            'aforo' => $aforo
         ]);
     }
 
+    // EDITAR COMPUESTA
     #[Route('/editar-actividad-compuesta', name: 'app-editar-actividad-compuesta')]
     public function editar_actividad_compuesta(Request $request, DetalleActividadRepository $detalleActividadRepository): Response
     {
         $id = $request->query->get('id');
         $detalleActividad = $detalleActividadRepository->find($id);
+        $idEvento = $request->query->get('idEvento');
 
         return $this->render('admin/actividad/editar/editar-actividad-compuesta.html.twig',[
             'id' => $id,
             'detalleActividad' => $detalleActividad,
+            'idEvento' => $idEvento
         ]);
     }
 
@@ -81,7 +89,7 @@ class DashboardController extends AbstractDashboardController
         
         yield MenuItem::section('Funciones');
         yield MenuItem::linkToCrud('Actividades Compuestas', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
-        yield MenuItem::linkToCrud('Actividades Simples', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
+        yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
         yield MenuItem::linkToCrud('Alumnos', 'fas fa-users', Alumno::class);

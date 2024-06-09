@@ -6,7 +6,7 @@
         {# NOMBRE #}
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ actividad.getNombre() }}">
+                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ detalleActividad.getNombre() }}">
             </div>
             <div class="row">
                 {# FECHA HORA INICIO #}
@@ -14,12 +14,12 @@
                     <label for="fechaHoraInicio">Fecha y Hora de Inicio:</label>
                     {# <input type="datetime-local" class="form-control daterange" id="fechaHoraInicio" name="fechaHoraInicio"> #}
                     <input class="daterange" id="fechaHoraInicio" name="fechaHoraInicio">
-                    <input type="hidden" id="fechaHoraInicio_servidor" value="{{ actividad.getFechaHoraInicio()|date('d/m/Y H:i') ~ ' / ' ~ actividad.getFechaHoraFin()|date('d/m/Y H:i') }}">
+                    <input type="hidden" id="fechaHoraInicio_servidor" value="{{ detalleActividad.getFechaHoraInicio()|date('d/m/Y H:i') ~ ' / ' ~ detalleActividad.getFechaHoraFin()|date('d/m/Y H:i') }}">
                 </div>
                 {# AFORO #}
                 <div class="col-xl-6 col-lg-12">
                     <label class="form-check-label" for="aforo">Aforo</label>
-                    <input type="number" class="form-control input-3-digits" id="aforo_simple" name="aforo_simple">
+                    <input type="number" class="form-control input-3-digits" id="aforo_simple" name="aforo_simple" value="{{ aforo }}">
                 </div>
             </div>
         </form>

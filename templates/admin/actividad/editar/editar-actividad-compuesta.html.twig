@@ -18,13 +18,16 @@
     <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
     {# PLANTILLA DEL LOGIN #}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
+    <style>
+        #elegir_simple_compusesta:hover { cursor: not-allowed; }
+    </style>
 
     {# JS #}
+{#    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>#}
     <script src="{{ asset('js/actividad/_validar.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/_eventos.js') }}"></script>
     <script src="{{ asset('js/actividad/editar/_editar.js') }}"></script>
     <script src="{{ asset('js/actividad/editar/compuesta/editar-compuesta.js') }}"></script>
-
-    {# <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script> #}
 {% endblock %}
 
 {% block content_title %} Editar Actividad Compuesta {% endblock %}
@@ -40,6 +43,8 @@
             <div name="para_anadir_actividad">
                 <div name="header" class="col-12">
                     <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
+                        <input type="hidden" id="id_evento" value="{{ idEvento }}">
+
                         <select name="eventos" id="eventos" class="w-85 w-sm-100 form-control">
                             <option selected disabled>EVENTOS</option>
                             <option value="sin evento">SIN EVENTO</option>

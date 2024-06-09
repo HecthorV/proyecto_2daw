@@ -2,7 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Actividad;
 use App\Entity\DetalleActividad;
+use App\Entity\Evento;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -15,6 +19,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DetalleActividadCrudController extends AbstractCrudController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public static function getEntityFqcn(): string
     {
         return DetalleActividad::class;
@@ -34,11 +45,40 @@ class DetalleActividadCrudController extends AbstractCrudController
     public function editRedirectCompuesta(AdminContext $context): RedirectResponse
     {
         $detalleActividad = $context->getEntity()->getInstance();
-        $id= $detalleActividad->getId();
 
-        return $this->redirectToRoute('app-editar-actividad-compuesta',[
-            'id' => $id,
+//        if ($detalleActividad->getActividad()->isCompuesta()) {
+        if ($detalleActividad->getNombre() == $detalleActividad->getActividad()->getNombre()) {
+
+            // $idEvento = $detalleActividad->getActividad()->getEvento() == null ? 0 : $detalleActividad->getActividad()->getEvento()->getId();
+            if ($detalleActividad->getActividad()->getEvento() == null) {
+                $idEvento = 0;
+            } else {
+                $idEvento = $detalleActividad->getActividad()->getEvento()->getId();
+            }
+
+            return $this->redirectToRoute('app-editar-actividad-compuesta',[
+                'id' => $detalleActividad->getId(),
+                'detalleActividad' => $detalleActividad,
+                "idEvento" => $idEvento
+            ]);
+        }
+
+        if ($detalleActividad->getActividad()->getEvento() == null) {
+            $idEvento = 0;
+        } else {
+            $idEvento = $detalleActividad->getActividad()->getEvento()->getId();
+        }
+        $espacios = $detalleActividad->getEspacios();
+        $aforo = 0;
+        foreach ($espacios as $espacio){
+            $aforo += $espacio->getAforo();
+        }
+
+        return $this->redirectToRoute('app-editar-actividad',[
+            'id' => $detalleActividad->getId(),
             'detalleActividad' => $detalleActividad,
+            'idEvento' => $idEvento,
+            'aforo' => $aforo
         ]);
     }
 

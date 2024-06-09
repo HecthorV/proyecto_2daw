@@ -5,38 +5,12 @@ $( function() {
     });
 
     $("#anadir_actividad").appendTo("div.page-actions")
-    
-
-
-    
-
-    // Formulario de compuesta
-    $("#b_compuesta")   .addClass("deshabilitado");
-    // Formulario de simple
-    $("#b_simple")      .addClass("deshabilitado");
-
-    $('#elegir_simple_compusesta').on('change', function(e) {
-        
-        if ( $(this).val() == "0" ) {
-            // ES SIMPLE
-            console.log("ES SIMPLE");
-            $("#b_simple")      .removeClass("deshabilitado");
-            $("#b_compuesta")   .addClass("deshabilitado");
-        } else {
-            // ES COMPUESTA
-            console.log("ES COMPUESTA");
-            $("#b_compuesta")   .removeClass("deshabilitado");
-            $("#b_simple")      .addClass("deshabilitado");
-        }
-
-    });
 
     // Información
     cargarIntroduccion();
 
     // Eventos
     cargarEventos();
-    crearTabsActividad();
 
     // Recursos
     cargarRecursos();
@@ -58,15 +32,10 @@ $( function() {
     //     crearActividad();
     // })
 
-    $("#crear_actividad_compuesta").on("click", function (e) {
+    $("#editar_actividad_simple").on("click", function (e) {
         e.preventDefault();
-        // console.log(obtenerDatosActividadSimple())
-        crearActividad(0, "compuesta", $("#eventos").val());
-    })
-    $("#crear_actividad_simple").on("click", function (e) {
-        e.preventDefault();
-        // console.log(obtenerDatosActividadSimple())
-        crearActividad(0, "simple", $("#eventos").val());
+        editarActividad($("#actividad_padre").val(), "simple", $("#eventos").val());
+        window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDetalleActividadCrudController";
     })
 
 });

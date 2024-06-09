@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="{{ asset('css/actividad/grupos.css') }}">
     {# PLANTILLA DEL LOGIN #}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/login/styles.css') }}">
+    <style>
+        #elegir_simple_compusesta { cursor: not-allowed; }
+    </style>
 
     {# JS #}
     {# tabs #}
@@ -36,13 +39,15 @@
         {# Introducción #}
         <script src="{{ asset('js/actividad/editar/simple/_tab1_introduccion.js') }}"></script>
 
+    <script src="{{ asset('js/actividad/_ponentes.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/_editar.js') }}"></script>
     <script src="{{ asset('js/actividad/editar/_eventos.js') }}"></script>
-    <script src="{{ asset('js/actividad/editar/editar.js') }}"></script>
+    <script src="{{ asset('js/actividad/editar/simple/editar-simple.js') }}"></script>
 
     {# <script src="{{ asset('js/actividad/tab4_grupos.js') }}"></script> #}
 {% endblock %}
 
-{% block content_title %} Editar Actividad {% endblock %}
+{% block content_title %} Editar Actividad Simple {% endblock %}
 
 
 
@@ -56,27 +61,18 @@
             <div name="para_anadir_actividad">
                 <div name="header" class="col-12">
                     <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
-                        <select name="eventos" id="eventos" class="w-85 w-sm-100 form-control">
-                            <option selected disabled>EVENTOS</option>
-                            <option value="sin evento">SIN EVENTO</option>
+                        <select disabled name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
+                            <option value="0" selected>Simple</option>
                         </select>
 
-                        {% if actividad.compuesta %}
-                            <select disabled name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
-                                <option value="1" selected>Compuesta</option>
-                            </select>
+                        <input type="hidden" id="id_evento" value="{{ idEvento }}">
+                        <select name="eventos" id="eventos" class="w-85 w-sm-100 form-control">
+                            <option selected disabled>EVENTOS</option>
+                            <option value="0">SIN EVENTO</option>
+                        </select>
 
-                            <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
-                                   placeholder="ID actividad padre" value="{{ id }}">
-                        {% else %}
-                            <select disabled name="simple_compuesta" id="elegir_simple_compusesta" class="w-85 w-sm-100 form-control">
-                                <option value="0" selected>Simple</option>
-                            </select>
-
-                            <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
-                                   placeholder="ID actividad padre">
-                        {% endif %}
-
+                        <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
+                               placeholder="ID actividad padre" value="{{ id }}">
                     </div>
                 </div>
 
@@ -106,11 +102,6 @@
                             {% include 'admin/actividad/editar/tab4_grupos.html.twig' %}
                         </div>
                     </div>
-                </div>
-
-                {# 2. OPCIÓN COMPUESTA #}
-                <div name="body_compuesta" id="b_compuesta">
-                    {% include 'admin/actividad/editar/compuesta.html.twig' %}
                 </div>
             </div>
         </div>

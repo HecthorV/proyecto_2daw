@@ -8,7 +8,10 @@
 //         console.log(e);
 //     });
 // }
-
+function seleccionarEvento() {
+    let idEvento = $('#id_evento').val();
+    $('#eventos').val(idEvento);
+}
 function cargarEventos() {
     $.ajax({
         url: 'api/eventos/findAll',
@@ -31,6 +34,8 @@ function cargarEventos() {
 
                 $("#eventos").append(option);
             }
+
+            seleccionarEvento();
         },
         error: function(textStatus, error) {
             console.error('Error en la petición:');

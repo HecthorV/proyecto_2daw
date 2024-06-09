@@ -9,7 +9,9 @@ use App\Entity\Item;
 use App\Entity\Ponente;
 use App\Entity\Route;
 use App\Repository\ActividadRepository;
+use App\Repository\DetalleActividadRepository;
 use App\Repository\EspacioRepository;
+use App\Repository\EventoRepository;
 use App\Repository\GrupoRepository;
 use App\Repository\PonenteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,15 +25,20 @@ class ActividadService
     public function __construct(
         EntityManagerInterface $entityManager,
         ActividadRepository    $actividadRepository,
+        DetalleActividadRepository $detalleActividadRepository,
         EspacioRepository      $espacioRepository,
         PonenteRepository      $ponenteRepository,
-        GrupoRepository        $grupoRepository
+        GrupoRepository        $grupoRepository,
+        EventoRepository       $eventoRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->actividadRepository = $actividadRepository;
+        $this->detalleActividadRepository = $detalleActividadRepository;
         $this->espacioRepository = $espacioRepository;
+        $this->ponenteRepository = $ponenteRepository;
         $this->grupoRepository = $grupoRepository;
+        $this->eventoRepository = $eventoRepository;
     }
 
 
@@ -44,11 +51,15 @@ class ActividadService
 
         if ($requestData['isCompuesta']) {
 
+            $idEvento = $requestData['idEvento'] ?? null;
+            $evento = $this->eventoRepository->find($idEvento);
+
             $actividad = new Actividad();
             $actividad->setNombre($description);
             $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
             $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
             $actividad->setCompuesta($requestData['isCompuesta']);
+            $actividad->setEvento($evento);
 
             $this->entityManager->persist($actividad);
 
@@ -116,22 +127,35 @@ class ActividadService
 
     public function update($requestData): int
     {
+        $idActividad = $requestData['idActividad'] ?? null;
+
+        $detalleActividad = $this->detalleActividadRepository->find($idActividad);
+        if (!$detalleActividad) {
+            throw new \Exception('DetalleActividad no encontrada');
+        }
 
         $description = $requestData['descripcion'] ?? null;
         $fechaHoraInicio = $requestData['fechaHoraInicio'] ?? null;
         $fechaHoraFin = $requestData['fechaHoraFin'] ?? null;
 
         if ($requestData['isCompuesta']) {
+            $actividad = $this->actividadRepository->find($idActividad);
 
-            $actividad = new Actividad();
+            if (!$actividad || !$detalleActividad) {
+                throw new \Exception('Actividad no encontrada');
+            }
+
+            $idEvento = $requestData['idEvento'] ?? null;
+            $evento = $this->eventoRepository->find($idEvento);
+
             $actividad->setNombre($description);
             $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
             $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
             $actividad->setCompuesta($requestData['isCompuesta']);
+            $actividad->setEvento($evento);
 
             $this->entityManager->persist($actividad);
 
-            $detalleActividad = new DetalleActividad();
             $detalleActividad->setNombre($description);
             $detalleActividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
             $detalleActividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
@@ -144,11 +168,7 @@ class ActividadService
 
             return $actividad->getId();
         } else {
-            $detalleActividad = new DetalleActividad();
 
-//            $aforo = $requestData['aforo'] ?? null;
-
-            $idActividad = $requestData['idActividadPadre'] ?? null;
             $actividadPadre = $this->actividadRepository->find($idActividad);
 
             $espaciosIds = $requestData["espacios"] ?? null;
@@ -166,12 +186,13 @@ class ActividadService
             $ponentesJson = $requestData["ponentes"] ?? null;
             $ponentesArr = json_decode($ponentesJson, true);
             foreach ($ponentesArr as $ponente) {
-                $newPonentes = new Ponente();
-                $newPonentes->setNombre($ponente['nombre']);
-                $newPonentes->setCargo($ponente['cargo']);
-                $newPonentes->setUrl($ponente['url']);
-                $newPonentes->setDetalleActividad($detalleActividad);
-//                $detalleActividad->addPonente($ponente);
+                $newPonente = new Ponente();
+                $newPonente->setNombre($ponente['nombre']);
+                $newPonente->setCargo($ponente['cargo']);
+                $newPonente->setUrl($ponente['url']);
+                $newPonente->setDetalleActividad($detalleActividad);
+
+                $this->entityManager->persist($newPonente);
             }
 
             foreach ($gruposIds as $grupoId) {

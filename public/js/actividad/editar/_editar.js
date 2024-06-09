@@ -10,12 +10,14 @@ function editarActividad(idPadre, simple_compuesta, idEvento) {
     }
 
     datos_actividad.isCompuesta = simple_compuesta === "compuesta";
+    datos_actividad.idActividad = idPadre;
+    datos_actividad.idEvento = idEvento;
 
     console.log(datos_actividad)
 
     $.ajax({
-        url: 'api/actividad/insert',
-        method: 'PUT',
+        url: '/api/actividad/update',
+        method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(datos_actividad),
         dataType: 'json',

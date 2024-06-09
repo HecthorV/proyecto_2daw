@@ -2,6 +2,7 @@
 
     <div class="container">
         <form id="actividadForm">
+            <input type="hidden" id="id_actividad" value="{{ detalleActividad.id }}">
         {# DESCRIPCIÓN #}
             <div class="form-group">
                 <label for="descripcion_compuesta">Descripción:</label>
@@ -11,8 +12,11 @@
             <div class="form-group">
                 <label for="fechaHoraInicio_compuesta">Fecha y hora de inicio:</label>
                 <input class="daterange" id="fechaHoraInicio_compuesta" name="fechaHoraInicio_compuesta">
+
+                <input type="hidden" id="fechaHoraInicio_compuesta_servidor" value="{{ detalleActividad.fechaHoraInicio|date('Y-m-d\\TH:i') }}">
+                <input type="hidden" id="fechaHoraFin_compuesta_servidor" value="{{ detalleActividad.fechaHoraFin|date('Y-m-d\\TH:i') }}">
             </div>
-            <button type="submit" class="btn btn-primary" id="editar_actividad_compuesta">Guardar</button>
+            <button type="submit" class="btn btn-primary" id="editar_actividad_compuesta">Actualizar</button>
         </form>
     </div>
 

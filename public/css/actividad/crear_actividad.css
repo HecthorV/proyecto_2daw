@@ -24,6 +24,7 @@
 .actividad.selected {
     background-color: lightblue;
 }
+#eventos { cursor: pointer; }
 
 .ui-dialog-buttonset {
     display: flex;

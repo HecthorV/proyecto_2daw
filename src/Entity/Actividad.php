@@ -28,15 +28,14 @@ class Actividad
     #[ORM\Column]
     private ?bool $compuesta = null;
 
-    #[ORM\ManyToOne(inversedBy: 'actividad')]
-    #[ORM\Column(nullable: true)]
-    private ?Evento $evento = null;
-
     /**
      * @var Collection<int, DetalleActividad>
      */
     #[ORM\OneToMany(targetEntity: DetalleActividad::class, mappedBy: 'actividad')]
     private Collection $detalleActividades;
+
+    #[ORM\ManyToOne(inversedBy: 'actividades')]
+    private ?Evento $evento = null;
 
     public function __construct()
     {
@@ -96,18 +95,6 @@ class Actividad
         return $this;
     }
 
-    public function getEvento(): ?Evento
-    {
-        return $this->evento;
-    }
-
-    public function setEvento(?Evento $evento): static
-    {
-        $this->evento = $evento;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, DetalleActividad>
      */
@@ -134,6 +121,18 @@ class Actividad
                 $detalleActividade->setActividad(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEvento(): ?Evento
+    {
+        return $this->evento;
+    }
+
+    public function setEvento(?Evento $evento): static
+    {
+        $this->evento = $evento;
 
         return $this;
     }

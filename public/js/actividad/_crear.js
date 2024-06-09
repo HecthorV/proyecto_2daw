@@ -53,6 +53,12 @@ function crearActividad(idPadre, simple_compuesta, idEvento) {
 
     datos_actividad.isCompuesta = simple_compuesta === "compuesta";
 
+    if ((idEvento == null) && simple_compuesta === "compuesta") {
+        alert("Debe seleccionar un evento");
+    } else {
+        datos_actividad.idEvento = idEvento;
+    }
+
     console.log(datos_actividad)
 
     $.ajax({
@@ -63,6 +69,11 @@ function crearActividad(idPadre, simple_compuesta, idEvento) {
         dataType: 'json',
         success: function(response) {
             console.log(response);
+            // if (datos_actividad.isCompuesta) {
+            //     window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CActividadCrudController";
+            // } else {
+            //     window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDetalleActividadCrudController";
+            // }
         },
         error: function(textStatus, error) {
             console.log('Error en la petición:');
