@@ -1,0 +1,34 @@
+/********** Template CSS **********/
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+img.animated.pulse {
+    animation-duration: 5s;
+}
+
+
+/*** Product ***/
+.product-item {
+    transition: .1s;
+}
+
+.product-item:hover {
+    border-width: 0 !important;
+    box-shadow: 0 0 35px rgba(144, 188, 121, .25);
+}
+
+.product-item:hover a.btn {
+    color: var(--bs-white);
+    background: var(--bs-primary);
+}

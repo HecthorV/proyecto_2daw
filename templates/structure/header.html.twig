@@ -29,6 +29,10 @@
                             <a class="nav-link text-uppercase  active px-3" aria-current="page"
                                href="{{ path('app_home') }}">Inicio</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase  px-3" href="{{ path('app_actividad-listado_actividades') }}">Listado actividades</a>
+                        </li>
+
                         {% if app.user %}
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item">
@@ -47,7 +51,7 @@
                                 <a class="nav-link text-uppercase  dropdown-toggle text-center" data-bs-toggle="dropdown" href="#"
                                     role="button" aria-expanded="false">Bienvenido, {{ app.user.role }}</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="about.html" class="dropdown-item text-uppercase ">{{ app.user.email }}</a></li>
+                                    <li><a href="" class="dropdown-item text-uppercase ">{{ app.user.email }}</a></li>
                                     <li><a href="{{ path('app_logout') }}" class="dropdown-item text-uppercase "> <span
                                                 class="badge bg-secondary">Cerrar sesión</span></a></li>
                                 </ul>

@@ -26,6 +26,13 @@ class ActividadController extends AbstractController
         ]);
     }
 
+    #[Route('/listado_actividades', name: 'listado_actividades')]
+    public function listado_actividades(): Response
+    {
+        return $this->render('listado_actividades.html.twig', [
+            // 'controller_name' => 'ActividadController',
+        ]);
+    }
     // TODO inyectarlo al panel de administrador
     #[Route('/crear', name: 'crear')]
     public function crear_actividad(GrupoRepository $grupoRepository): Response
