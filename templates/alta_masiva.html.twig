@@ -3,91 +3,53 @@
 {# Inyectar bloques necesarios #}
 {% block myjs %}
     {# SCRIPT #}
-    <script>
-        $( function() {
-            function downloadCSV(csv, filename) {
-                var csvFile;
-                var downloadLink;
-
-                // CSV file
-                csvFile = new Blob([csv], {type: "text/csv"});
-
-                // Download link
-                downloadLink = document.createElement("a");
-
-                // File name
-                downloadLink.download = filename;
-
-                // Create a link to the file
-                downloadLink.href = window.URL.createObjectURL(csvFile);
-
-                // Hide the link
-                downloadLink.style.display = "none";
-
-                // Add the link to DOM
-                document.body.appendChild(downloadLink);
-
-                // Click download link
-                downloadLink.click();
-            }
-
-            function exportTableToCSV(filename) {
-                var csv = [];
-                var rows = document.querySelectorAll("table tr");
-
-                for (var i = 0; i < rows.length; i++) {
-                    var row = [], cols = rows[i].querySelectorAll("td, th");
-
-                    for (var j = 0; j < cols.length; j++) {
-                        row.push(cols[j].innerText);
-                    }
-
-                    csv.push(row.join(","));
-                }
-
-                // Download CSV
-                downloadCSV(csv.join("\n"), filename);
-            }
-
-            document.getElementById("downloadCsv").addEventListener("click", function () {
-                var filename = "tabla_datos.csv";
-                exportTableToCSV(filename);
-            });
-        });
-    </script>
-
-    {% include 'plugins/date-range.html.twig' %}
-    <script src="{{ asset('js/actividad/formulario.js') }}"></script>
+{#    {% include 'plugins/date-range.html.twig' %}#}
+    <script src="{{ asset('js/altamasiva.js') }}"></script>
 {% endblock %}
 
 {% block mycss %}
+    <style>
+        header {
+            height: 7em;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+        }
+
+        #container {
+            width: 80%;
+            height: 20em;
+            text-align: center;
+
+            background-color: white;
+            border: 2px solid;
+            border-radius: 12px;
+        }
+        .mt-10 { margin-top: 5em }
+    </style>
 {% endblock %}
 
 {% block main %}
 
-    <table id="dataTable">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Fin</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Conferencia de Tecnología</td>
-                <td>2024-06-15</td>
-                <td>2024-06-17</td>
-            </tr>
-            <tr>
-                <td>Feria de Emprendedores</td>
-                <td>2024-07-01</td>
-                <td></td>
-            </tr>
-            <!-- Más filas aquí -->
-        </tbody>
-    </table>
-    <button id="downloadCsv">Descargar CSV</button>
+    <main>
+        <div id="container" class="container-fluid">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h1>Alta masiva de personas</h1>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-12">
+                    <div class="d-flex justify-content-around">
+                        <button id="downloadTemplate">Descargar plantilla CSV</button>
+                        <input type="file" id="uploadCsv" accept=".csv">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 
 {% endblock %}

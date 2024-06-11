@@ -1,0 +1,28 @@
+
+div.page-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2em;
+}
+
+.ui-widget-overlay.ui-front { opacity: 0.6 !important; }
+
+
+
+/* ALTA MASIVA */
+header { height: 7em; }
+main {
+    display: flex;
+    justify-content: center;
+}
+#container {
+    width: 80%;
+    height: 20em;
+    text-align: center;
+
+    background-color: white;
+    border: 2px solid;
+    border-radius: 12px;
+}
+.mt-10 { margin-top: 5em }
+

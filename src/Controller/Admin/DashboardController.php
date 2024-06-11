@@ -88,7 +88,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-users', User::class);
         
         yield MenuItem::section('Funciones');
-        yield MenuItem::linkToCrud('Actividades Compuestas', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
+//        yield MenuItem::linkToCrud('Actividades Compuestas', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
         yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
@@ -109,7 +109,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Assets::new()
             ->addCssFile('css/easyadmin/estilosprincipales.css')
-            // ->addJsFile('js/admin.js')
+             ->addJsFile('js/easyadmin/admin.js')
             ;
     }
     
