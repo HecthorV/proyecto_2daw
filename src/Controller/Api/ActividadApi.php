@@ -43,6 +43,12 @@ class ActividadApi extends AbstractController
         $data = json_encode($actividadesSerialized);
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
+    #[Route("/findAll/completo", name: "findAllCompleto", methods: ["GET"])]
+    public function findAllCompleto(): Response
+    {
+        $data = json_encode($this->actividadRepository->findCompuestasWithHijas());
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
 
     #[Route("/findById/{id}", name: "findById", methods: ["GET"])]
     public function findById($id): Response

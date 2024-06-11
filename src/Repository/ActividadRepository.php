@@ -45,4 +45,33 @@ class ActividadRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /*
+    public function findCompuestasWithHijas(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.compuesta = :val')
+            ->setParameter('val', true)
+            ->leftJoin('a.detalleActividades', 'd')
+            ->addSelect('d')
+            ->getQuery();
+
+        return $qb->getArrayResult();
+    }
+    */
+    public function findCompuestasWithHijas(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.compuesta = :val')
+            ->setParameter('val', true)
+            ->leftJoin('a.detalleActividades', 'd')
+            ->leftJoin('d.ponentes', 'p')
+            ->leftJoin('a.evento', 'e')
+            ->addSelect('d')
+            ->addSelect('p')
+            ->addSelect('e')
+            ->getQuery();
+
+        return $qb->getArrayResult();
+    }
 }

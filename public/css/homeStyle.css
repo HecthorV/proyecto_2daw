@@ -1,3 +1,30 @@
-.prof {
-    border: 2px solid;
+@media (max-width: 500px) {
+    .col-md-6.mb-5.mb-md-0 {
+        width: 100% !important;
+        min-width: 100% !important;
+        text-align: center;
+        font-size: 2em !important;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+    h3 {
+        font-size: 1em;
+    }
+}
+@media (min-width: 500px) {
+    .col-md-6.mb-5.mb-md-0 {
+        width: 100% !important;
+        min-width: 100% !important;
+        text-align: center;
+        font-size: 2em !important;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+    h3 {
+        font-size: 1em;
+    }
 }

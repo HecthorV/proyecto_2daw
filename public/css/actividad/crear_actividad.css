@@ -187,4 +187,11 @@ button {
     .recurso {
         width: 80%;
     }
+
+    div[name="selector_actividad"] {
+        height: 1000px;
+    }
+    #tabs {
+        height: 900px;
+    }
 }

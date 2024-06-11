@@ -26,5 +26,33 @@ class SerializeService
         ];
     }
 
+    /*
+    function serializeArrayActividadCompleto($actividades): array
+    {
+
+        $actividadesSerialized = [];
+        foreach ($actividades as $actividad) {
+            $actividadesSerialized = [
+                'id' => $actividad->getId(),
+                'nombre' => $actividad->getNombre(),
+                'fechaHoraInicio' => $actividad->getFechaHoraInicio(),
+                'fechaHoraFin' => $actividad->getFechaHoraFin(),
+                'id_evento' => $actividad->getEvento() == null ? null : $actividad->getEvento()->getId(),
+                ];
+        }
+
+        return $actividadesSerialized;
+    }
+*/
+//        return [
+//            'id' => $actividad->getId(),
+//            'nombre' => $actividad->getNombre(),
+//            'fechaHoraInicio' => $actividad->getFechaHoraInicio(),
+//            'fechaHoraFin' => $actividad->getFechaHoraFin(),
+//            'isCompuesta' => $actividad->isCompuesta(),
+//            'id_evento' => $actividad->getEvento() == null ? null : $actividad->getEvento()->getId(),
+//        ];
+
+
 
 }

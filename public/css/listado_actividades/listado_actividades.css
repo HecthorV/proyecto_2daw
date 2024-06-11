@@ -1,1 +1,14 @@
 .mt-10 { padding-top: 10em; }
+
+.position-fixed { position: static !important; }
+
+body { overflow-y: auto !important; }
+
+.actividad {
+
+    > div { /* '>' significa Hijo directo */
+        border-radius: 12px;
+        background-color: lightgreen;
+        cursor: pointer;
+    }
+}

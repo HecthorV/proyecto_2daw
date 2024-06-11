@@ -94,3 +94,32 @@ INSERT INTO grupo (nombre, curso, letra, nivel_educativo_id) VALUES
                                                                  ("ASIR", 3, "B", 3);
 
 
+
+SELECT
+    a.id AS actividad_id,
+    a.nombre AS actividad_nombre,
+    a.fecha_hora_inicio AS actividad_fechaHoraInicio,
+    a.fecha_hora_fin AS actividad_fechaHoraFin,
+    a.compuesta AS actividad_compuesta,
+    e.id AS evento_id,
+    e.nombre AS evento_nombre,
+    d.id AS detalleActividad_id,
+    d.nombre AS detalleActividad_nombre,
+    d.fecha_hora_inicio AS detalleActividad_fechaHoraInicio,
+    d.fecha_hora_fin AS detalleActividad_fechaHoraFin,
+    p.id AS ponente_id,
+    p.nombre AS ponente_nombre,
+    p.cargo AS ponente_cargo,
+    p.url AS ponente_url
+FROM
+    actividad a
+        LEFT JOIN
+    detalle_actividad d ON a.id = d.actividad_id
+        LEFT JOIN
+    ponente p ON a.id = p.detalle_actividad_id
+        LEFT JOIN
+    evento e ON a.evento_id = e.id
+WHERE
+    a.compuesta = 1;
+
+
