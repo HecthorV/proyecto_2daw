@@ -7,13 +7,25 @@
 
         <div class="col-12">
             <div class="row justify-content-center align-items-start">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-4 text-end pt-2">
+                            <label name="espacioseleccionado">Espacio seleccionado: </label>
+                        </div>
+
+                        <div class="col-4">
+                            <input id="espacio_seleccionado" for="espacioseleccionado" type="text" class="form-control" disabled placeholder="Ninguno, pulsa Buscar un espacio para seleccionar uno">
+                        </div>
+
+                    </div>
+                </div>
 
                 <div class="col-lg-5 col-12">
                     <div class="row">
                         <h4>Elige recursos</h4>
                     </div>
                     <div class="row">
-                        <div class="col-12 d-grid border-black-2 p-2">
+                        <div class="col-12 d-grid column border-black-2 p-4">
                             <div class="row gap-2" id="eligeRecursos">
                                 <!-- Los recursos se cargarán aquí -->
                             </div>
@@ -27,7 +39,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-grid border-black-2 p-2">
-                            <div class="row" id="elegidosRecursos">
+                            <div class="row gap-2" id="elegidosRecursos">
                                 <!-- Los recursos seleccionados se moverán aquí -->
                             </div>
                         </div>
@@ -37,14 +49,21 @@
             </div>
         </div>
 
-        <div class="col-12">
-            <button class="btn btn-primary" id="btnBuscarEspacios">Buscar espacios</button>
+        <div class="col-12 mt-2">
+            <div class="d-flex justify-content-around">
+                <button class="btn btn-primary" id="btnBuscarEspacios">Buscar espacios</button>
+                <button name="save_temp">Guardar borrador</button>
+            </div>
+        </div>
+
+        <div class="col-6">
         </div>
 
         <div class="col-12">
             <div class="row">
-                <div class="col-12 d-grid border-black-2 p-2">
-                    <div class="row gap-2" id="espacios">
+                <div class="col-12">
+                    <input type="hidden" id="id_espacio">
+                    <div class="row gap-2" id="listaEspacios" title="Por favor, selecciona un espacio">
                         <!-- Los espacios se cargarán aquí -->
                     </div>
                 </div>

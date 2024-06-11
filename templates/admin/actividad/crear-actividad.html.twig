@@ -17,6 +17,8 @@
 
     {# PLUGINS #}
     {% include 'plugins/date-range.html.twig' %}
+        {# SWEET ALERT #}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {# CSS #}
     <link rel="stylesheet" href="{{ asset('css/actividad/crear_actividad.css') }}">
@@ -56,6 +58,7 @@
         <div id="listaActividades"></div>
     </div>
 
+    <!--
     <button class="noselect" id="anadir_actividad">
         <span class="text">Añadir</span>
         <span class="icon">
@@ -65,6 +68,7 @@
             </svg>
         </span>
     </button>
+    -->
     <main>
         <div style="display: none;" name="todo_actividades">
             <div name="header">
@@ -86,16 +90,17 @@
             <div name="para_anadir_actividad">
                 <div name="header" class="col-12">
                     <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
-                        <select name="eventos" id="eventos" class="w-85 w-sm-100 form-control">
-                            <option selected disabled>EVENTOS</option>
-                            <option value="0">SIN EVENTO</option>
-                        </select>
 
                         <select name="simple_compuesta" id="elegir_simple_compusesta"
                                 class="w-85 w-sm-100 form-control">
                             <option selected disabled>Elegir simple o compuesta</option>
                             <option value="0">Simple</option>
                             <option value="1">Compuesta</option>
+                        </select>
+
+                        <select disabled name="eventos" id="eventos" class="eventos disabled w-85 w-sm-100 form-control">
+                            <option selected disabled value="-1">EVENTOS</option>
+                            <option value="0">SIN EVENTO</option>
                         </select>
 
                         <div class="d-flex justify-content-center">

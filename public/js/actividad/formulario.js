@@ -20,10 +20,6 @@ $( function() {
         }
     });
 
-    $("#anadir_actividad").appendTo("div.page-actions")
-
-    $("div[name='para_anadir_actividad']").addClass("deshabilitado");
-    
     let today = new Date();
     let datetime_start,datetime_end = "";
 
@@ -64,6 +60,10 @@ $( function() {
             Ok: function() {
                 let idActividad = $("#listaActividades div.actividad.selected").data("id");
                 $("#actividad_padre").val(idActividad);
+
+                let idEvento = $("#listaActividades div.actividad.selected").data("id_evento");
+                $("#eventos").val(idEvento)
+
                 $(this).dialog("close");
             },
             Cancelar: function() {
@@ -73,6 +73,28 @@ $( function() {
     });
     $("#buscarActividadPadre").click(function() {
         $("#elegirActividadPadre").dialog("open");
+    });
+
+
+    $("#listaEspacios").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            Ok: function() {
+                let idEspacio = $("#listaEspacios div.espacio.selected").data("id");
+                $("#id_espacio").val(idEspacio);
+                $("#espacio_seleccionado").val($("#listaEspacios div.espacio.selected").text())
+
+                $(this).dialog("close");
+            },
+            Cancelar: function() {
+                $("#espacio_seleccionado").val("")
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#btnBuscarEspacios").click(function() {
+        $("#listaEspacios").dialog("open");
     });
 
     // $('#actividadForm').submit(function(event) {
@@ -109,20 +131,39 @@ $( function() {
             $("#b_simple")      .removeClass("deshabilitado");
             $("#b_compuesta")   .addClass("deshabilitado");
             $("#buscarActividadPadre").addClass("visible");
-            $("#actividad_padre").val("")
+            $("#actividad_padre").val("");
+
+            $("#eventos").addClass("disabled");
+            $("#eventos").prop("disabled", true);
         } else {
             // ES COMPUESTA
             console.log("ES COMPUESTA");
             $("#b_compuesta")   .removeClass("deshabilitado");
             $("#b_simple")      .addClass("deshabilitado");
             $("#buscarActividadPadre").removeClass("visible");
-            $("#actividad_padre").val("")
+            $("#actividad_padre").val("");
+
+            $("#eventos").removeClass("disabled");
+            $("#eventos").prop("disabled", false);
+            $("#eventos").val(-1);
         }
 
     });
 
+    // Eventos
     cargarEventos();
     crearTabsActividad();
+
+    $("button[name='save_temp']").on("click", function(e) {
+        e.preventDefault()
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    })
 
     // Recursos
     cargarRecursos();
@@ -156,9 +197,6 @@ $( function() {
         e.preventDefault();
         if (validarActividadSimple()) {
             crearActividad(0, "simple", $("#eventos").val());
-        }
-        else if ($("#actividad_padre").val() == "") {
-                alert("Por favor, debes seleccionar una actividad padre.")
         } else {
             alert("Por favor, llena todos los campos obligatorios.")
         }

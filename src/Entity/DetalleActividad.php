@@ -41,22 +41,18 @@ class DetalleActividad
     private Collection $ponentes;
 
     /**
-     * @var Collection<int, Espacio>
-     */
-    #[ORM\ManyToMany(targetEntity: Espacio::class, inversedBy: 'detalleActividades')]
-    private Collection $espacios;
-
-    /**
      * @var Collection<int, Grupo>
      */
     #[ORM\ManyToMany(targetEntity: Grupo::class, inversedBy: 'detalleActividades')]
     private Collection $grupos;
 
+    #[ORM\ManyToOne(inversedBy: 'actividades')]
+    private ?Espacio $espacio = null;
+
     public function __construct()
     {
         $this->alumnoDetalleActividads = new ArrayCollection();
         $this->ponentes = new ArrayCollection();
-        $this->espacios = new ArrayCollection();
         $this->grupos = new ArrayCollection();
     }
 
@@ -174,30 +170,6 @@ class DetalleActividad
     }
 
     /**
-     * @return Collection<int, Espacio>
-     */
-    public function getEspacios(): Collection
-    {
-        return $this->espacios;
-    }
-
-    public function addEspacio(Espacio $espacio): static
-    {
-        if (!$this->espacios->contains($espacio)) {
-            $this->espacios->add($espacio);
-        }
-
-        return $this;
-    }
-
-    public function removeEspacio(Espacio $espacio): static
-    {
-        $this->espacios->removeElement($espacio);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Grupo>
      */
     public function getGrupos(): Collection
@@ -217,6 +189,18 @@ class DetalleActividad
     public function removeGrupo(Grupo $grupo): static
     {
         $this->grupos->removeElement($grupo);
+
+        return $this;
+    }
+
+    public function getEspacio(): ?Espacio
+    {
+        return $this->espacio;
+    }
+
+    public function setEspacio(?Espacio $espacio): static
+    {
+        $this->espacio = $espacio;
 
         return $this;
     }

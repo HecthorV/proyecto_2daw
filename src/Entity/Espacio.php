@@ -34,19 +34,12 @@ class Espacio
      * @var Collection<int, DetalleActividad>
      */
     #[ORM\OneToMany(targetEntity: DetalleActividad::class, mappedBy: 'espacio')]
-    private Collection $detalleActividad;
-
-    /**
-     * @var Collection<int, DetalleActividad>
-     */
-    #[ORM\ManyToMany(targetEntity: DetalleActividad::class, mappedBy: 'espacios')]
-    private Collection $detalleActividades;
+    private Collection $actividades;
 
     public function __construct()
     {
         $this->recursos = new ArrayCollection();
-        $this->detalleActividad = new ArrayCollection();
-        $this->detalleActividades = new ArrayCollection();
+        $this->actividades = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,55 +110,28 @@ class Espacio
     /**
      * @return Collection<int, DetalleActividad>
      */
-    public function getDetalleActividad(): Collection
+    public function getActividades(): Collection
     {
-        return $this->detalleActividad;
+        return $this->actividades;
     }
 
-    public function addDetalleActividad(DetalleActividad $detalleActividad): static
+    public function addActividade(DetalleActividad $actividade): static
     {
-        if (!$this->detalleActividad->contains($detalleActividad)) {
-            $this->detalleActividad->add($detalleActividad);
-            $detalleActividad->setEspacio($this);
+        if (!$this->actividades->contains($actividade)) {
+            $this->actividades->add($actividade);
+            $actividade->setEspacio($this);
         }
 
         return $this;
     }
 
-    public function removeDetalleActividad(DetalleActividad $detalleActividad): static
+    public function removeActividade(DetalleActividad $actividade): static
     {
-        if ($this->detalleActividad->removeElement($detalleActividad)) {
+        if ($this->actividades->removeElement($actividade)) {
             // set the owning side to null (unless already changed)
-            if ($detalleActividad->getEspacio() === $this) {
-                $detalleActividad->setEspacio(null);
+            if ($actividade->getEspacio() === $this) {
+                $actividade->setEspacio(null);
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, DetalleActividad>
-     */
-    public function getDetalleActividades(): Collection
-    {
-        return $this->detalleActividades;
-    }
-
-    public function addDetalleActividade(DetalleActividad $detalleActividade): static
-    {
-        if (!$this->detalleActividades->contains($detalleActividade)) {
-            $this->detalleActividades->add($detalleActividade);
-            $detalleActividade->addEspacio($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDetalleActividade(DetalleActividad $detalleActividade): static
-    {
-        if ($this->detalleActividades->removeElement($detalleActividade)) {
-            $detalleActividade->removeEspacio($this);
         }
 
         return $this;

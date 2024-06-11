@@ -21,7 +21,8 @@ class SerializeService
             'nombre' => $actividad->getNombre(),
             'fechaHoraInicio' => $actividad->getFechaHoraInicio(),
             'fechaHoraFin' => $actividad->getFechaHoraFin(),
-            'isCompuesta' => $actividad->isCompuesta()
+            'isCompuesta' => $actividad->isCompuesta(),
+            'id_evento' => $actividad->getEvento() == null ? null : $actividad->getEvento()->getId(),
         ];
     }
 

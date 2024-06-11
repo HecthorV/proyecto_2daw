@@ -18,7 +18,8 @@ function obtenerDatosActividadSimple() {
     var datetime_end = dates[1];
 
     // Espacios
-    const espacios = obtenerEspaciosIdsDiv();
+    // const espacios = obtenerEspaciosIdsDiv();
+    const idEspacio = obtenerIdEspaciosSeleccionado();
 
     // Ponentes
     const ponentes = obtenerPonentes();
@@ -33,7 +34,7 @@ function obtenerDatosActividadSimple() {
         fechaHoraInicio: datetime_start,
         fechaHoraFin: datetime_end,
         aforo: $("#aforo_simple").val(),
-        espacios: espacios,
+        idEspacio: idEspacio,
         ponentes: ponentes,
         grupos: grupos
     };
@@ -74,6 +75,7 @@ function crearActividad(idPadre, simple_compuesta, idEvento) {
             // } else {
             //     window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDetalleActividadCrudController";
             // }
+            window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CActividadCrudController";
         },
         error: function(textStatus, error) {
             console.log('Error en la petición:');

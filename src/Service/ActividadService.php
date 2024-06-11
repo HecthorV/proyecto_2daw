@@ -49,16 +49,18 @@ class ActividadService
         $fechaHoraInicio = $requestData['fechaHoraInicio'] ?? null;
         $fechaHoraFin = $requestData['fechaHoraFin'] ?? null;
 
+
+        $actividad = new Actividad();
+        $actividad->setNombre($description);
+        $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
+        $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
+        $actividad->setCompuesta($requestData['isCompuesta']);
+
+
         if ($requestData['isCompuesta']) {
 
             $idEvento = $requestData['idEvento'] ?? null;
             $evento = $this->eventoRepository->find($idEvento);
-
-            $actividad = new Actividad();
-            $actividad->setNombre($description);
-            $actividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
-            $actividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
-            $actividad->setCompuesta($requestData['isCompuesta']);
             $actividad->setEvento($evento);
 
             $this->entityManager->persist($actividad);
@@ -76,18 +78,20 @@ class ActividadService
 
             return $actividad->getId();
         } else {
+            $this->entityManager->persist($actividad);
+
             $detalleActividad = new DetalleActividad();
 
-//            $aforo = $requestData['aforo'] ?? null;
-
             $idActividad = $requestData['idActividadPadre'] ?? null;
-            $actividadPadre = $this->actividadRepository->find($idActividad);
 
-            $espaciosIds = $requestData["espacios"] ?? null;
-            foreach ($espaciosIds as $espacioId) {
-                $espacio = $this->espacioRepository->find($espacioId);
-                $detalleActividad->addEspacio($espacio);
-            }
+//            $espaciosIds = $requestData["espacios"] ?? null;
+//            foreach ($espaciosIds as $espacioId) {
+//                $espacio = $this->espacioRepository->find($espacioId);
+//                $detalleActividad->addEspacio($espacio);
+//            }
+            $idEspacio = $requestData["idEspacio"] ?? null;
+            $espacio = $this->espacioRepository->find($idEspacio);
+            $detalleActividad->setEspacio($espacio);
 
             $gruposIds = $requestData["grupos"] ?? null;
             foreach ($gruposIds as $grupoId) {
@@ -98,12 +102,13 @@ class ActividadService
             $ponentesJson = $requestData["ponentes"] ?? null;
             $ponentesArr = json_decode($ponentesJson, true);
             foreach ($ponentesArr as $ponente) {
-                $newPonentes = new Ponente();
-                $newPonentes->setNombre($ponente['nombre']);
-                $newPonentes->setCargo($ponente['cargo']);
-                $newPonentes->setUrl($ponente['url']);
-                $newPonentes->setDetalleActividad($detalleActividad);
+                $newPonente = new Ponente();
+                $newPonente->setNombre($ponente['nombre']);
+                $newPonente->setCargo($ponente['cargo']);
+                $newPonente->setUrl($ponente['url']);
+                $newPonente->setDetalleActividad($detalleActividad);
 //                $detalleActividad->addPonente($ponente);
+                $this->entityManager->persist($newPonente);
             }
 
             foreach ($gruposIds as $grupoId) {
@@ -115,7 +120,10 @@ class ActividadService
             $detalleActividad->setNombre($description);
             $detalleActividad->setFechaHoraInicio(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraInicio));
             $detalleActividad->setFechaHoraFin(\DateTime::createFromFormat('d/m/Y H:i', $fechaHoraFin));
-            $detalleActividad->setActividad($actividadPadre);
+            if ($idActividad != null) {
+                $actividadPadre = $this->actividadRepository->find($idActividad);
+                $detalleActividad->setActividad($actividadPadre);
+            }
 
             $this->entityManager->persist($detalleActividad);
             $this->entityManager->flush();

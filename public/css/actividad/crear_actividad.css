@@ -17,14 +17,16 @@
     align-items: center;
 }
 
-.actividad:hover {
+.actividad:hover, .espacio:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
-.actividad.selected {
+.actividad.selected, .espacio.selected {
     background-color: lightblue;
 }
-#eventos { cursor: pointer; }
+#eventos,#elegir_simple_compusesta { cursor: pointer; }
+.eventos.disabled { cursor: not-allowed !important; }
+
 
 .ui-dialog-buttonset {
     display: flex;
@@ -41,8 +43,12 @@
     }
 }
 
-#listaActividades {
-    max-height: 300px;
+#listaEspacios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+#listaActividades, #listaEspacios {
+    max-height: 400px;
     overflow-y: auto;
 }
 

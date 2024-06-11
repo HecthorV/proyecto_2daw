@@ -60,6 +60,7 @@ function obtenerRecursosIdsDiv() {
 }
 
 
+
 function cargarEspacios() {
 
     let recursosIds = obtenerRecursosIdsDiv();
@@ -73,7 +74,7 @@ function cargarEspacios() {
         success: function(response) {
             console.log(response);
 
-            const divEspacios = $('#espacios')
+            const divEspacios = $('#listaEspacios')
             divEspacios.empty();
 
             let espacios = response
@@ -88,6 +89,11 @@ function cargarEspacios() {
 
                 divEspacios.append(divEspacio)
             }
+
+            divEspacios.on('click', '.espacio', function() {
+                $('.espacio').removeClass('selected');
+                $(this).addClass('selected');
+            });
         },
         error: function(status, error) {
             console.error('Error en la petición:');
@@ -96,15 +102,19 @@ function cargarEspacios() {
     });
 }
 
-function obtenerEspaciosIdsDiv() {
-    const divsEspaciosElegidos = $('#espacios > [data-id]'); // '>' significa: hijo directo
-    const idsEspacios = [];
-
-    for (const divEspacio of divsEspaciosElegidos) {
-        var id = $(divEspacio).data('id');
-        idsEspacios.push(id);
-    }
-
-    return idsEspacios;
+function obtenerIdEspaciosSeleccionado() {
+    return $("#listaEspacios div.espacio.selected").data("id");
 }
+
+// function obtenerEspaciosIdsDiv() {
+//     const divsEspaciosElegidos = $('#espacios > [data-id]'); // '>' significa: hijo directo
+//     const idsEspacios = [];
+//
+//     for (const divEspacio of divsEspaciosElegidos) {
+//         var id = $(divEspacio).data('id');
+//         idsEspacios.push(id);
+//     }
+//
+//     return idsEspacios;
+// }
 

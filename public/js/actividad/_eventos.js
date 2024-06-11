@@ -55,9 +55,11 @@ function cargarActividadesPadre() {
 
             for (const item of response) {
 
+                const id_evento = (item.id_evento === null) ? 0 : item.id_evento;
                 const divActividad = $('<div>', {
                     class: 'actividad d-flex justify-content-space-around',
-                    "data-id": item.id
+                    "data-id": item.id,
+                    "data-id_evento": id_evento,
                 });
 
                 const pNombre = $('<p>',{
