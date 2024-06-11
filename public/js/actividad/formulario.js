@@ -116,7 +116,21 @@ $( function() {
     //         console.log(pair[0] + ': ' + pair[1]);
     //     }
     // });
-    
+
+    $("#continuarSinEvento").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Continuar sin evento": function() {
+                $(this).dialog("close");
+            },
+            "Quiero elegir un evento": function() {
+                $("#btnBuscarEspacios").preventDefault()
+                $(this).dialog("close");
+            }
+        }
+    });
+
 
     // Formulario de compuesta
     $("#b_compuesta")   .addClass("deshabilitado");
@@ -180,15 +194,13 @@ $( function() {
 
 
     // CREAR ACTIVIDAD
-    // $("#guardar_compuesta").on("click", function (e) {
-    //     e.preventDefault();
-    //     crearActividad();
-    // })
+
 
     $("#crear_actividad_compuesta").on("click", function (e) {
         e.preventDefault();
         if (validarActividadCompuesta()) {
-            crearActividad(0, "compuesta", $("#eventos").val());
+            let idEvento = $("#eventos").val() == null || $("#eventos").val() == -1 ? null : $("#eventos").val();
+            crearActividad(0, "compuesta", idEvento);
         } else {
             alert("Por favor, llena todos los campos obligatorios.")
         }

@@ -54,8 +54,16 @@
 
 {% block main %}
 
+    {# MODALES #}
     <div id="elegirActividadPadre" title="Elegir actividad padre" style="display: none;">
         <div id="listaActividades"></div>
+    </div>
+
+    <div id="continuarSinEvento" title="No has seleccionado ningún evento" style="display: none;">
+        <div>
+            <p>¿No has seleccionado ningún evento?</p>
+            <p>Se guardará 'SIN EVENTO' por defecto</p>
+        </div>
     </div>
 
     <!--

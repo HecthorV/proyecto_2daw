@@ -60,8 +60,10 @@ class ActividadService
         if ($requestData['isCompuesta']) {
 
             $idEvento = $requestData['idEvento'] ?? null;
-            $evento = $this->eventoRepository->find($idEvento);
-            $actividad->setEvento($evento);
+            if ($idEvento != null) {
+                $evento = $this->eventoRepository->find($idEvento);
+                $actividad->setEvento($evento);
+            }
 
             $this->entityManager->persist($actividad);
 
