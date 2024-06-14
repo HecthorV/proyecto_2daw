@@ -88,8 +88,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-users', User::class);
         
         yield MenuItem::section('Funciones');
-//        yield MenuItem::linkToCrud('Actividades Compuestas', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
-        yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
+       yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
+        yield MenuItem::linkToCrud('Lista de actividades', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
         yield MenuItem::linkToCrud('Alumnos', 'fas fa-users', Alumno::class);
@@ -97,6 +97,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Espacios', 'fas fa-users', Espacio::class);
         yield MenuItem::linkToCrud('Eventos', 'fas fa-users', Evento::class);
         yield MenuItem::linkToCrud('Grupos', 'fas fa-users', Grupo::class);
+
+        yield MenuItem::section('Zonas de mi web');
+        yield MenuItem::linkToUrl('Home', 'fas fa-home', "/home");
     }
 
     public function configureActions(): Actions

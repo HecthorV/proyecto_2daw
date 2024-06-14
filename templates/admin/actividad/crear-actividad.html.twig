@@ -100,8 +100,7 @@
                 <div name="header" class="col-12">
                     <div class="d-flex justify-content-around flex-sm-column flex-lg-row column-gap-2">
 
-                        <select name="simple_compuesta" id="elegir_simple_compusesta"
-                                class="w-85 w-sm-100 form-control">
+                        <select name="simple_compuesta" id="elegir_simple_compusesta" class="w-25 w-sm-100 form-control">
                             <option selected disabled>Elegir simple o compuesta</option>
                             <option value="0">Simple</option>
                             <option value="1">Compuesta</option>
@@ -112,12 +111,10 @@
                             <option value="0">SIN EVENTO</option>
                         </select>
 
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <input type="text" id="actividad_padre" class="w-85 w-sm-100 form-control" disabled
-                                       placeholder="ID actividad padre">
-                            </div>
-                                <button id="buscarActividadPadre"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <div class="d-flex justify-content-around w-25">
+                        
+                            <button id="buscarActividadPadre" class="me-3" style="width: 100%;">Elegir compuesta</button>
+                            <input style="width: 50px !important;" type="text" id="actividad_padre" class="form-control" disabled placeholder="ID actividad padre">
                         </div>
                     </div>
                 </div>

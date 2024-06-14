@@ -70,11 +70,7 @@ function crearActividad(idPadre, simple_compuesta, idEvento) {
         dataType: 'json',
         success: function(response) {
             console.log(response);
-            // if (datos_actividad.isCompuesta) {
-            //     window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CActividadCrudController";
-            // } else {
-            //     window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CDetalleActividadCrudController";
-            // }
+            
             window.location.href = "http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CActividadCrudController";
         },
         error: function(textStatus, error) {

@@ -15,4 +15,10 @@ class PersonaController extends AbstractController
     {
         return $this->render('alta_masiva.html.twig');
     }
+
+    #[Route('/rol_profesor', name: 'profesor')]
+    public function rol_profesor(): Response
+    {
+        return $this->render('rol_profesor.html.twig');
+    }
 }

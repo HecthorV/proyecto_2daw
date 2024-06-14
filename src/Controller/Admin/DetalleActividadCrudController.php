@@ -86,13 +86,13 @@ class DetalleActividadCrudController extends AbstractCrudController
     {
         return $actions
 
-            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action
-                    ->linkToRoute('app-crear-actividad', [])
-                    ->setIcon('fa-solid fa-circle-plus')
-                    ->setLabel("Crear actividad")
-                    ;
-            })
+            // ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+            //     return $action
+            //         ->linkToRoute('app-crear-actividad', [])
+            //         ->setIcon('fa-solid fa-circle-plus')
+            //         ->setLabel("Crear actividad")
+            //         ;
+            // })
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
                 return $action
                     ->setIcon('fas fa-search content-search-icon')

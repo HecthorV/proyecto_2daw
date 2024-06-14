@@ -45,7 +45,7 @@ body {
   --heading-color: #313131;
   --heading-line-height: 1.24;
 
-  --accent-color: #D06051;
+  --accent-color: #rgba(75, 195, 81, 0.6);
   --linear-gradient: linear-gradient(90deg, #C62813 0%, #D06051 100%);
 
 
@@ -259,7 +259,7 @@ img.logo-image:hover {
 /*---- testimonial section style start ----*/
 
 section#testimonial {
-  background: linear-gradient(90deg, #C62813 0%, #D06051 100%);
+  background: linear-gradient(90deg, #33622c 0%, #668e76 100%);
 }
 
 .testimonial-pattern-overlay.pattern-right {
@@ -479,13 +479,13 @@ iconify-icon.contact-icon {
 }
 
 iconify-icon.social-link-icon {
-  color: rgba(208, 96, 81, 0.60);
+  color: rgba(75, 195, 81, 0.6);
   font-size: 24px;
 }
 
 iconify-icon.social-link-icon.active,
 iconify-icon.social-link-icon:hover {
-  color: #D06051;
+  color: rgba(75, 195, 81, 0.6);
 }
 
 
@@ -533,7 +533,7 @@ span.price-tick {
 }
 
 .recommend-price {
-  background: #D06051;
+  background: rgba(75, 195, 81, 0.6)1;
 }
 
 /*--------------------------------------------------------------

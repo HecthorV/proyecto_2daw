@@ -173,7 +173,7 @@ $( function() {
         Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Your work has been saved",
+            title: "Borrador guardado",
             showConfirmButton: false,
             timer: 1500
         });
@@ -200,7 +200,7 @@ $( function() {
         e.preventDefault();
         if (validarActividadCompuesta()) {
             let idEvento = $("#eventos").val() == null || $("#eventos").val() == -1 ? null : $("#eventos").val();
-            crearActividad(0, "compuesta", idEvento);
+            crearActividad($("#actividad_padre").val(), "compuesta", idEvento);
         } else {
             alert("Por favor, llena todos los campos obligatorios.")
         }
@@ -208,7 +208,7 @@ $( function() {
     $("#crear_actividad_simple").on("click", function (e) {
         e.preventDefault();
         if (validarActividadSimple()) {
-            crearActividad(0, "simple", $("#eventos").val());
+            crearActividad($("#actividad_padre").val(), "simple", $("#eventos").val());
         } else {
             alert("Por favor, llena todos los campos obligatorios.")
         }

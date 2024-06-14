@@ -1,14 +1,4 @@
 
-// function encenderSelectElegirSimpleCompuesta() {
-    
-//     $("#elegir_simple_compusesta").change(function (e) { 
-//         // e.preventDefault();
-        
-//         console.log(this.value);
-//         console.log(e);
-//     });
-// }
-
 function cargarEventos() {
     $.ajax({
         url: 'api/eventos/findAll',
@@ -37,12 +27,6 @@ function cargarEventos() {
             console.log(textStatus); // Aquí puedes mostrar el tipo de error
         }
     });
-}
-
-function crearTabsActividad() {
-    $("span.icon").on("click", function () {
-        $("div[name='para_anadir_actividad']").removeClass("deshabilitado");
-    })
 }
 
 function cargarActividadesPadre() {
@@ -93,4 +77,3 @@ function cargarActividadesPadre() {
         }
     });
 }
-

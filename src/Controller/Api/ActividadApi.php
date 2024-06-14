@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route("/api/actividad", name: "actividades-")]
 class ActividadApi extends AbstractController
@@ -32,7 +33,7 @@ class ActividadApi extends AbstractController
     // #################################### SELECTS ###################################
     // ################################################################################
     #[Route("/findAll", name: "findAll", methods: ["GET"])]
-    public function findAll(): Response
+    public function findAll(): JsonResponse
     {
         $actividades = $this->actividadRepository->findAll();
         $actividadesSerialized = [];
@@ -40,25 +41,24 @@ class ActividadApi extends AbstractController
             $actividad = $this->serializeService->serializeActividad($actividad);
             $actividadesSerialized[] = $actividad;
         }
-        $data = json_encode($actividadesSerialized);
-        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+        return new JsonResponse($actividadesSerialized, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
     #[Route("/findAll/completo", name: "findAllCompleto", methods: ["GET"])]
-    public function findAllCompleto(): Response
+    public function findAllCompleto(): JsonResponse
     {
-        $data = json_encode($this->actividadRepository->findCompuestasWithHijas());
-        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+        $data = $this->actividadRepository->findCompuestasWithHijas();
+        return new JsonResponse($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    #[Route("/findById/{id}", name: "findById", methods: ["GET"])]
-    public function findById($id): Response
+    #[Route("/findById/{id}", name: "findById", methods: ["GET"]), IsGranted("ROLE_ADMIN")]
+    public function findById($id): JsonResponse
     {
-        $route = $this->actividadRepository->find($id);
-        if (!$route) {
-            return new Response(null, Response::HTTP_NOT_FOUND);
+        $actividad = $this->actividadRepository->find($id);
+        if (!$actividad) {
+            return new Response("actividad no encontrada", Response::HTTP_NOT_FOUND);
         }
-        $data = json_encode($route, 'json');
-        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+        $actividadSerialized = $this->serializeService->serializeActividad($actividad);
+        return new JsonResponse($actividadSerialized, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
     // ################################################################################
@@ -67,7 +67,7 @@ class ActividadApi extends AbstractController
     #[Route("/insert", name: "insert", methods: ["POST"]), IsGranted("ROLE_ADMIN")]
     public function insert_simple(Request $request, ActividadService $actividadService): Response
     {
-        $requestData = json_decode($request->getContent(), true);
+        $requestData = json_decode($request->getContent(), true); // obtener datos del body
 
         $newActividadId = $actividadService->insertNewEntity($requestData);
 
@@ -84,28 +84,4 @@ class ActividadApi extends AbstractController
         $this->actividadService->update($requestData);
         return new JsonResponse(true, JsonResponse::HTTP_CREATED);
     }
-
-    // #[Route("/update/{id}", name: "updateById", methods: ["PUT"])]
-    // public function updateById(Request $request, $id): Response
-    // {
-    //     $route = $this->routeRepository->find($id);
-    //     if (!$route) {
-    //         return new Response(null, Response::HTTP_NOT_FOUND);
-    //     }
-    //     $data = json_decode($request->getContent(), true);
-    //     // Aquí puedes actualizar la entidad Route con los datos recibidos en $data
-    // }
-
-    // #[Route("/delete/{id}", name: "delete", methods: ["DELETE"])]
-    // public function delete($id): Response
-    // {
-    //     $entityManager = $this->routeRepository->getManager();
-    //     $route = $entityManager->getRepository(Route::class)->find($id);
-    //     if (!$route) {
-    //         return new Response(null, Response::HTTP_NOT_FOUND);
-    //     }
-    //     $entityManager->remove($route);
-    //     $entityManager->flush();
-    //     return new Response(null, Response::HTTP_OK);
-    // }
 }

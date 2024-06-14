@@ -33,6 +33,7 @@ function cargarGrupos() {
 
 
     $('#select, #selected').on('click', 'div.grupo', function() {
+        // 'div.grupo' y $(this) es lo mismo
         const isSelected = $(this).parent().attr('id') === 'selected';
         if (isSelected) {
             $('#select').append($(this));
@@ -48,10 +49,10 @@ function cargarGrupos() {
 
         // Si la opción seleccionada es 'todos', muestra todos los grupos
         if (selectedOption == '0') {
-            $('#select .grupo').show();
+            $('#select .grupo').show(); // le quita el display none
         } else {
             // Oculta todos los grupos
-            $('#select .grupo').hide();
+            $('#select .grupo').hide(); // display none 
 
             // Muestra solo los grupos que correspondan a la opción seleccionada
             $('#select .grupo[data-curso="' + selectedOption + '"]').show();

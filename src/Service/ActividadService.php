@@ -21,6 +21,12 @@ class ActividadService
 //    private $entityManager;
 
     private EspacioRepository $espacioRepository;
+    private EntityManagerInterface $entityManager;
+    private ActividadRepository $actividadRepository;
+    private DetalleActividadRepository $detalleActividadRepository;
+    private PonenteRepository $ponenteRepository;
+    private GrupoRepository $grupoRepository;
+    private EventoRepository $eventoRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -76,8 +82,6 @@ class ActividadService
             $this->entityManager->persist($detalleActividad);
             $this->entityManager->flush();
 
-            $this->entityManager->flush();
-
             return $actividad->getId();
         } else {
             $this->entityManager->persist($actividad);
@@ -86,11 +90,6 @@ class ActividadService
 
             $idActividad = $requestData['idActividadPadre'] ?? null;
 
-//            $espaciosIds = $requestData["espacios"] ?? null;
-//            foreach ($espaciosIds as $espacioId) {
-//                $espacio = $this->espacioRepository->find($espacioId);
-//                $detalleActividad->addEspacio($espacio);
-//            }
             $idEspacio = $requestData["idEspacio"] ?? null;
             $espacio = $this->espacioRepository->find($idEspacio);
             $detalleActividad->setEspacio($espacio);
@@ -111,11 +110,6 @@ class ActividadService
                 $newPonente->setDetalleActividad($detalleActividad);
 //                $detalleActividad->addPonente($ponente);
                 $this->entityManager->persist($newPonente);
-            }
-
-            foreach ($gruposIds as $grupoId) {
-                $grupo = $this->grupoRepository->find($grupoId);
-                $detalleActividad->addGrupo($grupo);
             }
 
 
@@ -141,7 +135,7 @@ class ActividadService
 
         $detalleActividad = $this->detalleActividadRepository->find($idActividad);
         if (!$detalleActividad) {
-            throw new \Exception('DetalleActividad no encontrada');
+            throw new \Exception('DetalleActividad no encontrada con el ID ' . $idActividad);
         }
 
         $description = $requestData['descripcion'] ?? null;
@@ -181,11 +175,14 @@ class ActividadService
 
             $actividadPadre = $this->actividadRepository->find($idActividad);
 
-            $espaciosIds = $requestData["espacios"] ?? null;
-            foreach ($espaciosIds as $espacioId) {
-                $espacio = $this->espacioRepository->find($espacioId);
-                $detalleActividad->addEspacio($espacio);
-            }
+            // $espaciosIds = $requestData["espacios"] ?? null;
+            // foreach ($espaciosIds as $espacioId) {
+            //     $espacio = $this->espacioRepository->find($espacioId);
+            //     $detalleActividad->addEspacio($espacio);
+            // }
+            $idEspacio = $requestData["idEspacio"] ?? null;
+            $espacio = $this->espacioRepository->find($idEspacio);
+            $detalleActividad->setEspacio($espacio);
 
             $gruposIds = $requestData["grupos"] ?? null;
             foreach ($gruposIds as $grupoId) {
@@ -203,11 +200,6 @@ class ActividadService
                 $newPonente->setDetalleActividad($detalleActividad);
 
                 $this->entityManager->persist($newPonente);
-            }
-
-            foreach ($gruposIds as $grupoId) {
-                $grupo = $this->grupoRepository->find($grupoId);
-                $detalleActividad->addGrupo($grupo);
             }
 
 

@@ -1,3 +1,0 @@
-composer require symfony/serializer
-
-composer remove symfony/serializer
