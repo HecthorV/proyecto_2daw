@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register_original.html.twig', [
             'registrationForm' => $form,
         ]);
-    }
+    }/**/
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response

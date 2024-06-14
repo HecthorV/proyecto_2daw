@@ -32,10 +32,13 @@ $( function() {
                 var data = lines.map(function(line) {
                     return line.split(',');
                 });
+
                 console.log(data);
+                data.shift()
+                // data.pop()
+                // console.log(data);
 
 
-                // HACER EL AJAX A SERVIDOR de "data"
                 $.ajax({
                     url: 'api/alumno/insertMasivo',
                     method: 'POST',
