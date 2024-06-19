@@ -53,15 +53,12 @@ class DashboardController extends AbstractDashboardController
     {
         $id = $request->query->get('id');
         $detalleActividad = $actividadRepository->find($id);
-//        $actividad = $request->query->get('actividad');
-//        dd($request);
         $idEvento = $request->query->get('idEvento');
         $aforo = $request->query->get('aforo');
 
         return $this->render('admin/actividad/editar/editar-actividad-simple.html.twig',[
             'id' => $id,
             'detalleActividad' => $detalleActividad,
-//            'actividad' => $actividad,
             'idEvento' => $idEvento == "" || $idEvento == null ? 0 : $idEvento,
             'aforo' => $aforo
         ]);
@@ -88,7 +85,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Usuarios', 'fas fa-users', User::class);
         
         yield MenuItem::section('Funciones');
-       yield MenuItem::linkToCrud('Actividades', 'fas fa-list-check', Actividad::class); //$this->generateUrl('create-activity')
+       yield MenuItem::linkToCrud('Actividades', 'fa-solid fa-chart-line', Actividad::class); //$this->generateUrl('create-activity')
         yield MenuItem::linkToCrud('Lista de actividades', 'fas fa-list-check', DetalleActividad::class); //$this->generateUrl('create-activity')
 
         yield MenuItem::section('Entidades');
@@ -112,7 +109,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Assets::new()
             ->addCssFile('css/easyadmin/estilosprincipales.css')
-             ->addJsFile('js/easyadmin/admin.js')
+            ->addJsFile('js/easyadmin/admin.js')
             ;
     }
     

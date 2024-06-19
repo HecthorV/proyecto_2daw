@@ -34,10 +34,5 @@ function validarActividadSimple() {
         alert("Por favor, selecciona un espacio.");
     }
 
-    // let idActividadPadre = $("#actividad_padre").val() == "" ? false : true;
-    // if (!idActividadPadre) {
-    //     alert("Por favor, selecciona un padre.");
-    // }
-
     return descripcion;// && idActividadPadre;
 }

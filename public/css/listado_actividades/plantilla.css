@@ -25,7 +25,7 @@ img.animated.pulse {
 
 .product-item:hover {
     border-width: 0 !important;
-    box-shadow: 0 0 35px rgba(144, 188, 121, .25);
+    box-shadow: 0 0 35px black;
 }
 
 .product-item:hover a.btn {

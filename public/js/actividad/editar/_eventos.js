@@ -1,13 +1,4 @@
 
-// function encenderSelectElegirSimpleCompuesta() {
-    
-//     $("#elegir_simple_compusesta").change(function (e) { 
-//         // e.preventDefault();
-        
-//         console.log(this.value);
-//         console.log(e);
-//     });
-// }
 function seleccionarEvento() {
     let idEvento = $('#id_evento').val();
     $('#eventos').val(idEvento);

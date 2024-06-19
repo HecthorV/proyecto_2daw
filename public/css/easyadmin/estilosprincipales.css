@@ -1,20 +1,15 @@
-/*
-    Si ves que no se te cambian los colores o alguna propiedad CSS
-    pruéba a ponerle al final '!important'
-    te dejaré ejemplos de como hacerlo
- */
 
 /* aside.sidebar {
     background-color: green;
 }
 
 .main-content {
-    background-color: darkgreen;
-} */
+background-color: darkgreen;} 
+*/
 
 /* Iconos del aside */
 .menu-icon {
-    color: green !important;
+    color: white !important;
 }
 /* Label de los iconos anteriores */
 .menu-item-contents {
@@ -31,24 +26,40 @@
 
 
 /* parte superior */
+i.content-top.content-search.content-search-icon, i.fas.fa-gear {
+    color: white !important;
+}
+.content-top .content-search .content-search-icon {
+    color: white !important;
+}
+.list-pagination-counter {
+    color: white !important;
+}
 .content-top {
-    background-color: green !important;
+    background-color: darkred !important;
+    color:white !important;
 }
 .sidebar {
-    background-color: green !important;
+    background-color: rgb(70, 145, 67)!important;
 }
 
 /* Parte principal */
+h1.title {
+    color: white !important;
+}
     /* superior */
     .content-header {
-        background-color: blue !important;
+        background-color:rgb(70, 145, 67) !important;
     }
     /* inferior */
 .content-wrapper {
-    background-color: red !important;
+    background-color: rgb(70, 145, 67) !important;
 }
 
 
+span.user-name {
+    color: white !important;
+}
 /* Dropdown perfil (arriba derecha) */
 .dropdown-menu {
     background-color: lightblue !important;
@@ -61,28 +72,37 @@ button.btn.btn-primary {
 
 /* Botones secundarios */
 button.btn.btn-secondary {
-    background-color: darkred !important;
+    background-color: rgb(70, 145, 67) !important;
 }
 
 
 
 
 /* ACTIVIDAD */
+#tabs a {
+    color: white !important;
+}
 /*
-    Este CSS es más para la parte de actividad, lo dejo aquí para
-    que no tengas que linkearlo en dos archivos distintos de CREAR_ACTIVIDAD y EDITAR_ACTIVIDAD
+    Este CSS es más para la parte de actividad
 */
 /* Botones dentro del panel de crear actividad */
 #tabs button {
+    margin-top: .8em;
+    background-color: rgb(70, 145, 67) !important;
+    color: white !important;
+    border: 2px solid white !important;
+}
+#buscarActividadPadre {
     background-color: darkred !important;
+    color: white !important;
 }
 /* Panel de botones */
 #tabs > ul {
-    background-color: darkred !important;
+    background-color:rgb(70, 145, 67) !important;
 }
 /* Botones para elegir entre Introducción Recursos Ponente Grupos */
 #tabs li {
-    background-color: darkred !important;
+    background-color: rgb(144, 66, 66) !important;
     color: white;
     border-color: black;
 }
@@ -90,6 +110,12 @@ button.btn.btn-secondary {
 #tabs li[aria-selected="true"] {
     background-color: darkred !important;
     color: white;
+}
+li.active {
+    color: black !important;
+}
+li.active * {
+    color: black !important;
 }
 /* fondo principal */
 #tabs {

@@ -15,7 +15,6 @@ $(function () {
                 let nombreEvento = item.evento == null ? 'SIN EVENTO' : item.evento.nombre;
                 let fechaHoraInicioFin = formatearFechaHora(item.fechaHoraInicio.date) + ' - ' + formatearFechaHora(item.fechaHoraFin.date);
                 
-                // TODO bucle para recorer sus simples y crear más div.simple
                 let fechaHoraInicioFin_simple = formatearFechaHora(item.fechaHoraInicio.date) + ' - ' + formatearFechaHora(item.fechaHoraFin.date);
                 let descripcion_simple = item.descripcion == null ? '' : item.descripcion
 

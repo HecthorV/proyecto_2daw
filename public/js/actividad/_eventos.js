@@ -31,7 +31,7 @@ function cargarEventos() {
 
 function cargarActividadesPadre() {
     $.ajax({
-        url: 'api/actividad/findAll',
+        url: 'api/actividad/findAlll',
         method: 'GET',
         dataType: 'json',
         success: function(response) {

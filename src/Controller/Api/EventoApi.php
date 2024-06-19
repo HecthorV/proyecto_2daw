@@ -4,6 +4,8 @@
 namespace App\Controller\Api;
 
 use App\Repository\EventoRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,5 +52,4 @@ class EventoApi extends AbstractController
             ['Content-Type' => 'application/json']
         );
     }
-
 }

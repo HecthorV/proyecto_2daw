@@ -8,7 +8,8 @@ body { overflow-y: auto !important; }
 
     > div { /* '>' significa Hijo directo */
         border-radius: 12px;
-        background-color: lightgreen;
+        background-color: rgba(75, 195, 81, 0.6);
+        color:black;
         cursor: pointer;
     }
 }

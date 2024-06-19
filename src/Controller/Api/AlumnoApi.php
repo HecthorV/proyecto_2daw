@@ -22,7 +22,7 @@ class AlumnoApi extends AbstractController
         private EntityManagerInterface $entityManagerInteface,
     ){}
 
-    #[Route("/insertMasivo", name: "insertMasivo", methods: ["POST"]), IsGranted("ROLE_ADMIN")]
+    #[Route("/insertMasivo", name: "insertMasivo", methods: ["POST"])]//, IsGranted("ROLE_ADMIN")]
     public function insert_masivo(Request $request, EntityManagerInterface $entityManager): Response
     {
         $requestData = json_decode($request->getContent(), true);
@@ -51,5 +51,22 @@ class AlumnoApi extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(['alumnosArray' => $alumnosArray], JsonResponse::HTTP_CREATED);
+    }
+
+    #[Route("/findAll", name: "findAll", methods: ["GET"])]
+    public function find_all(): Response
+    {
+        $alumnos = $this->alumnoRepository->findAll();
+
+        $alumnosArray = array_map(function(Alumno $alumno) {
+            return [
+                'id' => $alumno->getId(),
+                'nombre' => $alumno->getNombre(),
+                'correo' => $alumno->getCorreo(),
+                'fechaNacimiento' => $alumno->getFechaNacimiento()->format('d/m/Y'),
+            ];
+        }, $alumnos);
+
+        return new JsonResponse($alumnosArray, JsonResponse::HTTP_OK);
     }
 }

@@ -25,6 +25,13 @@ class LoginController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+//
+//
     #[Route(path: '/login_original', name: 'app_login_original')]
     public function login_old(AuthenticationUtils $authenticationUtils): Response
     {
@@ -53,11 +60,5 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
-    }
-
-    #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
-    {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

@@ -106,15 +106,3 @@ function obtenerIdEspaciosSeleccionado() {
     return $("#listaEspacios div.espacio.selected").data("id");
 }
 
-// function obtenerEspaciosIdsDiv() {
-//     const divsEspaciosElegidos = $('#espacios > [data-id]'); // '>' significa: hijo directo
-//     const idsEspacios = [];
-//
-//     for (const divEspacio of divsEspaciosElegidos) {
-//         var id = $(divEspacio).data('id');
-//         idsEspacios.push(id);
-//     }
-//
-//     return idsEspacios;
-// }
-

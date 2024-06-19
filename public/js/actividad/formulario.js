@@ -4,6 +4,7 @@ $( function() {
         collapsible: true
     });
 
+    // TODO validación de tabs
     $('.ui-tabs-nav a').on('click', function(e) {
         // Obtén la pestaña actual
         var currentTab = $('.ui-tabs-active');
@@ -97,26 +98,6 @@ $( function() {
         $("#listaEspacios").dialog("open");
     });
 
-    // $('#actividadForm').submit(function(event) {
-    //     // Evitar el comportamiento predeterminado del formulario
-    //     event.preventDefault();
-        
-    //     // Crear un nuevo objeto FormData
-    //     var formData = new FormData($(this)[0]); // Pasar el formulario directamente al constructor de FormData
-        
-    //     // Agregar los datos adicionales
-    //     var datetime_start = "2024-05-07 08:00:00";
-    //     var datetime_end = "2024-05-07 10:00:00";
-    //     formData.append("fechaInicio", datetime_start);
-    //     formData.append("fechaFin", datetime_end);
-        
-    //     // Mostrar los datos por consola
-    //     console.log("Datos del formulario:");
-    //     for (var pair of formData.entries()) {
-    //         console.log(pair[0] + ': ' + pair[1]);
-    //     }
-    // });
-
     $("#continuarSinEvento").dialog({
         autoOpen: false,
         modal: true,
@@ -166,8 +147,8 @@ $( function() {
 
     // Eventos
     cargarEventos();
-    crearTabsActividad();
 
+    // Guardar Borrador
     $("button[name='save_temp']").on("click", function(e) {
         e.preventDefault()
         Swal.fire({
@@ -184,10 +165,6 @@ $( function() {
     $('#btnBuscarEspacios').on('click', function () {
         cargarEspacios();
     })
-
-
-    // Ponentes
-    // cargarPonentes();
 
     // Grupos
     cargarGrupos()

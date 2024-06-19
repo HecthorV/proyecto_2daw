@@ -23,6 +23,8 @@
     padding: 1em;
 
     cursor: pointer;
+
+    background-color: rgb(70, 145, 67) !important;
 }
 .grupo:hover {
     background-color: lightgrey;

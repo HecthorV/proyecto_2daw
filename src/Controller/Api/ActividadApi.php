@@ -32,8 +32,8 @@ class ActividadApi extends AbstractController
     // ################################################################################
     // #################################### SELECTS ###################################
     // ################################################################################
-    #[Route("/findAll", name: "findAll", methods: ["GET"])]
-    public function findAll(): JsonResponse
+    #[Route("/findAlll", name: "findAlll", methods: ["GET"])]
+    public function findAlll(): JsonResponse
     {
         $actividades = $this->actividadRepository->findAll();
         $actividadesSerialized = [];
@@ -50,7 +50,7 @@ class ActividadApi extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    #[Route("/findById/{id}", name: "findById", methods: ["GET"]), IsGranted("ROLE_ADMIN")]
+    #[Route("/findById/{id}", name: "findById", methods: ["GET"])]//, IsGranted("ROLE_ADMIN")]
     public function findById($id): JsonResponse
     {
         $actividad = $this->actividadRepository->find($id);
@@ -77,7 +77,7 @@ class ActividadApi extends AbstractController
     // ################################################################################
     // #################################### UPDATE ###################################
     // ################################################################################
-    #[Route("/update", name: "update", methods: ["POST"]), IsGranted("ROLE_ADMIN")]
+    #[Route("/update", name: "update", methods: ["POST"])]//, IsGranted("ROLE_ADMIN")]
     public function update(Request $request): Response
     {
         $requestData = json_decode($request->getContent(), true);

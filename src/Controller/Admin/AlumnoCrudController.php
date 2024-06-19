@@ -46,6 +46,8 @@ class AlumnoCrudController extends AbstractCrudController
             ->addJsFile('js/easyadmin/alumnoCrudControllerEvents.js')
             ->addJsFile('js/easyadmin/altamasiva.js')
             ->addCssFile('css/easyadmin/alumnoCrudController.css')
+
+            ->addCssFile('css/easyadmin/estilosprincipales.css')
             ;
     }
 }
